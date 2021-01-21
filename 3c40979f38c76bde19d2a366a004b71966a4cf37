@@ -1,0 +1,48 @@
+---------------------------------------------------------------------------
+
+by emodric at 2020-03-27T11:00:05Z
+
+Can't you just use a previous version of this package? It has all versions tagged just like `behat/mink-extension`
+
+---------------------------------------------------------------------------
+
+by johanwilfer at 2020-03-27T11:05:12Z
+
+The previous versions is missing the replaces-clause in composer.json, which leads to both the original package and the fork being installed. Then composer complains that the class names are duplicated...
+
+Is there a problem adding back support for 3.4 that is still supported in 1,5 years for security fixes?
+
+---------------------------------------------------------------------------
+
+by johanwilfer at 2020-03-27T11:32:24Z
+
+Here you can see that `replace` is missing in the previous version: https://github.com/FriendsOfBehat/MinkExtension/blob/80f7849ba53867181b7e412df9210e12fba50177/composer.json
+
+Here it how it looks on master:
+https://github.com/FriendsOfBehat/MinkExtension/blob/master/composer.json#L31-L33
+
+---------------------------------------------------------------------------
+
+by emodric at 2020-03-27T11:46:40Z
+
+Oh, okay. In my case, I'm just using this package, so no references to the older one.
+
+> Is there a problem adding back support for 3.4 that is still supported in 1,5 years for security fixes?
+
+I'm not a maintainer, so I can't answer this, I was just trying to help :)
+
+---------------------------------------------------------------------------
+
+by johanwilfer at 2020-03-27T11:52:24Z
+
+Ah, I see thanks :)
+
+The problem we have is that some of our dependencies uses the old reference, and some this fork. The replace-case handles that very well, except that the version it was introduced also removed support for symfony 3.4 that we use...
+
+For now I have forked this lib as well and use my fork, but it is always nice to get things included upstream instead..
+
+---------------------------------------------------------------------------
+
+by pamil at 2021-01-21T09:07:31Z
+
+Thank you, Johan! :tada:
