@@ -1,0 +1,39 @@
+---------------------------------------------------------------------------
+
+by phil-davis at 2020-12-17T05:01:44Z
+
+PHP 8.0 on Travis is working now.
+Can someone merge this, and make a release so that people who have this as a dependency can also move forward to PHP 8.0?
+
+---------------------------------------------------------------------------
+
+by nicodmf at 2021-01-04T09:52:25Z
+
+@dunglas do you have any reason not to merge this PR ?
+
+---------------------------------------------------------------------------
+
+by dunglas at 2021-01-04T10:09:22Z
+
+@nicodmf I'm not a maintainer of this project, I don't have the merge permission.
+
+---------------------------------------------------------------------------
+
+by phil-davis at 2021-01-04T10:16:57Z
+
+@pamil I see that you merged a PR last year. Can you please review this one?
+I guess that you have maintainer privs here?
+
+Or @lchrusciel @Zales0123 ?
+
+---------------------------------------------------------------------------
+
+by Vasary at 2021-01-20T12:14:36Z
+
+Please merge this
+
+---------------------------------------------------------------------------
+
+by pamil at 2021-01-21T09:05:52Z
+
+Thanks, Vincent! :tada:
