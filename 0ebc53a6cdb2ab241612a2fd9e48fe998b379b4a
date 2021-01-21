@@ -1,0 +1,15 @@
+---------------------------------------------------------------------------
+
+by smildev at 2020-04-23T10:40:39Z
+
+Hello @pamil i know that `No updates other than Symfony compatibility will be provided`, but can we deviate from the rule one time ?
+
+We really need this for javascript behat testing in a sylius plugin :(.
+
+Thanks for your feedback.
+
+---------------------------------------------------------------------------
+
+by pamil at 2021-01-21T09:08:01Z
+
+Thanks, @smildev! :1st_place_medal:
