@@ -116,7 +116,9 @@ class GoutteFactory implements DriverFactory
     {
         $refl = new \ReflectionParameter(array('Goutte\Client', 'setClient'), 0);
 
-        if ($refl->getClass() && 'Guzzle\Http\ClientInterface' === $refl->getClass()->getName()) {
+        if (method_exists($refl, 'getType') && 'Guzzle\Http\ClientInterface' == (string) $refl->getType()) {
+            return true;
+        } elseif ($refl->getClass() && 'Guzzle\Http\ClientInterface' === $refl->getClass()->getName()) {
             return true;
         }
 
