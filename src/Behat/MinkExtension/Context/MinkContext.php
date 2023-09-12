@@ -568,6 +568,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      */
     protected function fixStepArgument($argument)
     {
-        return str_replace('\\"', '"', $argument);
+        return is_null($argument) ? null : str_replace('\\"', '"', $argument);
     }
 }
