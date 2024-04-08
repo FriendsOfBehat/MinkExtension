@@ -19,6 +19,7 @@
             "email": "stof@notk.org"
         }
     ],
+    "homepage": "https://github.com/FriendsOfBehat/MinkExtension#readme",
     "require": {
         "php": "^7.4 || ^8",
         "behat/behat": "^3.0.5",
