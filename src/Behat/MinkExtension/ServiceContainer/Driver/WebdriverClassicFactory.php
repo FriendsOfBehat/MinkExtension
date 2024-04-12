@@ -15,7 +15,7 @@ class WebdriverClassicFactory implements DriverFactory
      */
     public function getDriverName(): string
     {
-        return 'webdriver-classic';
+        return 'webdriver_classic';
     }
 
     /**

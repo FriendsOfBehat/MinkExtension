@@ -14,7 +14,7 @@ class WebdriverClassicFactorySpec extends ObjectBehavior
 
     public function it_is_named_webdriver_classic(): void
     {
-        $this->getDriverName()->shouldReturn('webdriver-classic');
+        $this->getDriverName()->shouldReturn('webdriver_classic');
     }
 
     public function it_supports_javascript(): void
