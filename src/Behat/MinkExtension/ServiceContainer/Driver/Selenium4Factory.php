@@ -15,6 +15,8 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class Selenium4Factory implements DriverFactory
 {
+    use EnvironmentCapabilities;
+
     /**
      * {@inheritdoc}
      */
@@ -58,26 +60,12 @@ class Selenium4Factory implements DriverFactory
             ));
         }
 
-        $args = array(
-            'capabilities'  => $config['capabilities'],
-            'tags' => array(php_uname('n'), 'PHP '.phpversion())
-        );
-
-        if (getenv('TRAVIS_JOB_NUMBER')) {
-            $args['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
-            $args['build'] = getenv('TRAVIS_BUILD_NUMBER');
-            $args['tags'] = array('Travis-CI', 'PHP '.phpversion());
-        }
-
-        if (getenv('JENKINS_HOME')) {
-            $args['tunnel-identifier'] = getenv('JOB_NAME');
-            $args['build'] = getenv('BUILD_NUMBER');
-            $args['tags'] = array('Jenkins', 'PHP '.phpversion(), getenv('BUILD_TAG'));
-        }
-
         return new Definition('Behat\Mink\Driver\Selenium4Driver', array(
             $config['browser'],
-            $args,
+            array_merge(
+                ['capabilities' => $config['capabilities']],
+                $this->guessEnvironmentCapabilities()
+            ),
             $config['wd_host'],
         ));
     }

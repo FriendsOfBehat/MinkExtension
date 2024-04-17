@@ -21,6 +21,7 @@ use Behat\MinkExtension\ServiceContainer\Driver\SauceLabsFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\Selenium2Factory;
 use Behat\MinkExtension\ServiceContainer\Driver\Selenium4Factory;
 use Behat\MinkExtension\ServiceContainer\Driver\SeleniumFactory;
+use Behat\MinkExtension\ServiceContainer\Driver\WebdriverClassicFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\ZombieFactory;
 use Behat\Testwork\EventDispatcher\ServiceContainer\EventDispatcherExtension;
 use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
@@ -62,6 +63,7 @@ class MinkExtension implements ExtensionInterface
         $this->registerDriverFactory(new BrowserStackFactory());
         $this->registerDriverFactory(new ZombieFactory());
         $this->registerDriverFactory(new AppiumFactory());
+        $this->registerDriverFactory(new WebdriverClassicFactory());
     }
 
     public function registerDriverFactory(DriverFactory $driverFactory)
