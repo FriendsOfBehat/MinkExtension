@@ -68,7 +68,7 @@
         </trans-unit>
         <trans-unit id="i-attach-the-file-to-field">
             <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|j')attache le fichier "(?P<path>[^"]*)" à "(?P<field>(?:[^"]|\\")*)"$/]]></target>
+            <target><![CDATA[/^(?:|je )joins le fichier "(?P<path>[^"]*)" à "(?P<field>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
@@ -152,11 +152,11 @@
         </trans-unit>
         <trans-unit id="the-response-status-code-should-be">
             <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^le code de status de la réponse devrait être (?P<code>\d+)$/]]></target>
+            <target><![CDATA[/^le code d'état de la réponse devrait être (?P<code>\d+)$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-status-code-should-not-be">
             <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^le code de status de la réponse ne devrait pas être (?P<code>\d+)$/]]></target>
+            <target><![CDATA[/^le code d'état de la réponse ne devrait pas être (?P<code>\d+)$/]]></target>
         </trans-unit>
         <trans-unit id="print-last-response">
             <source><![CDATA[/^print last response$/]]></source>
