@@ -63,8 +63,8 @@ class Selenium4Factory implements DriverFactory
         return new Definition('Behat\Mink\Driver\Selenium4Driver', array(
             $config['browser'],
             array_merge(
-                ['capabilities' => $config['capabilities']],
-                $this->guessEnvironmentCapabilities()
+                $this->guessEnvironmentCapabilities(),
+                $config['capabilities']
             ),
             $config['wd_host'],
         ));
