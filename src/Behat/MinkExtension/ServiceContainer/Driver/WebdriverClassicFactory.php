@@ -57,8 +57,8 @@ class WebdriverClassicFactory implements DriverFactory
         return new Definition(WebdriverClassicDriver::class, [
             $config['browser'],
             array_merge(
-                $config['capabilities'],
-                $this->guessEnvironmentCapabilities()
+                $this->guessEnvironmentCapabilities(),
+                $config['capabilities']
             ),
             $config['wd_host'],
         ]);
