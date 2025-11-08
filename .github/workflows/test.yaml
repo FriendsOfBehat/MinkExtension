@@ -8,7 +8,7 @@ on:
 jobs:
     test:
         name: PHP ${{ matrix.php-version }} + Symfony ${{ matrix.symfony-version }}
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-latest
         continue-on-error: false
         strategy:
             fail-fast: false
@@ -26,12 +26,19 @@ jobs:
                       symfony-version: '6.4.*'
                     - php-version: '8.0'
                       symfony-version: '6.4.*'
+                    - php-version: '8.1'
+                      symfony-version: '4.4.*'
                 include:
                     - php-version: '8.2'
                       symfony-version: '7.0.*'
+                    - php-version: '8.3'
+                      symfony-version: '7.0.*'
+                    - php-version: '8.4'
+                      symfony-version: '7.0.*'
+
         steps:
             - name: Checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v5
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
