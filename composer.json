@@ -28,7 +28,7 @@
     },
     "require-dev": {
         "behat/mink-goutte-driver": "^1.1 || ^2.0",
-        "phpspec/phpspec": "^6.0 || ^7.0 || ^8.0",
+        "phpspec/phpspec": "^6.0 || ^7.0 || ^8.0 || 8.1.x-dev",
         "mink/webdriver-classic-driver": "^1.0@dev"
     },
     "replace": {

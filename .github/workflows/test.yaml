@@ -8,7 +8,7 @@ on:
 jobs:
     test:
         name: PHP ${{ matrix.php-version }} + Symfony ${{ matrix.symfony-version }}
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         continue-on-error: false
         strategy:
             fail-fast: false
