@@ -190,7 +190,7 @@ class MinkExtension implements ExtensionInterface
     /**
      * {@inheritDoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $this->processSelectors($container);
     }
