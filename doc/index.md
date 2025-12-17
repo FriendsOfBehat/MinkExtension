@@ -174,6 +174,10 @@ with support for 7 drivers out of the box:
 * `GoutteDriver` - headless driver without JavaScript support. In order to use
   it, modify your `behat.yml` profile:
 
+> [!IMPORTANT]
+> Support for this driver has been deprecated, since the driver package has been abandoned.
+> It will be removed in the next major version of this extension.
+
     ```yaml
     default:
         extensions:
@@ -256,6 +260,10 @@ with support for 7 drivers out of the box:
 * `SeleniumDriver` - javascript driver. In order to use it, modify your `behat.yml`
   profile:
 
+> [!IMPORTANT]
+> Support for this driver has been deprecated, since the driver package has been abandoned.
+> It will be removed in the next major version of this extension.
+
     ```yaml
     default:
         extensions:
@@ -268,6 +276,10 @@ with support for 7 drivers out of the box:
 * `SahiDriver` - javascript driver. In order to use it, modify your `behat.yml`
   profile:
 
+> [!IMPORTANT]
+> Support for this driver has been deprecated, since the driver package has been abandoned.
+> It will be removed in the next major version of this extension.
+
     ```yaml
     default:
         extensions:
@@ -279,6 +291,10 @@ with support for 7 drivers out of the box:
 
 * `ZombieDriver` - zombie.js javascript headless driver. In order to use it, modify
   your `behat.yml` profile:
+
+> [!IMPORTANT]
+> Support for this driver has been deprecated, since the driver package has been abandoned.
+> It will be removed in the next major version of this extension.
 
     ```yaml
     default:
