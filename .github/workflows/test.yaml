@@ -16,12 +16,14 @@ jobs:
                     - '8.1'
                     - '8.3'
                     - '8.4'
-                    - '8.5'
+                    # PHPSpec does not yet (2025/12) support PHP 8.5
+                    # - '8.5'
                 symfony-version:
                     - '5.4.*'
                     - '6.4.*'
                     - '7.4.*'
                 exclude:
+                    # Symfony 7.4 requires PHP >= 8.2
                     - php-version: '8.1'
                       symfony-version: '7.4.*'
         steps:
@@ -47,10 +49,15 @@ jobs:
                   restore-keys: |
                       composer-${{ runner.os }}-${{ matrix.php-version }}-${{ matrix.symfony-version }}-
 
+            # We currently cannot use Flex to control versions of Symfony and its components, since that would also impose constraints
+            # that cannot anymore be fulfilled by Goutte.
+            - name: Configure Symfony version
+              run: composer require --no-update "symfony/config:${{ matrix.symfony-version }}" "symfony/dependency-injection:${{ matrix.symfony-version }}"
+
             - name: Install dependencies with targeted Symfony version
               run: composer install --prefer-dist --no-progress
-              env:
-                  SYMFONY_REQUIRE: ${{ matrix.symfony-version }}
+              # env:
+              #     SYMFONY_REQUIRE: ${{ matrix.symfony-version }}
 
             - name: PHPSpec
               run: vendor/bin/phpspec run -f pretty
