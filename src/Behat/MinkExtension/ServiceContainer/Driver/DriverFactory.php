@@ -38,6 +38,8 @@ interface DriverFactory
      * Setups configuration for the driver factory.
      *
      * @param ArrayNodeDefinition $builder
+     *
+     * @return void
      */
     public function configure(ArrayNodeDefinition $builder);
 

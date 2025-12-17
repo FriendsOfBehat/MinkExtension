@@ -29,6 +29,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      *
      * @Given /^(?:|I )am on (?:|the )homepage$/
      * @When /^(?:|I )go to (?:|the )homepage$/
+     *
+     * @return void
      */
     public function iAmOnHomepage()
     {
@@ -43,6 +45,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      *
      * @Given /^(?:|I )am on "(?P<page>[^"]+)"$/
      * @When /^(?:|I )go to "(?P<page>[^"]+)"$/
+     *
+     * @return void
      */
     public function visit($page)
     {
@@ -55,6 +59,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I reload the page
      *
      * @When /^(?:|I )reload the page$/
+     *
+     * @return void
      */
     public function reload()
     {
@@ -66,6 +72,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: When I move backward one page
      *
      * @When /^(?:|I )move backward one page$/
+     *
+     * @return void
      */
     public function back()
     {
@@ -77,6 +85,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I move forward one page
      *
      * @When /^(?:|I )move forward one page$/
+     *
+     * @return void
      */
     public function forward()
     {
@@ -89,6 +99,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I press "Log In"
      *
      * @When /^(?:|I )press "(?P<button>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function pressButton($button)
     {
@@ -102,6 +114,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I follow "Log In"
      *
      * @When /^(?:|I )follow "(?P<link>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function clickLink($link)
     {
@@ -117,6 +131,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/
      * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/
      * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function fillField($field, $value)
     {
@@ -135,6 +151,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      *              | password | iLoveBats123 |
      *
      * @When /^(?:|I )fill in the following:$/
+     *
+     * @return void
      */
     public function fillFields(TableNode $fields)
     {
@@ -149,6 +167,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I select "Bats" from "user_fears"
      *
      * @When /^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function selectOption($select, $option)
     {
@@ -163,6 +183,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I additionally select "Deceased" from "parents_alive_status"
      *
      * @When /^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function additionallySelectOption($select, $option)
     {
@@ -177,6 +199,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I check "Pearl Necklace"
      *
      * @When /^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function checkOption($option)
     {
@@ -190,6 +214,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I uncheck "Broadway Plays"
      *
      * @When /^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function uncheckOption($option)
     {
@@ -203,6 +229,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I attach the file "bwayne_profile.png" to "profileImageUpload"
      *
      * @When /^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function attachFileToField($field, $path)
     {
@@ -225,6 +253,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should be on "http://google.com"
      *
      * @Then /^(?:|I )should be on "(?P<page>[^"]+)"$/
+     *
+     * @return void
      */
     public function assertPageAddress($page)
     {
@@ -237,6 +267,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should be on the homepage
      *
      * @Then /^(?:|I )should be on (?:|the )homepage$/
+     *
+     * @return void
      */
     public function assertHomepage()
     {
@@ -250,6 +282,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the url should match "log in"
      *
      * @Then /^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/
+     *
+     * @return void
      */
     public function assertUrlRegExp($pattern)
     {
@@ -262,6 +296,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the response status code should be 400
      *
      * @Then /^the response status code should be (?P<code>\d+)$/
+     *
+     * @return void
      */
     public function assertResponseStatus($code)
     {
@@ -274,6 +310,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the response status code should not be 404
      *
      * @Then /^the response status code should not be (?P<code>\d+)$/
+     *
+     * @return void
      */
     public function assertResponseStatusIsNot($code)
     {
@@ -286,6 +324,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should see "Who is the Batman?"
      *
      * @Then /^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function assertPageContainsText($text)
     {
@@ -298,6 +338,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should not see "Batman is Bruce Wayne"
      *
      * @Then /^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function assertPageNotContainsText($text)
     {
@@ -310,6 +352,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should not see "Batman, the vigilante"
      *
      * @Then /^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/
+     *
+     * @return void
      */
     public function assertPageMatchesText($pattern)
     {
@@ -322,6 +366,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should not see "Bruce Wayne, the vigilante"
      *
      * @Then /^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/
+     *
+     * @return void
      */
     public function assertPageNotMatchesText($pattern)
     {
@@ -334,6 +380,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the response should contain "Batman is the hero Gotham deserves."
      *
      * @Then /^the response should contain "(?P<text>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function assertResponseContains($text)
     {
@@ -346,6 +394,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the response should not contain "Bruce Wayne is a billionaire, play-boy, vigilante."
      *
      * @Then /^the response should not contain "(?P<text>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function assertResponseNotContains($text)
     {
@@ -358,6 +408,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should see "Batman" in the "heroes_list" element
      *
      * @Then /^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/
+     *
+     * @return void
      */
     public function assertElementContainsText($element, $text)
     {
@@ -370,6 +422,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should not see "Bruce Wayne" in the "heroes_alter_egos" element
      *
      * @Then /^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/
+     *
+     * @return void
      */
     public function assertElementNotContainsText($element, $text)
     {
@@ -382,6 +436,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the "body" element should contain "style=\"color:black;\""
      *
      * @Then /^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function assertElementContains($element, $value)
     {
@@ -394,6 +450,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the "body" element should not contain "style=\"color:black;\""
      *
      * @Then /^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function assertElementNotContains($element, $value)
     {
@@ -406,6 +464,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should see a "body" element
      *
      * @Then /^(?:|I )should see an? "(?P<element>[^"]*)" element$/
+     *
+     * @return void
      */
     public function assertElementOnPage($element)
     {
@@ -418,6 +478,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should not see a "canvas" element
      *
      * @Then /^(?:|I )should not see an? "(?P<element>[^"]*)" element$/
+     *
+     * @return void
      */
     public function assertElementNotOnPage($element)
     {
@@ -430,6 +492,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the "username" field should contain "bwayne"
      *
      * @Then /^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function assertFieldContains($field, $value)
     {
@@ -444,6 +508,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the "username" field should not contain "batman"
      *
      * @Then /^the "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/
+     *
+     * @return void
      */
     public function assertFieldNotContains($field, $value)
     {
@@ -458,6 +524,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should see 5 "div" elements
      *
      * @Then /^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/
+     *
+     * @return void
      */
     public function assertNumElements($num, $element)
     {
@@ -472,6 +540,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * @Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/
      * @Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox is checked$/
      * @Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" (?:is|should be) checked$/
+     *
+     * @return void
      */
     public function assertCheckboxChecked($checkbox)
     {
@@ -488,6 +558,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * @Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox is (?:unchecked|not checked)$/
      * @Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" should (?:be unchecked|not be checked)$/
      * @Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/
+     *
+     * @return void
      */
     public function assertCheckboxNotChecked($checkbox)
     {
@@ -500,6 +572,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And print current URL
      *
      * @Then /^print current URL$/
+     *
+     * @return void
      */
     public function printCurrentUrl()
     {
@@ -512,6 +586,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And print last response
      *
      * @Then /^print last response$/
+     *
+     * @return void
      */
     public function printLastResponse()
     {
@@ -527,6 +603,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And show last response
      *
      * @Then /^show last response$/
+     *
+     * @return void
      */
     public function showLastResponse()
     {
