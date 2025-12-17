@@ -65,6 +65,8 @@ class FailureShowListener implements EventSubscriberInterface
      * @param AfterStepTested $event
      *
      * @throws \RuntimeException if show_cmd is not configured
+     *
+     * @return void
      */
     public function showFailedStepResponse(AfterStepTested $event)
     {

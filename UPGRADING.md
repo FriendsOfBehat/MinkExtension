@@ -24,3 +24,11 @@ by using `goutte` as the driver identifier in the `behat.yml` configuration file
 
 Note, however, that Behat currently does not have a built-in mechanism to collect such deprecation notices and display
 them in a user-friendly way.
+
+## Soft `@return` types added
+
+`@return` type hints have been added to the `MinkAwareContext` and `DriverFactory` interfaces and to all methods
+in `MinkContext` and `RawMinkContext`.
+
+If you implement or extend these classes or any of the drivers shipped here, make sure to add _real_ corresponding
+return types to your implementations now. Signatures will be changed to include return types in the next major version.
