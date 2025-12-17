@@ -25,6 +25,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * Listens Behat events and configures/stops Mink sessions.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
+ *
+ * @final since 2.8.0
  */
 class SessionsListener implements EventSubscriberInterface
 {
