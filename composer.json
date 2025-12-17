@@ -27,7 +27,7 @@
         "symfony/config": "^4.4 || ^5.0 || ^6.0 || ^7.0"
     },
     "require-dev": {
-        "behat/mink-goutte-driver": "^1.1 || ^2.0",
+        "behat/mink-browserkit-driver": "^2.0",
         "phpspec/phpspec": "^6.0 || ^7.0 || 7.1.x-dev",
         "mink/webdriver-classic-driver": "^1.0@dev"
     },

@@ -8,4 +8,4 @@ default:
       base_url: http://en.wikipedia.org/
       sessions:
         default:
-          goutte: ~
+          browserkit_http: ~
