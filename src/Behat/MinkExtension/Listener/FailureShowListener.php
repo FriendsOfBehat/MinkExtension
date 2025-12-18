@@ -24,6 +24,7 @@ use Behat\Mink\Exception\Exception as MinkException;
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * @final since 2.8.0
+ * @internal since 2.8.0
  */
 class FailureShowListener implements EventSubscriberInterface
 {

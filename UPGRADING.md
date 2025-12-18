@@ -4,9 +4,8 @@ This document summarizes the changes relevant for users when upgrading to new ve
 
 # Upgrade to 2.8
 
-## Soft `@final` declarations added
+## Soft `@final` and `@internal` declarations added
 
-The classes `FailureShowListener`, `SessionsListener` and `MinkExtension` have been marked as `@final`.
+The classes `FailureShowListener`, `SessionsListener` and `MinkExtension` have been marked as `@final`. They will become `final` classes in the next major release and you will no longer be able to use them by inheritance (https://github.com/FriendsOfBehat/MinkExtension/pull/41).
 
-They will become `final` classes in the next major release and you will no longer be able to use them
-by inheritance (https://github.com/FriendsOfBehat/MinkExtension/pull/41).
+Additionally, the two listener classes have been marked as `@internal`. Starting with the next major version, their API may change at any time without further notice.
