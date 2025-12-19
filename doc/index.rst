@@ -50,7 +50,7 @@ The easiest way to keep your suite updated is to use `Composer <http://getcompos
               base_url:  'http://example.com'
               sessions:
                 default:
-                  goutte: ~
+                  browserkit_http: ~
 
 Usage
 -----
@@ -143,7 +143,7 @@ will need to choose the driver you want to use.
                     first_session:
                         selenium2: ~
                     second_session:
-                        goutte: ~
+                        browserkit_http: ~
                     third_session:
                         selenium2: ~
 
@@ -171,16 +171,16 @@ session using a javascript driver in the order of the configuration (it would
 be ``first_session`` in the example above as ``selenium2`` supports Javascript).
 If it is not configured explicitly, the default session is set to the first
 session using a non-javascript driver if any, or to the first javascript session
-otherwise (it would be ``second_session`` above as ``goutte`` does not support
+otherwise (it would be ``second_session`` above as ``browserkit_http`` does not support
 javascript).
 
 Drivers
 ~~~~~~~
 
 First of all, there are drivers enabling configuration. MinkExtension comes
-with support for 7 drivers out of the box:
+with support for different drivers.
 
-* ``GoutteDriver`` - headless driver without JavaScript support. In order to use
+* ``BrowserKitDriver`` - headless driver without JavaScript support. In order to use
   it, modify your ``behat.yml`` profile:
 
     .. code-block:: yaml
@@ -190,38 +190,7 @@ with support for 7 drivers out of the box:
                 Behat\MinkExtension:
                     sessions:
                         my_session:
-                            goutte: ~
-
-  .. Tips : HTTPS and self-signed certificate
-  If you use Behat/Mink/Goutte to test your application, and want to test an
-  application secured with HTTPS, but with a self-signed certificate, you can use
-  the following parameters to avoid the validation error triggered by Guzzle:
-
-  * For ``Guzzle 4`` or later:
-  
-      .. code-block:: yaml
-
-          default:
-              extensions:
-                  Behat\MinkExtension:
-                      sessions:
-                          my_session:
-                              goutte:
-                                  guzzle_parameters:
-                                      verify: false
-  
-  * For ``Guzzle 3`` or earlier:
-  
-      .. code-block:: yaml
-
-          default:
-              extensions:
-                  Behat\MinkExtension:
-                      sessions:
-                          my_session:
-                              goutte:
-                                  guzzle_parameters:
-                                      ssl.certificate_authority: false
+                            browserkit_http: ~
 
 * ``Selenium2Driver`` - javascript driver. In order to use it, modify your
   ``behat.yml`` profile:
@@ -301,12 +270,9 @@ with support for 7 drivers out of the box:
 
 .. note::
 
-    The phar version of Mink comes bundled with all 5 drivers and you don't need to do
-    anything except enabling them in order to use them.
+    You need to install drivers that you need through Composer:
 
-    But if you're using Composer, you need to install drivers that you need first:
-
-    - GoutteDriver - ``behat/mink-goutte-driver``
+    - BrowserKitDriver - ``behat/mink-browserkit-driver``
     - SeleniumDriver - ``behat/mink-selenium-driver``
     - Selenium2Driver (also used for SauceLabs and BrowserStack) - ``behat/mink-selenium2-driver``
     - SahiDriver - ``behat/mink-sahi-driver``

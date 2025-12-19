@@ -15,7 +15,7 @@ class SessionsListenerSpec extends ObjectBehavior
 {
     function let(Mink $mink, ScenarioTested $event, FeatureNode $feature, ScenarioNode $scenario, Suite $suite)
     {
-        $this->beConstructedWith($mink, 'goutte', 'selenium2', array('selenium2', 'sahi'));
+        $this->beConstructedWith($mink, 'browserkit_http', 'selenium2', array('selenium2', 'sahi'));
 
         $event->getSuite()->willReturn($suite);
         $event->getFeature()->willReturn($feature);
@@ -38,7 +38,7 @@ class SessionsListenerSpec extends ObjectBehavior
     function it_resets_the_default_session_before_scenarios($event, $mink)
     {
         $mink->resetSessions()->shouldBeCalled();
-        $mink->setDefaultSessionName('goutte')->shouldBeCalled();
+        $mink->setDefaultSessionName('browserkit_http')->shouldBeCalled();
 
         $this->prepareDefaultMinkSession($event);
     }
@@ -120,7 +120,7 @@ class SessionsListenerSpec extends ObjectBehavior
     function it_fails_when_the_javascript_session_is_used_but_not_defined($event, $mink, $feature, $suite)
     {
         $suite->hasSetting('mink_javascript_session')->willReturn(false);
-        $this->beConstructedWith($mink, 'goutte', null);
+        $this->beConstructedWith($mink, 'browserkit_http', null);
         $feature->getTags()->willReturn(array('javascript'));
 
         $this->shouldThrow(new ProcessingException('The @javascript tag cannot be used without enabling a javascript session'))
@@ -151,7 +151,7 @@ class SessionsListenerSpec extends ObjectBehavior
     {
         $scenario->hasTag('insulated')->willReturn(true);
         $mink->stopSessions()->shouldBeCalled();
-        $mink->setDefaultSessionName('goutte')->shouldBeCalled();
+        $mink->setDefaultSessionName('browserkit_http')->shouldBeCalled();
 
         $this->prepareDefaultMinkSession($event);
     }
@@ -160,7 +160,7 @@ class SessionsListenerSpec extends ObjectBehavior
     {
         $feature->hasTag('insulated')->willReturn(true);
         $mink->stopSessions()->shouldBeCalled();
-        $mink->setDefaultSessionName('goutte')->shouldBeCalled();
+        $mink->setDefaultSessionName('browserkit_http')->shouldBeCalled();
 
         $this->prepareDefaultMinkSession($event);
     }
