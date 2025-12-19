@@ -69,15 +69,21 @@ class SessionsListener implements EventSubscriberInterface
     }
 
     /**
-     * Configures default Mink session before each scenario.
-     * Configuration is based on provided scenario tags:
+     * Configures Mink sessions before each scenario.
      *
-     * `@javascript` tagged scenarios will get `javascript_session` as default session
-     * `@mink:CUSTOM_NAME tagged scenarios will get `CUSTOM_NAME` as default session
-     * Other scenarios get `default_session` as default session
+     * Configuration is based on provided scenario tags.
      *
-     * `@insulated` tag will cause Mink to stop current sessions before scenario
-     * instead of just soft-resetting them
+     * Default session:
+     *   `@javascript` tagged scenarios will get `javascript_session` as default session
+     *   `@mink:CUSTOM_NAME` tagged scenarios will get `CUSTOM_NAME` as default session
+     *   Other scenarios get `default_session` as default session
+     *
+     * Scenarios sessions isolation:
+     *   By default, sessions get soft-resetted before each scenario
+     *   `@insulated` tag will cause Mink to stop current sessions before scenario instead of just soft-resetting them.
+     *   `@resetSessions` tag will explicitly cause Mink to soft-reset current sessions before scenario.
+     *   `@preserveSessions` tag will keep current sessions opened. If set at the feature level you can use the other 
+     *   tags (`@insulated` or `@resetSessions`) to specify at which scenario Mink should start a new session.
      *
      * @param ScenarioLikeTested $event
      *
@@ -104,7 +110,12 @@ class SessionsListener implements EventSubscriberInterface
         if ($scenario->hasTag('insulated') || $feature->hasTag('insulated')) {
             $this->mink->stopSessions();
         } else {
-            $this->mink->resetSessions();
+            $preserveSessions = $scenario->hasTag('preserveSessions') || $feature->hasTag('preserveSessions');
+            $preserveSessions = $preserveSessions && !$scenario->hasTag('resetSessions');
+
+            if (!$preserveSessions) {
+                $this->mink->resetSessions();
+            }
         }
 
         $this->mink->setDefaultSessionName($session);
