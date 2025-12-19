@@ -85,11 +85,10 @@ After installing the extension, there are 4 usage options available:
     }
     ```
 
-**Warning:**
-
-Keep in mind, that you can not have multiple step definitions with the same regex.
-It will cause a `RedundantException`. So, you can inherit from `MinkContext`
-only with one of your context/subcontext classes.
+> [!NOTE]
+> Keep in mind, that you can not have multiple step definitions with the same regex.
+> It will cause a `RedundantException`. So, you can inherit from `MinkContext`
+> only with one of your context/subcontext classes.
 
 3. Adding `Behat\MinkExtension\Context\MinkContext` as a context in your suite.
    Exactly like the previous option, but gives you the ability to keep your main context
@@ -104,11 +103,10 @@ only with one of your context/subcontext classes.
             - Behat\MinkExtension\Context\MinkContext
     ```
 
-**Note:**
-
-Keep in mind, that you can not have multiple step definitions with the same regex.
-It will cause a `RedundantException`. So, you can inherit from `MinkContext`
-only with one of your context/subcontext classes.
+> [!NOTE]
+> Keep in mind, that you can not have multiple step definitions with the same regex.
+> It will cause a `RedundantException`. So, you can inherit from `MinkContext`
+> only with one of your context/subcontext classes.
 
 4. Implementing `Behat\MinkExtension\Context\MinkAwareContext` with your context.
 
@@ -293,10 +291,9 @@ with support for 7 drivers out of the box:
                             node_modules_path: /usr/local/lib/node_modules/
     ```
 
-**Note**
-
-The phar version of Mink comes bundled with all 5 drivers and you don't need to do
-anything except enabling them in order to use them.
+> [!NOTE]
+> The phar version of Mink comes bundled with all 5 drivers and you don't need to do
+> anything except enabling them in order to use them.
 
 But if you're using Composer, you need to install drivers that you need first:
 
@@ -306,12 +303,11 @@ But if you're using Composer, you need to install drivers that you need first:
 - SahiDriver - `behat/mink-sahi-driver`
 - ZombieDriver - `behat/mink-zombie-driver`
 
-**Note**
-
-All drivers share the same API, which means that you could use multiple drivers
-for the same suite - whichever one fits your needs for concrete scenarios. Don't
-try to stick to a single driver as there's simply no universal solution - every
-driver has its pros and cons.
+> [!NOTE]
+> All drivers share the same API, which means that you could use multiple drivers
+> for the same suite - whichever one fits your needs for concrete scenarios. Don't
+> try to stick to a single driver as there's simply no universal solution - every
+> driver has its pros and cons.
 
 ### Additional Parameters
 
