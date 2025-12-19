@@ -3,7 +3,6 @@ name: Test
 on:
     push:
     pull_request:
-        types: [opened, synchronize, edited, reopened]
 
 jobs:
     test:
@@ -14,21 +13,19 @@ jobs:
             fail-fast: false
             matrix:
                 php-version:
-                    - '7.4'
-                    - '8.0'
                     - '8.1'
+                    - '8.3'
+                    - '8.4'
+                    # PHPSpec does not yet (2025/12) support PHP 8.5
+                    # - '8.5'
                 symfony-version:
-                    - '4.4.*'
                     - '5.4.*'
                     - '6.4.*'
+                    - '7.4.*'
                 exclude:
-                    - php-version: '7.4'
-                      symfony-version: '6.4.*'
-                    - php-version: '8.0'
-                      symfony-version: '6.4.*'
-                include:
-                    - php-version: '8.2'
-                      symfony-version: '7.0.*'
+                    # Symfony 7.4 requires PHP >= 8.2
+                    - php-version: '8.1'
+                      symfony-version: '7.4.*'
         steps:
             - name: Checkout
               uses: actions/checkout@v6
@@ -39,16 +36,28 @@ jobs:
                   coverage: none
                   ini-values: "memory_limit=-1"
                   php-version: ${{ matrix.php-version }}
-                  tools: composer:v2
+                  tools: composer:v2, flex
 
             - name: Validate composer.json
               run: composer validate --no-check-lock
 
+            - name: Restore cached dependencies
+              uses: actions/cache@v4
+              with:
+                  path: vendor
+                  key: composer-${{ runner.os }}-${{ matrix.php-version }}-${{ matrix.symfony-version }}-${{ hashFiles('composer.json') }}
+                  restore-keys: |
+                      composer-${{ runner.os }}-${{ matrix.php-version }}-${{ matrix.symfony-version }}-
+
+            # We currently cannot use Flex to control versions of Symfony and its components, since that would also impose constraints
+            # that cannot anymore be fulfilled by Goutte.
             - name: Configure Symfony version
               run: composer require --no-update "symfony/config:${{ matrix.symfony-version }}" "symfony/dependency-injection:${{ matrix.symfony-version }}"
 
-            - name: Install dependencies
+            - name: Install dependencies with targeted Symfony version
               run: composer install --prefer-dist --no-progress
+              # env:
+              #     SYMFONY_REQUIRE: ${{ matrix.symfony-version }}
 
             - name: PHPSpec
               run: vendor/bin/phpspec run -f pretty
