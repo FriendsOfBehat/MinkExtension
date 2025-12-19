@@ -21,15 +21,17 @@
     ],
     "homepage": "https://github.com/FriendsOfBehat/MinkExtension#readme",
     "require": {
-        "php": "^7.4 || ^8",
+        "php": "^8.1",
         "behat/behat": "^3.0.5",
         "behat/mink": "^1.5",
-        "symfony/config": "^4.4 || ^5.0 || ^6.0 || ^7.0"
+        "symfony/config": "^5.4 || ^6.4 || ^7.3",
+        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.3",
+        "symfony/event-dispatcher": "^5.4 || ^6.4 || ^7.3"
     },
     "require-dev": {
         "behat/mink-goutte-driver": "^1.1 || ^2.0",
-        "phpspec/phpspec": "^6.0 || ^7.0 || 7.1.x-dev",
-        "mink/webdriver-classic-driver": "^1.0@dev"
+        "phpspec/phpspec": "^7.0 || ^8.0",
+        "mink/webdriver-classic-driver": "^1.0"
     },
     "replace": {
         "behat/mink-extension": "self.version"
