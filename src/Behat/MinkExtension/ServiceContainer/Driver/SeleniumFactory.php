@@ -50,6 +50,8 @@ class SeleniumFactory implements DriverFactory
      */
     public function buildDriver(array $config)
     {
+        trigger_deprecation('friends-of-behat/mink-extension', '2.8.0', 'Configuration for the "selenium" driver is deprecated, since the client implementation has been abandoned. Support for it will be removed in the next major version of this extension.');
+
         if (!class_exists('Behat\Mink\Driver\SeleniumDriver')) {
             throw new \RuntimeException(
                 'Install MinkSeleniumDriver in order to activate selenium session.'

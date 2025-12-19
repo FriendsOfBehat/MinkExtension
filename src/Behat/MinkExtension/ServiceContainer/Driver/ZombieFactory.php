@@ -53,6 +53,8 @@ class ZombieFactory implements DriverFactory
      */
     public function buildDriver(array $config)
     {
+        trigger_deprecation('friends-of-behat/mink-extension', '2.8.0', 'Configuration for the "zombie" driver is deprecated, since the client implementation has been abandoned. Support for it will be removed in the next major version of this extension.');
+
         if (!class_exists('Behat\Mink\Driver\ZombieDriver')) {
             throw new \RuntimeException(
                 'Install MinkZombieDriver in order to use zombie driver.'
