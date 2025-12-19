@@ -22,6 +22,9 @@ use Behat\Mink\Exception\Exception as MinkException;
  * Listens to failed Behat steps and shows last response in a browser.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
+ *
+ * @final since 2.8.0
+ * @internal since 2.8.0
  */
 class FailureShowListener implements EventSubscriberInterface
 {
