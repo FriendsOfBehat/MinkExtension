@@ -59,13 +59,13 @@ class SessionsListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
-        return array(
-            ScenarioTested::BEFORE   => array('prepareDefaultMinkSession', 10),
-            ExampleTested::BEFORE    => array('prepareDefaultMinkSession', 10),
-            ExerciseCompleted::AFTER => array('tearDownMinkSessions', -10)
-        );
+        return [
+            ScenarioTested::BEFORE   => ['prepareDefaultMinkSession', 10],
+            ExampleTested::BEFORE    => ['prepareDefaultMinkSession', 10],
+            ExerciseCompleted::AFTER => ['tearDownMinkSessions', -10]
+        ];
     }
 
     /**

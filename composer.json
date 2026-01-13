@@ -1,5 +1,5 @@
 {
-    "name": "friends-of-behat/mink-extension",
+    "name": "short-edition/mink-extension",
     "description": "Mink extension for Behat",
     "license": "MIT",
     "type": "behat-extension",
@@ -21,10 +21,12 @@
     ],
     "homepage": "https://github.com/FriendsOfBehat/MinkExtension#readme",
     "require": {
-        "php": "^7.4 || ^8",
+        "php": ">= 8.5",
         "behat/behat": "^3.0.5",
         "behat/mink": "^1.5",
-        "symfony/config": "^4.4 || ^5.0 || ^6.0 || ^7.0"
+        "symfony/config": "^6.4 || ^7.4 || ^8.0",
+        "symfony/dependency-injection": "^6.4 || ^7.4 || ^8.0",
+        "symfony/event-dispatcher": "^6.4 || ^7.4 || ^8.0"
     },
     "require-dev": {
         "behat/mink-goutte-driver": "^1.1 || ^2.0",
