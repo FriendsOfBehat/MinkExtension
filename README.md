@@ -12,7 +12,7 @@ and it provides:
 
 ## Docs
 
-[Official documentation](doc/index.rst).
+[Official documentation](doc/index.md).
 
 ## Translated languages
 
