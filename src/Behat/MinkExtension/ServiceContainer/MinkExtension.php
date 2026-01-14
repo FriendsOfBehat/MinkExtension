@@ -121,7 +121,7 @@ class MinkExtension implements ExtensionInterface
                 ->always()
                 ->then(function ($v) use ($renamedKeys) {
                     foreach ($renamedKeys as $driverType) {
-                        if (!array_key_exists($driverType, $v) || isset($v['sessions'][$driverType])) {
+                        if (!array_key_exists($driverType, (array)$v) || isset($v['sessions'][$driverType])) {
                             continue;
                         }
 
