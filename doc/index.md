@@ -1,6 +1,6 @@
 # Mink Extension
 
-This extension allows you to use the [Mink](http://mink.behat.org) browser emulator
+This extension allows you to use the [Mink](https://mink.behat.org) browser emulator
 abstraction with [Behat](https://github.com/Behat/Behat), a BDD tool for PHP.
 
 Together, this allows you to do functional and acceptance testing of web applications. 
