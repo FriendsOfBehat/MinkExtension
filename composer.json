@@ -24,7 +24,8 @@
         "php": "^7.4 || ^8",
         "behat/behat": "^3.0.5",
         "behat/mink": "^1.5",
-        "symfony/config": "^4.4 || ^5.0 || ^6.0 || ^7.0"
+        "symfony/config": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+        "symfony/deprecation-contracts": "^1.0 || ^2.0 || ^3.0"
     },
     "require-dev": {
         "behat/mink-goutte-driver": "^1.1 || ^2.0",
