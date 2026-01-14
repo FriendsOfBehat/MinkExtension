@@ -341,3 +341,10 @@ class MyMinkDriverExtension implements ExtensionInterface
 
 Your driver factory defines the driver name, which can be used to configure
 _your_ driver in the `behat.yml` file just like the other drivers shown above.
+
+> [!TIP]
+> If you would like to see a real-world example, have a look at the [SymfonyExtension](https://github.com/FriendsOfBehat/SymfonyExtension). 
+> In its [extension class](https://github.com/FriendsOfBehat/SymfonyExtension/blob/3ed86d77923be089d67d952e7b75af48fec42e22/src/ServiceContainer/SymfonyExtension.php#L102),
+> it registers a `SymfonyDriver` under the driver name `symfony`. That driver can be used
+> to make requests directly against a Symfony Kernel, without the overhead of HTTP network
+> requests and within the same PHP process that is running Behat.
