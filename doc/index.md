@@ -151,7 +151,7 @@ javascript).
 
 Configuration settings depend on the Mink driver being used. Out of the box, MinkExtension can configure the following Mink drivers:
 
-* **Symfony `BrowserKit` with Symfony `HttpClient`** - headless driver without JavaScript support. In order to use it, install [`behat/mink-browserkit-driver`](https://packagist.org/packages/behat/mink-browserkit-driver) through Composer. Then, modify your `behat.yml` profile:
+* **Symfony `BrowserKit` with Symfony `HttpClient`** - headless driver without JavaScript support. In order to use it, install [`behat/mink-browserkit-driver`](https://packagist.org/packages/behat/mink-browserkit-driver) and [`symfony/http-client`](https://packagist.org/packages/symfony/http-client) through Composer. Then, modify your `behat.yml` profile:
 
     ```yaml
     default:
