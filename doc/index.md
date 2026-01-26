@@ -85,10 +85,10 @@ After installing the extension, there are 4 usage options available:
     }
     ```
 
-> [!NOTE]
-> Keep in mind, that you can not have multiple step definitions with the same regex.
-> It will cause a `RedundantException`. So, you can inherit from `MinkContext`
-> only with one of your context/subcontext classes.
+    > [!NOTE]
+    > Keep in mind, that you can not have multiple step definitions with the same regex.
+    > It will cause a `RedundantException`. So, you can inherit from `MinkContext`
+    > only with one of your context/subcontext classes.
 
 3. Adding `Behat\MinkExtension\Context\MinkContext` as a context in your suite.
    Exactly like the previous option, but gives you the ability to keep your main context
@@ -103,10 +103,10 @@ After installing the extension, there are 4 usage options available:
             - Behat\MinkExtension\Context\MinkContext
     ```
 
-> [!NOTE]
-> Keep in mind, that you can not have multiple step definitions with the same regex.
-> It will cause a `RedundantException`. So, you can inherit from `MinkContext`
-> only with one of your context/subcontext classes.
+    > [!NOTE]
+    > Keep in mind, that you can not have multiple step definitions with the same regex.
+    > It will cause a `RedundantException`. So, you can inherit from `MinkContext`
+    > only with one of your context/subcontext classes.
 
 4. Implementing `Behat\MinkExtension\Context\MinkAwareContext` with your context.
 
@@ -173,6 +173,10 @@ with support for 7 drivers out of the box:
 
 * `GoutteDriver` - headless driver without JavaScript support. In order to use
   it, modify your `behat.yml` profile:
+
+    > [!IMPORTANT]
+    > Support for this driver has been deprecated, since the driver package has been abandoned.
+    > It will be removed in the next major version of this extension.
 
     ```yaml
     default:
@@ -256,6 +260,10 @@ with support for 7 drivers out of the box:
 * `SeleniumDriver` - javascript driver. In order to use it, modify your `behat.yml`
   profile:
 
+    > [!IMPORTANT]
+    > Support for this driver has been deprecated, since the driver package has been abandoned.
+    > It will be removed in the next major version of this extension.
+
     ```yaml
     default:
         extensions:
@@ -268,6 +276,10 @@ with support for 7 drivers out of the box:
 * `SahiDriver` - javascript driver. In order to use it, modify your `behat.yml`
   profile:
 
+    > [!IMPORTANT]
+    > Support for this driver has been deprecated, since the driver package has been abandoned.
+    > It will be removed in the next major version of this extension.
+
     ```yaml
     default:
         extensions:
@@ -279,6 +291,10 @@ with support for 7 drivers out of the box:
 
 * `ZombieDriver` - zombie.js javascript headless driver. In order to use it, modify
   your `behat.yml` profile:
+
+    > [!IMPORTANT]
+    > Support for this driver has been deprecated, since the driver package has been abandoned.
+    > It will be removed in the next major version of this extension.
 
     ```yaml
     default:
