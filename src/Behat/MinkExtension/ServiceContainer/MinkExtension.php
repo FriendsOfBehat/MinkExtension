@@ -51,7 +51,7 @@ class MinkExtension implements ExtensionInterface
     /**
      * @var DriverFactory[]
      */
-    private $driverFactories = array();
+    private array $driverFactories = array();
 
     public function __construct()
     {
@@ -68,7 +68,7 @@ class MinkExtension implements ExtensionInterface
         $this->registerDriverFactory(new WebdriverClassicFactory());
     }
 
-    public function registerDriverFactory(DriverFactory $driverFactory)
+    public function registerDriverFactory(DriverFactory $driverFactory): void
     {
         $this->driverFactories[$driverFactory->getDriverName()] = $driverFactory;
     }
@@ -76,7 +76,7 @@ class MinkExtension implements ExtensionInterface
     /**
      * {@inheritDoc}
      */
-    public function load(ContainerBuilder $container, array $config)
+    public function load(ContainerBuilder $container, array $config): void
     {
         if (isset($config['mink_loader'])) {
             $basePath = $container->getParameter('paths.base');
@@ -108,7 +108,7 @@ class MinkExtension implements ExtensionInterface
     /**
      * {@inheritDoc}
      */
-    public function configure(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder): void
     {
         // Rewrite keys to define a shortcut way without allowing conflicts with real keys
         $renamedKeys = array_diff(
@@ -177,7 +177,7 @@ class MinkExtension implements ExtensionInterface
     /**
      * {@inheritDoc}
      */
-    public function getConfigKey()
+    public function getConfigKey(): string
     {
         return 'mink';
     }
@@ -185,7 +185,7 @@ class MinkExtension implements ExtensionInterface
     /**
      * {@inheritdoc}
      */
-    public function initialize(ExtensionManager $extensionManager)
+    public function initialize(ExtensionManager $extensionManager): void
     {
     }
 
@@ -197,12 +197,12 @@ class MinkExtension implements ExtensionInterface
         $this->processSelectors($container);
     }
 
-    private function loadMink(ContainerBuilder $container)
+    private function loadMink(ContainerBuilder $container): void
     {
         $container->setDefinition(self::MINK_ID, new Definition('Behat\Mink\Mink'));
     }
 
-    private function loadContextInitializer(ContainerBuilder $container)
+    private function loadContextInitializer(ContainerBuilder $container): void
     {
         $definition = new Definition('Behat\MinkExtension\Context\Initializer\MinkAwareInitializer', array(
             new Reference(self::MINK_ID),
@@ -212,7 +212,7 @@ class MinkExtension implements ExtensionInterface
         $container->setDefinition('mink.context_initializer', $definition);
     }
 
-    private function loadSelectorsHandler(ContainerBuilder $container)
+    private function loadSelectorsHandler(ContainerBuilder $container): void
     {
         $container->setDefinition(self::SELECTORS_HANDLER_ID, new Definition('Behat\Mink\Selector\SelectorsHandler'));
 
@@ -225,7 +225,7 @@ class MinkExtension implements ExtensionInterface
         $container->setDefinition(self::SELECTOR_TAG . '.named', $namedSelectorDefinition);
     }
 
-    private function loadSessions(ContainerBuilder $container, array $config)
+    private function loadSessions(ContainerBuilder $container, array $config): void
     {
         $defaultSession = $config['default_session'];
         $javascriptSession = $config['javascript_session'];
@@ -271,7 +271,7 @@ class MinkExtension implements ExtensionInterface
         $container->setParameter('mink.available_javascript_sessions', $javascriptSessions);
     }
 
-    private function loadSessionsListener(ContainerBuilder $container)
+    private function loadSessionsListener(ContainerBuilder $container): void
     {
         $definition = new Definition('Behat\MinkExtension\Listener\SessionsListener', array(
             new Reference(self::MINK_ID),
@@ -283,7 +283,7 @@ class MinkExtension implements ExtensionInterface
         $container->setDefinition('mink.listener.sessions', $definition);
     }
 
-    private function loadFailureShowListener(ContainerBuilder $container)
+    private function loadFailureShowListener(ContainerBuilder $container): void
     {
         $definition = new Definition('Behat\MinkExtension\Listener\FailureShowListener', array(
             new Reference(self::MINK_ID),
@@ -293,7 +293,7 @@ class MinkExtension implements ExtensionInterface
         $container->setDefinition('mink.listener.failure_show', $definition);
     }
 
-    private function processSelectors(ContainerBuilder $container)
+    private function processSelectors(ContainerBuilder $container): void
     {
         $handlerDefinition = $container->getDefinition(self::SELECTORS_HANDLER_ID);
 
