@@ -24,8 +24,8 @@ use Behat\MinkExtension\Context\MinkAwareContext;
  */
 class MinkAwareInitializer implements ContextInitializer
 {
-    private $mink;
-    private $parameters;
+    private Mink $mink;
+    private array $parameters;
 
     /**
      * Initializes initializer.
@@ -44,7 +44,7 @@ class MinkAwareInitializer implements ContextInitializer
      *
      * @param Context $context
      */
-    public function initializeContext(Context $context)
+    public function initializeContext(Context $context): void
     {
         if (!$context instanceof MinkAwareContext) {
             return;

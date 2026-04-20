@@ -32,7 +32,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      */
     #[Given('/^(?:|I )am on (?:|the )homepage$/')]
     #[When('/^(?:|I )go to (?:|the )homepage$/')]
-    public function iAmOnHomepage()
+    public function iAmOnHomepage(): void
     {
         $this->visitPath('/');
     }
@@ -45,7 +45,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      */
     #[Given('/^(?:|I )am on "(?P<page>[^"]+)"$/')]
     #[When('/^(?:|I )go to "(?P<page>[^"]+)"$/')]
-    public function visit($page)
+    public function visit($page): void
     {
         $this->visitPath($page);
     }
@@ -56,7 +56,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I reload the page
      */
     #[When('/^(?:|I )reload the page$/')]
-    public function reload()
+    public function reload(): void
     {
         $this->getSession()->reload();
     }
@@ -66,7 +66,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: When I move backward one page
      */
     #[When('/^(?:|I )move backward one page$/')]
-    public function back()
+    public function back(): void
     {
         $this->getSession()->back();
     }
@@ -76,7 +76,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I move forward one page
      */
     #[When('/^(?:|I )move forward one page$/')]
-    public function forward()
+    public function forward(): void
     {
         $this->getSession()->forward();
     }
@@ -87,7 +87,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I press "Log In"
      */
     #[When('/^(?:|I )press "(?P<button>(?:[^"]|\\")*)"$/')]
-    public function pressButton($button)
+    public function pressButton($button): void
     {
         $button = $this->fixStepArgument($button);
         $this->getSession()->getPage()->pressButton($button);
@@ -99,7 +99,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I follow "Log In"
      */
     #[When('/^(?:|I )follow "(?P<link>(?:[^"]|\\")*)"$/')]
-    public function clickLink($link)
+    public function clickLink($link): void
     {
         $link = $this->fixStepArgument($link);
         $this->getSession()->getPage()->clickLink($link);
@@ -113,7 +113,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     #[When('/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/')]
     #[When('/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/')]
     #[When('/^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/')]
-    public function fillField($field, $value)
+    public function fillField($field, $value): void
     {
         $field = $this->fixStepArgument($field);
         $value = $this->fixStepArgument($value);
@@ -130,7 +130,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      *              | password | iLoveBats123 |
      */
     #[When('/^(?:|I )fill in the following:$/')]
-    public function fillFields(TableNode $fields)
+    public function fillFields(TableNode $fields): void
     {
         foreach ($fields->getRowsHash() as $field => $value) {
             $this->fillField($field, $value);
@@ -143,7 +143,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I select "Bats" from "user_fears"
      */
     #[When('/^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/')]
-    public function selectOption($select, $option)
+    public function selectOption($select, $option): void
     {
         $select = $this->fixStepArgument($select);
         $option = $this->fixStepArgument($option);
@@ -156,7 +156,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I additionally select "Deceased" from "parents_alive_status"
      */
     #[When('/^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/')]
-    public function additionallySelectOption($select, $option)
+    public function additionallySelectOption($select, $option): void
     {
         $select = $this->fixStepArgument($select);
         $option = $this->fixStepArgument($option);
@@ -169,7 +169,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I check "Pearl Necklace"
      */
     #[When('/^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/')]
-    public function checkOption($option)
+    public function checkOption($option): void
     {
         $option = $this->fixStepArgument($option);
         $this->getSession()->getPage()->checkField($option);
@@ -181,7 +181,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I uncheck "Broadway Plays"
      */
     #[When('/^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/')]
-    public function uncheckOption($option)
+    public function uncheckOption($option): void
     {
         $option = $this->fixStepArgument($option);
         $this->getSession()->getPage()->uncheckField($option);
@@ -193,7 +193,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I attach the file "bwayne_profile.png" to "profileImageUpload"
      */
     #[When('/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/')]
-    public function attachFileToField($field, $path)
+    public function attachFileToField($field, $path): void
     {
         $field = $this->fixStepArgument($field);
 
@@ -214,7 +214,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should be on "http://google.com"
      */
     #[Then('/^(?:|I )should be on "(?P<page>[^"]+)"$/')]
-    public function assertPageAddress($page)
+    public function assertPageAddress($page): void
     {
         $this->assertSession()->addressEquals($this->locatePath($page));
     }
@@ -225,7 +225,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should be on the homepage
      */
     #[Then('/^(?:|I )should be on (?:|the )homepage$/')]
-    public function assertHomepage()
+    public function assertHomepage(): void
     {
         $this->assertSession()->addressEquals($this->locatePath('/'));
     }
@@ -237,7 +237,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the url should match "log in"
      */
     #[Then('/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/')]
-    public function assertUrlRegExp($pattern)
+    public function assertUrlRegExp($pattern): void
     {
         $this->assertSession()->addressMatches($this->fixStepArgument($pattern));
     }
@@ -248,7 +248,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the response status code should be 400
      */
     #[Then('/^the response status code should be (?P<code>\d+)$/')]
-    public function assertResponseStatus($code)
+    public function assertResponseStatus($code): void
     {
         $this->assertSession()->statusCodeEquals($code);
     }
@@ -259,7 +259,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the response status code should not be 404
      */
     #[Then('/^the response status code should not be (?P<code>\d+)$/')]
-    public function assertResponseStatusIsNot($code)
+    public function assertResponseStatusIsNot($code): void
     {
         $this->assertSession()->statusCodeNotEquals($code);
     }
@@ -270,7 +270,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should see "Who is the Batman?"
      */
     #[Then('/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/')]
-    public function assertPageContainsText($text)
+    public function assertPageContainsText($text): void
     {
         $this->assertSession()->pageTextContains($this->fixStepArgument($text));
     }
@@ -281,7 +281,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should not see "Batman is Bruce Wayne"
      */
     #[Then('/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/')]
-    public function assertPageNotContainsText($text)
+    public function assertPageNotContainsText($text): void
     {
         $this->assertSession()->pageTextNotContains($this->fixStepArgument($text));
     }
@@ -292,7 +292,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should not see "Batman, the vigilante"
      */
     #[Then('/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/')]
-    public function assertPageMatchesText($pattern)
+    public function assertPageMatchesText($pattern): void
     {
         $this->assertSession()->pageTextMatches($this->fixStepArgument($pattern));
     }
@@ -303,7 +303,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should not see "Bruce Wayne, the vigilante"
      */
     #[Then('/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/')]
-    public function assertPageNotMatchesText($pattern)
+    public function assertPageNotMatchesText($pattern): void
     {
         $this->assertSession()->pageTextNotMatches($this->fixStepArgument($pattern));
     }
@@ -314,7 +314,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the response should contain "Batman is the hero Gotham deserves."
      */
     #[Then('/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/')]
-    public function assertResponseContains($text)
+    public function assertResponseContains($text): void
     {
         $this->assertSession()->responseContains($this->fixStepArgument($text));
     }
@@ -325,7 +325,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the response should not contain "Bruce Wayne is a billionaire, play-boy, vigilante."
      */
     #[Then('/^the response should not contain "(?P<text>(?:[^"]|\\")*)"$/')]
-    public function assertResponseNotContains($text)
+    public function assertResponseNotContains($text): void
     {
         $this->assertSession()->responseNotContains($this->fixStepArgument($text));
     }
@@ -336,7 +336,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should see "Batman" in the "heroes_list" element
      */
     #[Then('/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/')]
-    public function assertElementContainsText($element, $text)
+    public function assertElementContainsText($element, $text): void
     {
         $this->assertSession()->elementTextContains('css', $element, $this->fixStepArgument($text));
     }
@@ -347,7 +347,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should not see "Bruce Wayne" in the "heroes_alter_egos" element
      */
     #[Then('/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/')]
-    public function assertElementNotContainsText($element, $text)
+    public function assertElementNotContainsText($element, $text): void
     {
         $this->assertSession()->elementTextNotContains('css', $element, $this->fixStepArgument($text));
     }
@@ -358,7 +358,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the "body" element should contain "style=\"color:black;\""
      */
     #[Then('/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/')]
-    public function assertElementContains($element, $value)
+    public function assertElementContains($element, $value): void
     {
         $this->assertSession()->elementContains('css', $element, $this->fixStepArgument($value));
     }
@@ -369,7 +369,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the "body" element should not contain "style=\"color:black;\""
      */
     #[Then('/^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/')]
-    public function assertElementNotContains($element, $value)
+    public function assertElementNotContains($element, $value): void
     {
         $this->assertSession()->elementNotContains('css', $element, $this->fixStepArgument($value));
     }
@@ -380,7 +380,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should see a "body" element
      */
     #[Then('/^(?:|I )should see an? "(?P<element>[^"]*)" element$/')]
-    public function assertElementOnPage($element)
+    public function assertElementOnPage($element): void
     {
         $this->assertSession()->elementExists('css', $element);
     }
@@ -391,7 +391,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should not see a "canvas" element
      */
     #[Then('/^(?:|I )should not see an? "(?P<element>[^"]*)" element$/')]
-    public function assertElementNotOnPage($element)
+    public function assertElementNotOnPage($element): void
     {
         $this->assertSession()->elementNotExists('css', $element);
     }
@@ -402,7 +402,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the "username" field should contain "bwayne"
      */
     #[Then('/^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/')]
-    public function assertFieldContains($field, $value)
+    public function assertFieldContains($field, $value): void
     {
         $field = $this->fixStepArgument($field);
         $value = $this->fixStepArgument($value);
@@ -415,7 +415,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the "username" field should not contain "batman"
      */
     #[Then('/^the "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/')]
-    public function assertFieldNotContains($field, $value)
+    public function assertFieldNotContains($field, $value): void
     {
         $field = $this->fixStepArgument($field);
         $value = $this->fixStepArgument($value);
@@ -428,7 +428,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should see 5 "div" elements
      */
     #[Then('/^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/')]
-    public function assertNumElements($num, $element)
+    public function assertNumElements($num, $element): void
     {
         $this->assertSession()->elementsCount('css', $element, intval($num));
     }
@@ -441,7 +441,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     #[Then('/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/')]
     #[Then('/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox is checked$/')]
     #[Then('/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" (?:is|should be) checked$/')]
-    public function assertCheckboxChecked($checkbox)
+    public function assertCheckboxChecked($checkbox): void
     {
         $this->assertSession()->checkboxChecked($this->fixStepArgument($checkbox));
     }
@@ -456,7 +456,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     #[Then('/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox is (?:unchecked|not checked)$/')]
     #[Then('/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" should (?:be unchecked|not be checked)$/')]
     #[Then('/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/')]
-    public function assertCheckboxNotChecked($checkbox)
+    public function assertCheckboxNotChecked($checkbox): void
     {
         $this->assertSession()->checkboxNotChecked($this->fixStepArgument($checkbox));
     }
@@ -467,7 +467,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And print current URL
      */
     #[Then('/^print current URL$/')]
-    public function printCurrentUrl()
+    public function printCurrentUrl(): void
     {
         echo $this->getSession()->getCurrentUrl();
     }
@@ -478,7 +478,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And print last response
      */
     #[Then('/^print last response$/')]
-    public function printLastResponse()
+    public function printLastResponse(): void
     {
         echo (
             $this->getSession()->getCurrentUrl()."\n\n".
@@ -492,7 +492,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And show last response
      */
     #[Then('/^show last response$/')]
-    public function showLastResponse()
+    public function showLastResponse(): void
     {
         if (null === $this->getMinkParameter('show_cmd')) {
             throw new \RuntimeException('Set "show_cmd" parameter in behat.yml to be able to open page in browser (ex.: "show_cmd: firefox %s")');
@@ -508,7 +508,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      *
      * @return array
      */
-    public static function getTranslationResources()
+    public static function getTranslationResources(): array
     {
         return self::getMinkTranslationResources();
     }
@@ -518,7 +518,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      *
      * @return array
      */
-    public static function getMinkTranslationResources()
+    public static function getMinkTranslationResources(): array
     {
         return glob(__DIR__.'/../../../../i18n/*.xliff');
     }
@@ -530,7 +530,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      *
      * @return string
      */
-    protected function fixStepArgument($argument)
+    protected function fixStepArgument($argument): string
     {
         return str_replace('\\"', '"', $argument);
     }
