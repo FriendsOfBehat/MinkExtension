@@ -10,8 +10,8 @@
 
 namespace Behat\MinkExtension\Listener;
 
+use Behat\Behat\EventDispatcher\Event\BeforeScenarioTested;
 use Behat\Behat\EventDispatcher\Event\ExampleTested;
-use Behat\Behat\EventDispatcher\Event\ScenarioLikeTested;
 use Behat\Behat\EventDispatcher\Event\ScenarioTested;
 use Behat\Mink\Mink;
 use Behat\Testwork\EventDispatcher\Event\ExerciseCompleted;
@@ -31,14 +31,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class SessionsListener implements EventSubscriberInterface
 {
-    private $mink;
-    private $defaultSession;
-    private $javascriptSession;
+    private Mink $mink;
+    private string $defaultSession;
+    private ?string $javascriptSession;
 
     /**
      * @var string[] The available javascript sessions
      */
-    private $availableJavascriptSessions;
+    private array $availableJavascriptSessions;
 
     /**
      * Initializes initializer.
@@ -48,7 +48,7 @@ class SessionsListener implements EventSubscriberInterface
      * @param string|null $javascriptSession
      * @param string[]    $availableJavascriptSessions
      */
-    public function __construct(Mink $mink, $defaultSession, $javascriptSession, array $availableJavascriptSessions = array())
+    public function __construct(Mink $mink, string $defaultSession, ?string $javascriptSession, array $availableJavascriptSessions = array())
     {
         $this->mink              = $mink;
         $this->defaultSession    = $defaultSession;
@@ -79,11 +79,11 @@ class SessionsListener implements EventSubscriberInterface
      * `@insulated` tag will cause Mink to stop current sessions before scenario
      * instead of just soft-resetting them
      *
-     * @param ScenarioLikeTested $event
+     * @param BeforeScenarioTested $event
      *
      * @throws ProcessingException when the @javascript tag is used without a javascript session
      */
-    public function prepareDefaultMinkSession(ScenarioLikeTested $event)
+    public function prepareDefaultMinkSession(BeforeScenarioTested $event): void
     {
         $scenario = $event->getScenario();
         $feature  = $event->getFeature();
@@ -92,7 +92,7 @@ class SessionsListener implements EventSubscriberInterface
         foreach (array_merge($feature->getTags(), $scenario->getTags()) as $tag) {
             if ('javascript' === $tag) {
                 $session = $this->getJavascriptSession($event->getSuite());
-            } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
+            } elseif (preg_match('/^mink:(.+)/', $tag, $matches)) {
                 $session = $matches[1];
             }
         }
@@ -113,12 +113,12 @@ class SessionsListener implements EventSubscriberInterface
     /**
      * Stops all started Mink sessions.
      */
-    public function tearDownMinkSessions()
+    public function tearDownMinkSessions(): void
     {
         $this->mink->stopSessions();
     }
 
-    private function getDefaultSession(Suite $suite)
+    private function getDefaultSession(Suite $suite): string
     {
         if (!$suite->hasSetting('mink_session')) {
             return $this->defaultSession;
@@ -140,7 +140,7 @@ class SessionsListener implements EventSubscriberInterface
         return $session;
     }
 
-    private function getJavascriptSession(Suite $suite)
+    private function getJavascriptSession(Suite $suite): ?string
     {
         if (!$suite->hasSetting('mink_javascript_session')) {
             if (null === $this->javascriptSession) {
