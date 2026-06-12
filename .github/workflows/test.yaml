@@ -2,8 +2,12 @@ name: Test
 
 on:
     push:
+        branches:
+            - master
     pull_request:
-        types: [opened, synchronize, edited, reopened]
+    schedule:
+        -
+            cron: "0 1 * * 6" # Run at 1am every Saturday
 
 jobs:
     test:
@@ -14,24 +18,21 @@ jobs:
             fail-fast: false
             matrix:
                 php-version:
-                    - '7.4'
-                    - '8.0'
-                    - '8.1'
+                    - '8.3'
+                    - '8.4'
+                    - '8.5'
                 symfony-version:
-                    - '4.4.*'
-                    - '5.4.*'
-                    - '6.4.*'
+                    - '7.4.*'
+                    - '8.0.*'
+                    - '8.1.*'
                 exclude:
-                    - php-version: '7.4'
-                      symfony-version: '6.4.*'
-                    - php-version: '8.0'
-                      symfony-version: '6.4.*'
-                include:
-                    - php-version: '8.2'
-                      symfony-version: '7.0.*'
+                    - php-version: '8.3'
+                      symfony-version: '8.0.*'
+                    - php-version: '8.3'
+                      symfony-version: '8.1.*'
         steps:
             - name: Checkout
-              uses: actions/checkout@v6
+              uses: actions/checkout@v3
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
@@ -44,8 +45,15 @@ jobs:
             - name: Validate composer.json
               run: composer validate --no-check-lock
 
-            - name: Configure Symfony version
-              run: composer require --no-update "symfony/config:${{ matrix.symfony-version }}" "symfony/dependency-injection:${{ matrix.symfony-version }}"
+            - name: Lock Symfony version
+              run: VERSION=${{ matrix.symfony-version }} .github/workflows/lock-symfony-version.sh
+
+            - name: Require behat 4.x for Symfony 8+
+              if: startsWith(matrix.symfony-version, '8.')
+              run: |
+                  cat <<< $(jq --indent 4 '."require-dev"."behat/behat" = "4.x-dev as 3.31.0"' < composer.json) > composer.json
+                  composer config minimum-stability dev
+                  composer config prefer-stable true
 
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress
@@ -54,4 +62,9 @@ jobs:
               run: vendor/bin/phpspec run -f pretty
 
             - name: Behat
-              run: vendor/bin/behat -fprogress --strict
+              run: |
+                  if [[ "${{ matrix.symfony-version }}" == 8.* ]]; then
+                    vendor/bin/behat --config behat.dist.php -fprogress --strict
+                  else
+                    vendor/bin/behat -fprogress --strict
+                  fi
