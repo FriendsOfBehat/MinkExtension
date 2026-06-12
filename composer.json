@@ -24,13 +24,13 @@
         "php": "^8.3",
         "behat/behat": "^3.31",
         "behat/mink": "^1.5",
-        "symfony/config": "^7.4"
+        "symfony/config": "^7.4 || ^8.0"
     },
     "require-dev": {
         "behat/mink-browserkit-driver": "^2.0",
         "phpspec/phpspec": "^8.0",
-        "symfony/browser-kit": "^7.4",
-        "symfony/http-client": "^7.4"
+        "symfony/browser-kit": "^7.4 || ^8.0",
+        "symfony/http-client": "^7.4 || ^8.0"
     },
     "replace": {
         "behat/mink-extension": "self.version"
