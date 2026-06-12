@@ -11,21 +11,16 @@
 namespace Behat\MinkExtension\ServiceContainer\Driver;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\DependencyInjection\Definition;
 
 class SauceLabsFactory extends Selenium2Factory
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDriverName()
+    public function getDriverName(): string
     {
         return 'sauce_labs';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function configure(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder): void
     {
         $builder
             ->children()
@@ -39,21 +34,21 @@ class SauceLabsFactory extends Selenium2Factory
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed> $config
      */
-    public function buildDriver(array $config)
+    public function buildDriver(array $config): Definition
     {
         $host = 'ondemand.saucelabs.com';
-        if ($config['connect']) {
+        if (is_bool($config['connect']) ? $config['connect'] : (bool) $config['connect']) {
             $host = 'localhost:4445';
         }
 
-        $config['wd_host'] = sprintf('%s:%s@%s/wd/hub', $config['username'], $config['access_key'], $host);
+        $config['wd_host'] = sprintf('%s:%s@%s/wd/hub', is_string($config['username']) ? $config['username'] : '', is_string($config['access_key']) ? $config['access_key'] : '', $host);
 
         return parent::buildDriver($config);
     }
 
-    protected function getCapabilitiesNode()
+    protected function getCapabilitiesNode(): ArrayNodeDefinition
     {
         $node = parent::getCapabilitiesNode();
 
@@ -84,9 +79,11 @@ class SauceLabsFactory extends Selenium2Factory
                 ->booleanNode('disable-popup-handler')->end()
             ->end()
             ->validate()
-                ->ifTrue(function ($v) {return empty($v['custom-data']);})
-                ->then(function ($v) {
-                    unset ($v['custom-data']);
+                ->ifTrue(function (mixed $v): bool {return !is_array($v) || empty($v['custom-data']); })
+                ->then(function (mixed $v): mixed {
+                    if (is_array($v)) {
+                        unset($v['custom-data']);
+                    }
 
                     return $v;
                 })

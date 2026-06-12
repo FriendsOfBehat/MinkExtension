@@ -10,34 +10,24 @@
 namespace Behat\MinkExtension\ServiceContainer\Driver;
 
 use Behat\Mink\Driver\BrowserKitDriver;
+use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\HttpClient\HttpClient;
-
 
 class BrowserKitFactory implements DriverFactory
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDriverName()
+    public function getDriverName(): string
     {
         return 'browserkit_http';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function supportsJavascript()
+    public function supportsJavascript(): bool
     {
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function configure(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder): void
     {
         $builder
             ->children()
@@ -51,9 +41,9 @@ class BrowserKitFactory implements DriverFactory
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed> $config
      */
-    public function buildDriver(array $config)
+    public function buildDriver(array $config): Definition
     {
         if (!class_exists(BrowserKitDriver::class)) {
             throw new \RuntimeException('Install behat/mink-browserkit-driver in order to use the browserkit_http driver.');
@@ -77,5 +67,4 @@ class BrowserKitFactory implements DriverFactory
             '%mink.base_url%',
         ]);
     }
-
 }

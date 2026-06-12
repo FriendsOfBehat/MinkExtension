@@ -25,12 +25,12 @@ interface MinkAwareContext extends Context
      *
      * @param Mink $mink Mink session manager
      */
-    public function setMink(Mink $mink);
+    public function setMink(Mink $mink): void;
 
     /**
      * Sets parameters provided for Mink.
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      */
-    public function setMinkParameters(array $parameters);
+    public function setMinkParameters(array $parameters): void;
 }
