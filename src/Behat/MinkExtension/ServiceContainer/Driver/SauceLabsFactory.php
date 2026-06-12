@@ -39,7 +39,7 @@ class SauceLabsFactory extends Selenium2Factory
     public function buildDriver(array $config): Definition
     {
         $host = 'ondemand.saucelabs.com';
-        if (is_bool($config['connect']) ? $config['connect'] : (bool) $config['connect']) {
+        if ((bool) $config['connect']) {
             $host = 'localhost:4445';
         }
 

@@ -81,7 +81,7 @@ class FailureShowListener implements EventSubscriberInterface
         }
 
         $showTmpDir = $this->parameters['show_tmp_dir'];
-        $filename = rtrim(is_string($showTmpDir) ? $showTmpDir : '', DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.uniqid().'.html';
+        $filename = rtrim(is_string($showTmpDir) ? $showTmpDir : sys_get_temp_dir(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.uniqid().'.html';
         file_put_contents($filename, $this->mink->getSession()->getPage()->getContent());
         system(sprintf(is_string($showCmd) ? $showCmd : '', escapeshellarg($filename)));
     }

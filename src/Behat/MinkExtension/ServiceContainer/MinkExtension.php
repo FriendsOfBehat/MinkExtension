@@ -98,8 +98,10 @@ class MinkExtension implements ExtensionInterface
         unset($config['sessions']);
 
         $container->setParameter('mink.parameters', $config);
-        $container->setParameter('mink.base_url', is_string($config['base_url'] ?? '') ? ($config['base_url'] ?? '') : '');
-        $container->setParameter('mink.browser_name', is_string($config['browser_name'] ?? '') ? ($config['browser_name'] ?? '') : '');
+        $baseUrl = $config['base_url'] ?? '';
+        $container->setParameter('mink.base_url', is_string($baseUrl) ? $baseUrl : '');
+        $browserName = $config['browser_name'] ?? '';
+        $container->setParameter('mink.browser_name', is_string($browserName) ? $browserName : '');
     }
 
     public function configure(ArrayNodeDefinition $builder): void
