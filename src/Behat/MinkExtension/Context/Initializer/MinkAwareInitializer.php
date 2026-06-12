@@ -23,9 +23,11 @@ use Behat\MinkExtension\Context\MinkAwareContext;
  */
 class MinkAwareInitializer implements ContextInitializer
 {
+    /**
+     * @param array<string, mixed> $parameters
+     */
     public function __construct(
         private readonly Mink $mink,
-        /** @var array<string, mixed> */
         private readonly array $parameters,
     ) {
     }

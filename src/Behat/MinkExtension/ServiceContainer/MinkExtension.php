@@ -124,13 +124,12 @@ class MinkExtension implements ExtensionInterface
                         if (!array_key_exists($driverType, $v)) {
                             continue;
                         }
-                        /** @var array<string, array<string, mixed>> $sessions */
                         $sessions = is_array($v['sessions']) ? $v['sessions'] : [];
                         if (isset($sessions[$driverType])) {
                             continue;
                         }
 
-                        $sessions[$driverType][$driverType] = $v[$driverType];
+                        $sessions[$driverType] = [$driverType => $v[$driverType]];
                         $v['sessions'] = $sessions;
                         unset($v[$driverType]);
                     }
@@ -223,28 +222,25 @@ class MinkExtension implements ExtensionInterface
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array<mixed> $config
      */
     private function loadSessions(ContainerBuilder $container, array $config): void
     {
-        /** @var string|null $defaultSession */
         $defaultSession = is_string($config['default_session']) ? $config['default_session'] : null;
-        /** @var string|null $javascriptSession */
         $javascriptSession = is_string($config['javascript_session']) ? $config['javascript_session'] : null;
-        /** @var string[] $javascriptSessions */
         $javascriptSessions = [];
-        /** @var string[] $nonJavascriptSessions */
         $nonJavascriptSessions = [];
 
         $minkDefinition = $container->getDefinition(self::MINK_ID);
 
-        /** @var array<string, array<string, mixed>> $sessions */
         $sessions = is_array($config['sessions']) ? $config['sessions'] : [];
         foreach ($sessions as $name => $session) {
+            if (!is_array($session)) {
+                continue;
+            }
             $driver = (string) key($session);
             $factory = $this->driverFactories[$driver];
 
-            /** @var array<string, mixed> $driverConfig */
             $driverConfig = is_array($session[$driver]) ? $session[$driver] : [];
             $definition = new Definition('Behat\Mink\Session', [
                 $factory->buildDriver($driverConfig),

@@ -39,7 +39,7 @@ class Selenium2Factory implements DriverFactory
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array<mixed> $config
      */
     public function buildDriver(array $config): Definition
     {
@@ -47,9 +47,7 @@ class Selenium2Factory implements DriverFactory
             throw new \RuntimeException(sprintf('Install MinkSelenium2Driver in order to use %s driver.', $this->getDriverName()));
         }
 
-        /** @var array<string, mixed> $capabilities */
         $capabilities = is_array($config['capabilities']) ? $config['capabilities'] : [];
-        /** @var array<string, mixed> $extraCapabilities */
         $extraCapabilities = is_array($capabilities['extra_capabilities']) ? $capabilities['extra_capabilities'] : [];
         unset($capabilities['extra_capabilities']);
 

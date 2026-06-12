@@ -33,7 +33,7 @@ class BrowserStackFactory extends Selenium2Factory
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array<mixed> $config
      */
     public function buildDriver(array $config): Definition
     {

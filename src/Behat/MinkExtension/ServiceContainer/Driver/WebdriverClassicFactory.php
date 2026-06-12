@@ -34,6 +34,9 @@ class WebdriverClassicFactory implements DriverFactory
             ->end();
     }
 
+    /**
+     * @param array<mixed> $config
+     */
     public function buildDriver(array $config): Definition
     {
         if (!class_exists(WebdriverClassicDriver::class)) {

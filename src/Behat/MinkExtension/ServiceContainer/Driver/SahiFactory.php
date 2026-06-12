@@ -39,7 +39,7 @@ class SahiFactory implements DriverFactory
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array<mixed> $config
      */
     public function buildDriver(array $config): Definition
     {
