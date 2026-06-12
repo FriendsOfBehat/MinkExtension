@@ -15,13 +15,10 @@ use Behat\MinkExtension\ServiceContainer\Driver\AppiumFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\BrowserKitFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\BrowserStackFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
-use Behat\MinkExtension\ServiceContainer\Driver\SahiFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\SauceLabsFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\Selenium2Factory;
 use Behat\MinkExtension\ServiceContainer\Driver\Selenium4Factory;
-use Behat\MinkExtension\ServiceContainer\Driver\SeleniumFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\WebdriverClassicFactory;
-use Behat\MinkExtension\ServiceContainer\Driver\ZombieFactory;
 use Behat\Testwork\EventDispatcher\ServiceContainer\EventDispatcherExtension;
 use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
 use Behat\Testwork\ServiceContainer\Extension as ExtensionInterface;
@@ -55,13 +52,10 @@ class MinkExtension implements ExtensionInterface
     public function __construct()
     {
         $this->registerDriverFactory(new BrowserKitFactory());
-        $this->registerDriverFactory(new SahiFactory());
-        $this->registerDriverFactory(new SeleniumFactory());
         $this->registerDriverFactory(new Selenium2Factory());
         $this->registerDriverFactory(new Selenium4Factory());
         $this->registerDriverFactory(new SauceLabsFactory());
         $this->registerDriverFactory(new BrowserStackFactory());
-        $this->registerDriverFactory(new ZombieFactory());
         $this->registerDriverFactory(new AppiumFactory());
         $this->registerDriverFactory(new WebdriverClassicFactory());
     }
