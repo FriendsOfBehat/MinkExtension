@@ -11,7 +11,7 @@ on:
 
 jobs:
     test:
-        name: PHP ${{ matrix.php-version }} + Symfony ${{ matrix.symfony-version }}
+        name: PHP ${{ matrix.php-version }} + Symfony ${{ matrix.symfony-version }} + Behat ${{ matrix.behat-version }}
         runs-on: ubuntu-latest
         continue-on-error: false
         strategy:
@@ -25,10 +25,19 @@ jobs:
                     - '7.4.*'
                     - '8.0.*'
                     - '8.1.*'
+                behat-version:
+                    - stable
+                    - 4.x-dev
                 exclude:
+                    # Symfony 8.x requires PHP >= 8.4
                     - php-version: '8.3'
                       symfony-version: '8.0.*'
                     - php-version: '8.3'
+                      symfony-version: '8.1.*'
+                    # Behat 3.31 (stable) cannot install with Symfony 8.x
+                    - behat-version: stable
+                      symfony-version: '8.0.*'
+                    - behat-version: stable
                       symfony-version: '8.1.*'
         steps:
             - name: Checkout
@@ -48,8 +57,8 @@ jobs:
             - name: Lock Symfony version
               run: VERSION=${{ matrix.symfony-version }} .github/workflows/lock-symfony-version.sh
 
-            - name: Require behat 4.x for Symfony 8+
-              if: startsWith(matrix.symfony-version, '8.')
+            - name: Require behat 4.x
+              if: matrix.behat-version == '4.x-dev'
               run: |
                   VERSION="4.x-dev as 3.31.0" .github/workflows/lock-behat-version.sh
                   composer config minimum-stability dev
@@ -62,9 +71,4 @@ jobs:
               run: vendor/bin/phpspec run -f pretty
 
             - name: Behat
-              run: |
-                  if [[ "${{ matrix.symfony-version }}" == 8.* ]]; then
-                    vendor/bin/behat --config behat.dist.php -fprogress --strict
-                  else
-                    vendor/bin/behat -fprogress --strict
-                  fi
+              run: vendor/bin/behat --config behat.dist.php -fprogress --strict
