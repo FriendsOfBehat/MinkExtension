@@ -10,25 +10,16 @@ class WebdriverClassicFactory implements DriverFactory
 {
     use EnvironmentCapabilities;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDriverName(): string
     {
         return 'webdriver_classic';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supportsJavascript(): bool
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(ArrayNodeDefinition $builder): void
     {
         $builder
@@ -44,21 +35,19 @@ class WebdriverClassicFactory implements DriverFactory
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<mixed> $config
      */
     public function buildDriver(array $config): Definition
     {
         if (!class_exists(WebdriverClassicDriver::class)) {
-            throw new \RuntimeException(
-                "Install mink/webdriver-classic-driver in order to use the {$this->getDriverName()} driver."
-            );
+            throw new \RuntimeException("Install mink/webdriver-classic-driver in order to use the {$this->getDriverName()} driver.");
         }
 
         return new Definition(WebdriverClassicDriver::class, [
             $config['browser'],
             array_merge(
                 $this->guessEnvironmentCapabilities(),
-                $config['capabilities']
+                is_array($config['capabilities']) ? $config['capabilities'] : []
             ),
             $config['wd_host'],
         ]);

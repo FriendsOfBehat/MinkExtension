@@ -11,8 +11,8 @@
 namespace Behat\MinkExtension\Context;
 
 use Behat\Mink\Mink;
-use Behat\Mink\WebAssert;
 use Behat\Mink\Session;
+use Behat\Mink\WebAssert;
 
 /**
  * Raw Mink context for Behat BDD tool.
@@ -22,31 +22,28 @@ use Behat\Mink\Session;
  */
 class RawMinkContext implements MinkAwareContext
 {
-    private $mink;
-    private $minkParameters;
+    private ?Mink $mink = null;
+
+    /** @var array<string, mixed> */
+    private array $minkParameters = [];
 
     /**
      * Sets Mink instance.
      *
      * @param Mink $mink Mink session manager
      */
-    public function setMink(Mink $mink)
+    public function setMink(Mink $mink): void
     {
         $this->mink = $mink;
     }
 
     /**
      * Returns Mink instance.
-     *
-     * @return Mink
      */
-    public function getMink()
+    public function getMink(): Mink
     {
         if (null === $this->mink) {
-            throw new \RuntimeException(
-                'Mink instance has not been set on Mink context class. ' . 
-                'Have you enabled the Mink Extension?'
-            );
+            throw new \RuntimeException('Mink instance has not been set on Mink context class. Have you enabled the Mink Extension?');
         }
 
         return $this->mink;
@@ -55,9 +52,9 @@ class RawMinkContext implements MinkAwareContext
     /**
      * Returns the parameters provided for Mink.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function getMinkParameters()
+    public function getMinkParameters(): array
     {
         return $this->minkParameters;
     }
@@ -65,21 +62,17 @@ class RawMinkContext implements MinkAwareContext
     /**
      * Sets parameters provided for Mink.
      *
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      */
-    public function setMinkParameters(array $parameters)
+    public function setMinkParameters(array $parameters): void
     {
         $this->minkParameters = $parameters;
     }
 
     /**
      * Returns specific mink parameter.
-     *
-     * @param string $name
-     *
-     * @return mixed
      */
-    public function getMinkParameter($name)
+    public function getMinkParameter(string $name): mixed
     {
         return isset($this->minkParameters[$name]) ? $this->minkParameters[$name] : null;
     }
@@ -89,9 +82,9 @@ class RawMinkContext implements MinkAwareContext
      * feature context.
      *
      * @param string $name  The key of the parameter
-     * @param string $value The value of the parameter
+     * @param mixed  $value The value of the parameter
      */
-    public function setMinkParameter($name, $value)
+    public function setMinkParameter(string $name, mixed $value): void
     {
         $this->minkParameters[$name] = $value;
     }
@@ -100,10 +93,8 @@ class RawMinkContext implements MinkAwareContext
      * Returns Mink session.
      *
      * @param string|null $name name of the session OR active session will be used
-     *
-     * @return Session
      */
-    public function getSession($name = null)
+    public function getSession(?string $name = null): Session
     {
         return $this->getMink()->getSession($name);
     }
@@ -112,21 +103,16 @@ class RawMinkContext implements MinkAwareContext
      * Returns Mink session assertion tool.
      *
      * @param string|null $name name of the session OR active session will be used
-     *
-     * @return WebAssert
      */
-    public function assertSession($name = null)
+    public function assertSession(?string $name = null): WebAssert
     {
         return $this->getMink()->assertSession($name);
     }
 
     /**
      * Visits provided relative path using provided or default session.
-     *
-     * @param string      $path
-     * @param string|null $sessionName
      */
-    public function visitPath($path, $sessionName = null)
+    public function visitPath(string $path, ?string $sessionName = null): void
     {
         $this->getSession($sessionName)->visit($this->locatePath($path));
     }
@@ -134,16 +120,13 @@ class RawMinkContext implements MinkAwareContext
     /**
      * Locates url, based on provided path.
      * Override to provide custom routing mechanism.
-     *
-     * @param string $path
-     *
-     * @return string
      */
-    public function locatePath($path)
+    public function locatePath(string $path): string
     {
-        $startUrl = rtrim($this->getMinkParameter('base_url') ?? '', '/') . '/';
+        $baseUrl = $this->getMinkParameter('base_url');
+        $startUrl = rtrim(is_string($baseUrl) ? $baseUrl : '', '/').'/';
 
-        return 0 !== strpos($path, 'http') ? $startUrl . ltrim($path, '/') : $path;
+        return 0 !== strpos($path, 'http') ? $startUrl.ltrim($path, '/') : $path;
     }
 
     /**
@@ -154,12 +137,13 @@ class RawMinkContext implements MinkAwareContext
      * @param string $filepath Desired filepath, defaults to
      *                         upload_tmp_dir, falls back to sys_get_temp_dir()
      */
-    public function saveScreenshot($filename = null, $filepath = null)
+    public function saveScreenshot(?string $filename = null, ?string $filepath = null): void
     {
         // Under Cygwin, uniqid with more_entropy must be set to true.
         // No effect in other environments.
-        $filename = $filename ?: sprintf('%s_%s_%s.%s', $this->getMinkParameter('browser_name'), date('c'), uniqid('', true), 'png');
-        $filepath = $filepath ?: (ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir());
-        file_put_contents($filepath . '/' . $filename, $this->getSession()->getScreenshot());
+        $browserName = $this->getMinkParameter('browser_name');
+        $filename = $filename ?: sprintf('%s_%s_%s.%s', is_string($browserName) ? $browserName : '', date('c'), uniqid('', true), 'png');
+        $filepath = $filepath ?: (ini_get('upload_tmp_dir') ?: sys_get_temp_dir());
+        file_put_contents($filepath.'/'.$filename, $this->getSession()->getScreenshot());
     }
 }

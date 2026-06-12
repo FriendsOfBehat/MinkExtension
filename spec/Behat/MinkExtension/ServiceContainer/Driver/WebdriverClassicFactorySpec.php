@@ -2,8 +2,8 @@
 
 namespace spec\Behat\MinkExtension\ServiceContainer\Driver;
 
-use PhpSpec\ObjectBehavior;
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
+use PhpSpec\ObjectBehavior;
 
 class WebdriverClassicFactorySpec extends ObjectBehavior
 {

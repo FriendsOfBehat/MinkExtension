@@ -18,35 +18,14 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 interface DriverFactory
 {
-    /**
-     * Gets the name of the driver being configured.
-     *
-     * This will be the key of the configuration for the driver.
-     *
-     * @return string
-     */
-    public function getDriverName();
+    public function getDriverName(): string;
+
+    public function supportsJavascript(): bool;
+
+    public function configure(ArrayNodeDefinition $builder): void;
 
     /**
-     * Defines whether a session using this driver is eligible as default javascript session
-     *
-     * @return boolean
+     * @param array<mixed> $config
      */
-    public function supportsJavascript();
-
-    /**
-     * Setups configuration for the driver factory.
-     *
-     * @param ArrayNodeDefinition $builder
-     */
-    public function configure(ArrayNodeDefinition $builder);
-
-    /**
-     * Builds the service definition for the driver.
-     *
-     * @param array $config
-     *
-     * @return Definition
-     */
-    public function buildDriver(array $config);
+    public function buildDriver(array $config): Definition;
 }

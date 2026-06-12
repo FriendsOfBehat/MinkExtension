@@ -67,6 +67,12 @@ jobs:
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress
 
+            - name: CS Fixer
+              run: vendor/bin/php-cs-fixer fix --dry-run
+
+            - name: PHPStan
+              run: vendor/bin/phpstan analyse --memory-limit=512M
+
             - name: PHPSpec
               run: vendor/bin/phpspec run -f pretty
 

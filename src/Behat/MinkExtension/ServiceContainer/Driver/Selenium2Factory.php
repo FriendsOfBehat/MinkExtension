@@ -17,26 +17,17 @@ class Selenium2Factory implements DriverFactory
 {
     use EnvironmentCapabilities;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getDriverName()
+    public function getDriverName(): string
     {
         return 'selenium2';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function supportsJavascript()
+    public function supportsJavascript(): bool
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function configure(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder): void
     {
         $builder
             ->children()
@@ -48,28 +39,26 @@ class Selenium2Factory implements DriverFactory
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<mixed> $config
      */
-    public function buildDriver(array $config)
+    public function buildDriver(array $config): Definition
     {
         if (!class_exists('Behat\Mink\Driver\Selenium2Driver')) {
-            throw new \RuntimeException(sprintf(
-                'Install MinkSelenium2Driver in order to use %s driver.',
-                $this->getDriverName()
-            ));
+            throw new \RuntimeException(sprintf('Install MinkSelenium2Driver in order to use %s driver.', $this->getDriverName()));
         }
 
-        $extraCapabilities = $config['capabilities']['extra_capabilities'];
-        unset($config['capabilities']['extra_capabilities']);
+        $capabilities = is_array($config['capabilities']) ? $config['capabilities'] : [];
+        $extraCapabilities = is_array($capabilities['extra_capabilities']) ? $capabilities['extra_capabilities'] : [];
+        unset($capabilities['extra_capabilities']);
 
-        return new Definition('Behat\Mink\Driver\Selenium2Driver', array(
+        return new Definition('Behat\Mink\Driver\Selenium2Driver', [
             $config['browser'],
-            array_replace($this->guessEnvironmentCapabilities(), $extraCapabilities, $config['capabilities']),
+            array_replace($this->guessEnvironmentCapabilities(), $extraCapabilities, $capabilities),
             $config['wd_host'],
-        ));
+        ]);
     }
 
-    protected function getCapabilitiesNode()
+    protected function getCapabilitiesNode(): ArrayNodeDefinition
     {
         $node = new ArrayNodeDefinition('capabilities');
 
@@ -106,7 +95,7 @@ class Selenium2Factory implements DriverFactory
                         ->scalarNode('sslProxy')->end()
                     ->end()
                     ->validate()
-                        ->ifTrue(function ($v) {
+                        ->ifTrue(function (mixed $v): bool {
                             return empty($v);
                         })
                         ->thenUnset()
@@ -116,8 +105,8 @@ class Selenium2Factory implements DriverFactory
                     ->children()
                         ->scalarNode('profile')
                             ->validate()
-                                ->ifTrue(function ($v) {
-                                    return !file_exists($v);
+                                ->ifTrue(function (mixed $v): bool {
+                                    return !is_string($v) || !file_exists($v);
                                 })
                                 ->thenInvalid('Cannot find profile zip file %s')
                             ->end()
@@ -137,11 +126,14 @@ class Selenium2Factory implements DriverFactory
                         ->end()
                     ->end()
                     ->validate()
-                        ->ifTrue(function ($v) {
-                            return empty($v['prefs']);
+                        ->ifTrue(function (mixed $v): bool {
+                            return !is_array($v) || empty($v['prefs']);
                         })
-                        ->then(function ($v) {
-                            unset($v['prefs']);
+                        ->then(function (mixed $v): mixed {
+                            if (is_array($v)) {
+                                unset($v['prefs']);
+                            }
+
                             return $v;
                         })
                     ->end()

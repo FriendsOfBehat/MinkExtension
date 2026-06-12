@@ -17,26 +17,17 @@ class Selenium4Factory implements DriverFactory
 {
     use EnvironmentCapabilities;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getDriverName()
+    public function getDriverName(): string
     {
         return 'selenium4';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function supportsJavascript()
+    public function supportsJavascript(): bool
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function configure(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder): void
     {
         $builder
             ->children()
@@ -49,28 +40,25 @@ class Selenium4Factory implements DriverFactory
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<mixed> $config
      */
-    public function buildDriver(array $config)
+    public function buildDriver(array $config): Definition
     {
         if (!class_exists('Behat\Mink\Driver\Selenium4Driver')) {
-            throw new \RuntimeException(sprintf(
-                'Install MinkSelenium4Driver in order to use %s driver.',
-                $this->getDriverName()
-            ));
+            throw new \RuntimeException(sprintf('Install MinkSelenium4Driver in order to use %s driver.', $this->getDriverName()));
         }
 
-        return new Definition('Behat\Mink\Driver\Selenium4Driver', array(
+        return new Definition('Behat\Mink\Driver\Selenium4Driver', [
             $config['browser'],
             array_merge(
                 $this->guessEnvironmentCapabilities(),
-                $config['capabilities']
+                is_array($config['capabilities']) ? $config['capabilities'] : []
             ),
             $config['wd_host'],
-        ));
+        ]);
     }
 
-    protected function getCapabilitiesNode()
+    protected function getCapabilitiesNode(): ArrayNodeDefinition
     {
         $node = new ArrayNodeDefinition('capabilities');
 

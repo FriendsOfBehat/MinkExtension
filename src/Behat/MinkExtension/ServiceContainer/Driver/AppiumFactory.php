@@ -1,24 +1,18 @@
 <?php
 
-
 namespace Behat\MinkExtension\ServiceContainer\Driver;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\DependencyInjection\Definition;
 
 class AppiumFactory extends Selenium2Factory
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDriverName()
+    public function getDriverName(): string
     {
         return 'appium';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function configure(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder): void
     {
         $builder
             ->children()
@@ -31,18 +25,18 @@ class AppiumFactory extends Selenium2Factory
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<mixed> $config
      */
-    public function buildDriver(array $config)
+    public function buildDriver(array $config): Definition
     {
-        $host = $config['appium_host'].":".$config['appium_port'];
+        $host = (is_string($config['appium_host']) ? $config['appium_host'] : '').':'.(is_string($config['appium_port']) ? $config['appium_port'] : '');
 
         $config['wd_host'] = sprintf('%s/wd/hub', $host);
 
         return parent::buildDriver($config);
     }
 
-    protected function getCapabilitiesNode()
+    protected function getCapabilitiesNode(): ArrayNodeDefinition
     {
         $node = parent::getCapabilitiesNode();
 
@@ -63,7 +57,7 @@ class AppiumFactory extends Selenium2Factory
                 ->booleanNode('autoWebview')->end()
                 ->booleanNode('noReset')->end()
                 ->booleanNode('fullReset')->end()
-            //ANDROID ONLY
+            // ANDROID ONLY
                 ->scalarNode('appActivity')->end()
                 ->scalarNode('appPackage')->end()
                 ->scalarNode('appWaitActivity')->end()
@@ -116,7 +110,7 @@ class AppiumFactory extends Selenium2Factory
                 ->booleanNode('keepKeyChains')->end()
                 ->booleanNode('showIOSLog')->end()
             ->end()
-         ;
+        ;
 
         return $node;
     }

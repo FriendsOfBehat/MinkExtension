@@ -12,10 +12,10 @@ namespace Behat\MinkExtension\Listener;
 
 use Behat\Behat\EventDispatcher\Event\AfterStepTested;
 use Behat\Behat\EventDispatcher\Event\StepTested;
+use Behat\Mink\Exception\Exception as MinkException;
+use Behat\Mink\Mink;
 use Behat\Testwork\Tester\Result\ExceptionResult;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Behat\Mink\Mink;
-use Behat\Mink\Exception\Exception as MinkException;
 
 /**
  * Failed step response show listener.
@@ -24,33 +24,32 @@ use Behat\Mink\Exception\Exception as MinkException;
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * @final since 2.8.0
+ *
  * @internal since 2.8.0
  */
 class FailureShowListener implements EventSubscriberInterface
 {
-    private $mink;
-    private $parameters;
+    private Mink $mink;
+
+    /** @var array<string, mixed> */
+    private array $parameters;
 
     /**
      * Initializes initializer.
      *
-     * @param Mink  $mink
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      */
     public function __construct(Mink $mink, array $parameters)
     {
-        $this->mink       = $mink;
+        $this->mink = $mink;
         $this->parameters = $parameters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
-        return array(
-            StepTested::AFTER => array('showFailedStepResponse', -10)
-        );
+        return [
+            StepTested::AFTER => ['showFailedStepResponse', -10],
+        ];
     }
 
     /**
@@ -62,11 +61,9 @@ class FailureShowListener implements EventSubscriberInterface
      * `show_cmd` command to run (`open %s` to open default browser on Mac)
      * `show_tmp_dir` folder where to store temp files (default is system temp)
      *
-     * @param AfterStepTested $event
-     *
      * @throws \RuntimeException if show_cmd is not configured
      */
-    public function showFailedStepResponse(AfterStepTested $event)
+    public function showFailedStepResponse(AfterStepTested $event): void
     {
         $testResult = $event->getTestResult();
 
@@ -78,12 +75,14 @@ class FailureShowListener implements EventSubscriberInterface
             return;
         }
 
-        if (null === $this->parameters['show_cmd']) {
+        $showCmd = $this->parameters['show_cmd'];
+        if (null === $showCmd) {
             throw new \RuntimeException('Set "show_cmd" parameter in behat.yml to be able to open page in browser (ex.: "show_cmd: open %s")');
         }
 
-        $filename = rtrim($this->parameters['show_tmp_dir'], DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.uniqid().'.html';
+        $showTmpDir = $this->parameters['show_tmp_dir'];
+        $filename = rtrim(is_string($showTmpDir) ? $showTmpDir : sys_get_temp_dir(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.uniqid().'.html';
         file_put_contents($filename, $this->mink->getSession()->getPage()->getContent());
-        system(sprintf($this->parameters['show_cmd'], escapeshellarg($filename)));
+        system(sprintf(is_string($showCmd) ? $showCmd : '', escapeshellarg($filename)));
     }
 }

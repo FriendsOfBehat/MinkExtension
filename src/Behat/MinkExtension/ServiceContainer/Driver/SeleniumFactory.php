@@ -15,26 +15,17 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class SeleniumFactory implements DriverFactory
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDriverName()
+    public function getDriverName(): string
     {
         return 'selenium';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function supportsJavascript()
+    public function supportsJavascript(): bool
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function configure(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder): void
     {
         $builder
             ->children()
@@ -46,25 +37,23 @@ class SeleniumFactory implements DriverFactory
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<mixed> $config
      */
-    public function buildDriver(array $config)
+    public function buildDriver(array $config): Definition
     {
         trigger_deprecation('friends-of-behat/mink-extension', '2.8.0', 'Configuration for the "selenium" driver is deprecated, since the client implementation has been abandoned. Support for it will be removed in the next major version of this extension.');
 
         if (!class_exists('Behat\Mink\Driver\SeleniumDriver')) {
-            throw new \RuntimeException(
-                'Install MinkSeleniumDriver in order to activate selenium session.'
-            );
+            throw new \RuntimeException('Install MinkSeleniumDriver in order to activate selenium session.');
         }
 
-        return new Definition('Behat\Mink\Driver\SeleniumDriver', array(
+        return new Definition('Behat\Mink\Driver\SeleniumDriver', [
             $config['browser'],
             '%mink.base_url%',
-            new Definition('Selenium\Client', array(
+            new Definition('Selenium\Client', [
                 $config['host'],
                 $config['port'],
-            )),
-        ));
+            ]),
+        ]);
     }
 }
