@@ -2,36 +2,46 @@ name: Test
 
 on:
     push:
+        branches:
+            - master
     pull_request:
-        types: [opened, synchronize, edited, reopened]
+    schedule:
+        -
+            cron: "0 1 * * 6" # Run at 1am every Saturday
 
 jobs:
     test:
-        name: PHP ${{ matrix.php-version }} + Symfony ${{ matrix.symfony-version }}
+        name: PHP ${{ matrix.php-version }} + Symfony ${{ matrix.symfony-version }} + Behat ${{ matrix.behat-version }}
         runs-on: ubuntu-latest
         continue-on-error: false
         strategy:
             fail-fast: false
             matrix:
                 php-version:
-                    - '7.4'
-                    - '8.0'
-                    - '8.1'
+                    - '8.3'
+                    - '8.4'
+                    - '8.5'
                 symfony-version:
-                    - '4.4.*'
-                    - '5.4.*'
-                    - '6.4.*'
+                    - '7.4.*'
+                    - '8.0.*'
+                    - '8.1.*'
+                behat-version:
+                    - stable
+                    - 4.x-dev
                 exclude:
-                    - php-version: '7.4'
-                      symfony-version: '6.4.*'
-                    - php-version: '8.0'
-                      symfony-version: '6.4.*'
-                include:
-                    - php-version: '8.2'
-                      symfony-version: '7.0.*'
+                    # Symfony 8.x requires PHP >= 8.4
+                    - php-version: '8.3'
+                      symfony-version: '8.0.*'
+                    - php-version: '8.3'
+                      symfony-version: '8.1.*'
+                    # Behat 3.31 (stable) cannot install with Symfony 8.x
+                    - behat-version: stable
+                      symfony-version: '8.0.*'
+                    - behat-version: stable
+                      symfony-version: '8.1.*'
         steps:
             - name: Checkout
-              uses: actions/checkout@v6
+              uses: actions/checkout@v5
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
@@ -42,10 +52,17 @@ jobs:
                   tools: composer:v2
 
             - name: Validate composer.json
-              run: composer validate --no-check-lock
+              run: composer validate --strict
 
-            - name: Configure Symfony version
-              run: composer require --no-update "symfony/config:${{ matrix.symfony-version }}" "symfony/dependency-injection:${{ matrix.symfony-version }}"
+            - name: Lock Symfony version
+              run: VERSION=${{ matrix.symfony-version }} .github/workflows/lock-symfony-version.sh
+
+            - name: Require behat 4.x
+              if: matrix.behat-version == '4.x-dev'
+              run: |
+                  VERSION="4.x-dev as 3.31.0" .github/workflows/lock-behat-version.sh
+                  composer config minimum-stability dev
+                  composer config prefer-stable true
 
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress
@@ -54,4 +71,4 @@ jobs:
               run: vendor/bin/phpspec run -f pretty
 
             - name: Behat
-              run: vendor/bin/behat -fprogress --strict
+              run: vendor/bin/behat --config behat.dist.php -fprogress --strict
