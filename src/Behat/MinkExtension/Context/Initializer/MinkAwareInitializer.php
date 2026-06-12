@@ -24,27 +24,13 @@ use Behat\MinkExtension\Context\MinkAwareContext;
  */
 class MinkAwareInitializer implements ContextInitializer
 {
-    private $mink;
-    private $parameters;
-
-    /**
-     * Initializes initializer.
-     *
-     * @param Mink  $mink
-     * @param array $parameters
-     */
-    public function __construct(Mink $mink, array $parameters)
-    {
-        $this->mink       = $mink;
-        $this->parameters = $parameters;
+    public function __construct(
+        private readonly Mink $mink,
+        private readonly array $parameters,
+    ) {
     }
 
-    /**
-     * Initializes provided context.
-     *
-     * @param Context $context
-     */
-    public function initializeContext(Context $context)
+    public function initializeContext(Context $context): void
     {
         if (!$context instanceof MinkAwareContext) {
             return;
