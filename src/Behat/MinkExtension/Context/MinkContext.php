@@ -298,20 +298,14 @@ class MinkContext extends RawMinkContext implements TranslatableContext
         system(sprintf($this->getMinkParameter('show_cmd'), escapeshellarg($filename)));
     }
 
-    /**
-     * @return array
-     */
-    public static function getTranslationResources()
+    public static function getTranslationResources(): array
     {
         return self::getMinkTranslationResources();
     }
 
-    /**
-     * @return array
-     */
-    public static function getMinkTranslationResources()
+    public static function getMinkTranslationResources(): array
     {
-        return glob(__DIR__.'/../../../../i18n/*.xliff');
+        return glob(__DIR__.'/../../../../i18n/*.xliff') ?: [];
     }
 
     protected function fixStepArgument($argument)
