@@ -2,6 +2,26 @@
 
 This document summarizes the changes relevant for users when upgrading to new versions.
 
+# Upgrade to 3.0
+
+## PHP, Symfony and Behat minimum versions raised
+
+- PHP `^7.4 || ^8` → `^8.3`
+- `symfony/config` `^4.4 || ^5.0 || ^6.0 || ^7.0` → `^7.4 || ^8.0`
+- `behat/behat` `^3.0.5` → `^3.31`
+
+## Abandoned driver factories removed
+
+The `GoutteFactory`, `SeleniumFactory`, `SahiFactory` and `ZombieFactory` classes have been removed.
+These were deprecated in 2.8.0 and the underlying driver implementations are abandoned.
+
+Switch to `browserkit_http` (via `behat/mink-browserkit-driver`) or another actively maintained driver.
+
+## Behat 4 compatibility
+
+Step definitions in `MinkContext` now use PHP 8 attributes (`#[\Behat\Step\Given(...)]` etc.) instead of
+docblock annotations. Behat 3.31+ and Behat 4.x are both supported.
+
 # Upgrade to 2.8
 
 ## Soft `@final` and `@internal` declarations added
