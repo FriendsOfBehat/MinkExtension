@@ -42,5 +42,5 @@ Support for the following drivers has been deprecated, since the underlying driv
 The corresponding `Factory` classes will trigger a deprecation notice when they are used to build the driver, for example
 by using `goutte` as the driver identifier in the `behat.yml` configuration file (https://github.com/FriendsOfBehat/MinkExtension/pull/39/).
 
-Note, however, that Behat currently does not have a built-in mechanism to collect such deprecation notices and display
-them in a user-friendly way.
+These deprecations will be reported if running Behat with the `--print-behat-deprecations` option,
+and will cause the build to fail if running with the `--fail-on-behat-deprecations` option. These options can also be set on the `TesterOptions` in a behat config file.
