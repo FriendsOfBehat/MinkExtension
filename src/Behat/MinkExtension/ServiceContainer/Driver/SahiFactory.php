@@ -10,6 +10,7 @@
 
 namespace Behat\MinkExtension\ServiceContainer\Driver;
 
+use Behat\Testwork\Deprecation\DeprecationCollector;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -43,7 +44,7 @@ class SahiFactory implements DriverFactory
      */
     public function buildDriver(array $config): Definition
     {
-        trigger_deprecation('friends-of-behat/mink-extension', '2.8.0', 'Configuration for the "sahi" driver is deprecated, since the client implementation has been abandoned. Support for it will be removed in the next major version of this extension.');
+        DeprecationCollector::trigger('Configuration for the "sahi" driver is deprecated, since the client implementation has been abandoned. Support for it will be removed in the next major version of MinkExtension.');
 
         if (!class_exists('Behat\Mink\Driver\SahiDriver')) {
             throw new \RuntimeException('Install MinkSahiDriver in order to use sahi driver.');
