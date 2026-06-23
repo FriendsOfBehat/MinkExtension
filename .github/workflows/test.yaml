@@ -26,18 +26,18 @@ jobs:
                     - '8.0.*'
                     - '8.1.*'
                 behat-version:
-                    - stable
-                    - 4.x-dev
+                    - '3.*'
+                    - '4.*'
                 exclude:
                     # Symfony 8.x requires PHP >= 8.4
                     - php-version: '8.3'
                       symfony-version: '8.0.*'
                     - php-version: '8.3'
                       symfony-version: '8.1.*'
-                    # Behat 3.31 (stable) cannot install with Symfony 8.x
-                    - behat-version: stable
+                    # Behat 3.x cannot install with Symfony 8.x
+                    - behat-version: '3.*'
                       symfony-version: '8.0.*'
-                    - behat-version: stable
+                    - behat-version: '3.*'
                       symfony-version: '8.1.*'
         steps:
             - name: Checkout
@@ -57,15 +57,8 @@ jobs:
             - name: Lock Symfony version
               run: VERSION=${{ matrix.symfony-version }} .github/workflows/lock-symfony-version.sh
 
-            - name: Require behat 4.x
-              if: matrix.behat-version == '4.x-dev'
-              run: |
-                  VERSION="4.x-dev as 3.31.0" .github/workflows/lock-behat-version.sh
-                  composer config minimum-stability dev
-                  composer config prefer-stable true
-
             - name: Install dependencies
-              run: composer install --prefer-dist --no-progress
+              run: composer update --prefer-dist --no-progress --with behat/behat:"${{ matrix.behat-version }}"
 
             - name: CS Fixer
               run: vendor/bin/php-cs-fixer fix --dry-run
