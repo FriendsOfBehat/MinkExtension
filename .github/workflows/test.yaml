@@ -58,7 +58,7 @@ jobs:
               run: VERSION=${{ matrix.symfony-version }} .github/workflows/lock-symfony-version.sh
 
             - name: Install dependencies
-              run: composer install --prefer-dist --no-progress --with behat/behat:"${{ matrix.behat-version }}"
+              run: composer update --prefer-dist --no-progress --with behat/behat:"${{ matrix.behat-version }}"
 
             - name: CS Fixer
               run: vendor/bin/php-cs-fixer fix --dry-run
