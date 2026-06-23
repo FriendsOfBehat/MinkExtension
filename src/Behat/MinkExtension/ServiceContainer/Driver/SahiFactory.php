@@ -44,7 +44,7 @@ class SahiFactory implements DriverFactory
      */
     public function buildDriver(array $config): Definition
     {
-        DeprecationCollector::trigger('Configuration for the "sahi" driver is deprecated, since the client implementation has been abandoned. Support for it will be removed in the next major version of MinkExtension.');
+        DeprecationCollector::trigger('Since friends-of-behat/mink-extension 2.8.0: Configuration for the "sahi" driver is deprecated, since the client implementation has been abandoned. Support for it will be removed in the next major version of MinkExtension.');
 
         if (!class_exists('Behat\Mink\Driver\SahiDriver')) {
             throw new \RuntimeException('Install MinkSahiDriver in order to use sahi driver.');
