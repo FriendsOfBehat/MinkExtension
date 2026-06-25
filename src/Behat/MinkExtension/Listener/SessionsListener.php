@@ -83,8 +83,9 @@ class SessionsListener implements EventSubscriberInterface
         $session = null;
 
         $scenarioTags = $scenario instanceof TaggedNodeInterface ? $scenario->getTags() : [];
-        foreach (array_merge($feature->getTags(), $scenarioTags) as $tag) {
-            if ('javascript' === $tag) {
+        $mergedTags = array_merge($feature->getTags(), $scenarioTags);
+        foreach ($mergedTags as $tag) {
+            if (preg_match('/^@?javascript/', $tag, $matches)) {
                 $session = $this->getJavascriptSession($event->getSuite());
             } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
                 $session = $matches[1];
@@ -95,8 +96,8 @@ class SessionsListener implements EventSubscriberInterface
             $session = $this->getDefaultSession($event->getSuite());
         }
 
-        $isInsulated = ($scenario instanceof TaggedNodeInterface && $scenario->hasTag('insulated'))
-            || $feature->hasTag('insulated');
+        $isInsulated = in_array('insulated', $mergedTags, true)
+            || in_array('@insulated', $mergedTags, true);
         if ($isInsulated) {
             $this->mink->stopSessions();
         } else {
