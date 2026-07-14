@@ -22,7 +22,7 @@
     "homepage": "https://github.com/FriendsOfBehat/MinkExtension#readme",
     "require": {
         "php": "^8.3",
-        "behat/behat": "^3.31 || ^4.0@alpha",
+        "behat/behat": "^3.32 || ^4.0",
         "behat/mink": "^1.5",
         "symfony/config": "^7.4 || ^8.0"
     },
