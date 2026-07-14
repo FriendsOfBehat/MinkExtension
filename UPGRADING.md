@@ -22,6 +22,12 @@ Switch to `browserkit_http` (via `behat/mink-browserkit-driver`) or another acti
 Step definitions in `MinkContext` now use PHP 8 attributes (`#[\Behat\Step\Given(...)]` etc.) instead of
 docblock annotations. Behat 3.32+ and Behat 4.x are both supported.
 
+## `FailureShowListener`, `SessionsListener` and `MinkExtension` are now `final`
+
+These classes were marked as soft `@final` in 2.8.0 and are now actually `final`.
+You can no longer extend them. If you relied on inheritance, use composition instead
+(wrap or decorate them, or register your own service).
+
 # Upgrade to 2.8
 
 ## Soft `@final` and `@internal` declarations added

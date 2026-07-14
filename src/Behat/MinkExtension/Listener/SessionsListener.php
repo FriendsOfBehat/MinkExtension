@@ -26,11 +26,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  *
- * @final since 2.8.0
- *
  * @internal since 2.8.0
  */
-class SessionsListener implements EventSubscriberInterface
+final class SessionsListener implements EventSubscriberInterface
 {
     private Mink $mink;
     private string $defaultSession;
