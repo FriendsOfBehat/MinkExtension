@@ -8,7 +8,7 @@ This document summarizes the changes relevant for users when upgrading to new ve
 
 - PHP `^7.4 || ^8` → `^8.3`
 - `symfony/config` `^4.4 || ^5.0 || ^6.0 || ^7.0` → `^7.4 || ^8.0`
-- `behat/behat` `^3.0.5` → `^3.31`
+- `behat/behat` `^3.0.5` → `^3.32 || ^4.0`
 
 ## Abandoned driver factories removed
 
@@ -20,7 +20,7 @@ Switch to `browserkit_http` (via `behat/mink-browserkit-driver`) or another acti
 ## Behat 4 compatibility
 
 Step definitions in `MinkContext` now use PHP 8 attributes (`#[\Behat\Step\Given(...)]` etc.) instead of
-docblock annotations. Behat 3.31+ and Behat 4.x are both supported.
+docblock annotations. Behat 3.32+ and Behat 4.x are both supported.
 
 # Upgrade to 2.8
 
