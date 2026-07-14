@@ -27,7 +27,7 @@ jobs:
                     - '8.1.*'
                 behat-version:
                     - '3.*'
-                    - '4.*'
+                    - '4.*@alpha'
                 exclude:
                     # Symfony 8.x requires PHP >= 8.4
                     - php-version: '8.3'
