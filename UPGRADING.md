@@ -23,8 +23,11 @@ Switch to `browserkit_http` (via `behat/mink-browserkit-driver`) or another acti
 Step definitions in `MinkContext` now use PHP 8 attributes (`#[\Behat\Step\Given(...)]` etc.) instead of
 docblock annotations. Behat 3.32+ and Behat 4.x are both supported.
 
-Behat 4 introduces PHP-based configuration files (`behat.php`) alongside the classic `behat.yml`. The
-documentation examples now use the `behat.php` format; existing `behat.yml` configurations continue to work.
+Behat 4 no longer supports the classic `behat.yml` configuration format and requires PHP-based
+configuration files (`behat.php`). On Behat 3.x, `behat.yml` still works, but the format is deprecated in
+favour of `behat.php`. The documentation examples now use the `behat.php` format. If you are still using
+`behat.yml`, convert it with Behat's built-in converter (`vendor/bin/behat --convert-config`) before
+upgrading to Behat 4.
 
 ## `FailureShowListener`, `SessionsListener` and `MinkExtension` are now `final`
 
