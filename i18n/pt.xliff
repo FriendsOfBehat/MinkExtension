@@ -31,104 +31,104 @@
             <target><![CDATA[/^(?:|Eu )avancei uma página$/]]></target>
         </trans-unit>
         <trans-unit id="i-press-button">
-            <source><![CDATA[/^(?:|I )press "(?P<button>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )pressiono "(?P<button>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )press "(?P<button>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )pressiono "(?P<button>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-follow-link">
-            <source><![CDATA[/^(?:|I )follow "(?P<link>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )sigo o link "(?P<link>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )follow "(?P<link>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )sigo o link "(?P<link>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-field-with-value">
-            <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )preencho "(?P<field>(?:[^"]|\\")*)" com "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\")*)" with "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )preencho "(?P<field>(?:[^"]|\")*)" com "(?P<value>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-value-for-field">
-            <source><![CDATA[/^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )preencho "(?P<value>(?:[^"]|\\")*)" para "(?P<field>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )fill in "(?P<value>(?:[^"]|\")*)" for "(?P<field>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )preencho "(?P<value>(?:[^"]|\")*)" para "(?P<field>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-the-following">
             <source><![CDATA[/^(?:|I )fill in the following:$/]]></source>
             <target><![CDATA[/^(?:|Eu )preencho o seguinte:$/]]></target>
         </trans-unit>
         <trans-unit id="i-select-option-from-select">
-            <source><![CDATA[/^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )seleciono "(?P<option>(?:[^"]|\\")*)" de "(?P<select>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )select "(?P<option>(?:[^"]|\")*)" from "(?P<select>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )seleciono "(?P<option>(?:[^"]|\")*)" de "(?P<select>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-additionally-select-option-from-select">
-            <source><![CDATA[/^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )seleciono também "(?P<option>(?:[^"]|\\")*)" de "(?P<select>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )additionally select "(?P<option>(?:[^"]|\")*)" from "(?P<select>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )seleciono também "(?P<option>(?:[^"]|\")*)" de "(?P<select>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-check-option">
-            <source><![CDATA[/^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )marco "(?P<option>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )check "(?P<option>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )marco "(?P<option>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-uncheck-option">
-            <source><![CDATA[/^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )desmarco "(?P<option>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )uncheck "(?P<option>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )desmarco "(?P<option>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-attach-the-file-to-field">
-            <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )anexo o arquivo "(?P<path>[^"]*)" ao "(?P<field>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )anexo o arquivo "(?P<path>[^"]*)" ao "(?P<field>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text">
-            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )devo ver "(?P<text>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )devo ver "(?P<text>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text-matching">
-            <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^(?:|Eu )devo ver o texto que coincide com (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+            <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\")*")$/]]></source>
+            <target><![CDATA[/^(?:|Eu )devo ver o texto que coincide com (?P<pattern>"(?:[^"]|\")*")$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text-matching">
-            <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^(?:|Eu )não devo ver o texto que coincide com (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+            <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\")*")$/]]></source>
+            <target><![CDATA[/^(?:|Eu )não devo ver o texto que coincide com (?P<pattern>"(?:[^"]|\")*")$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-should-contain">
-            <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^a resposta deve conter "(?P<text>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^a resposta deve conter "(?P<text>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text">
-            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )não devo ver "(?P<text>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|Eu )não devo ver "(?P<text>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-should-not-contain">
-            <source><![CDATA[/^the response should not contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^a resposta não deve conter "(?P<text>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the response should not contain "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^a resposta não deve conter "(?P<text>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-field-should-contain-value">
-            <source><![CDATA[/^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^o campo "(?P<field>(?:[^"]|\\")*)" deve conter "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the "(?P<field>(?:[^"]|\")*)" field should contain "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^o campo "(?P<field>(?:[^"]|\")*)" deve conter "(?P<value>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-field-should-not-contain-value">
-            <source><![CDATA[/^the "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^o campo "(?P<field>(?:[^"]|\\")*)" não deve conter "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the "(?P<field>(?:[^"]|\")*)" field should not contain "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^o campo "(?P<field>(?:[^"]|\")*)" não deve conter "(?P<value>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-checkbox-should-be-checked">
-            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/]]></source>
-            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\\")*)" deve (?:ser|estar) marcado$/]]></target>
+            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\")*)" checkbox should be checked$/]]></source>
+            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\")*)" deve (?:ser|estar) marcado$/]]></target>
         </trans-unit>
         <trans-unit id="the-checkbox-should-not-be-checked">
-            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/]]></source>
-            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\\")*)" não deve (?:ser|estar) marcado$/]]></target>
+            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\")*)" checkbox should not be checked$/]]></source>
+            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\")*)" não deve (?:ser|estar) marcado$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-be-on-page">
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
             <target><![CDATA[/^(?:|Eu )devo estar em "(?P<page>[^"]+)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^a (?i)url(?-i) deve coincidir com (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\")*")$/]]></source>
+            <target><![CDATA[/^a (?i)url(?-i) deve coincidir com (?P<pattern>"(?:[^"]|\")*")$/]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-contain">
-            <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^o elemento "(?P<element>[^"]*)" deve conter "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^o elemento "(?P<element>[^"]*)" deve conter "(?P<value>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text-in-element">
-            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^(?:|Eu )devo ver "(?P<text>(?:[^"]|\\")*)" no elemento "(?P<element>[^"]*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^(?:|Eu )devo ver "(?P<text>(?:[^"]|\")*)" no elemento "(?P<element>[^"]*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text-in-element">
-            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^(?:|Eu )não deveria de ver "(?P<text>(?:[^"]|\\")*)" no elemento "(?P<element>[^"]*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^(?:|Eu )não deveria de ver "(?P<text>(?:[^"]|\")*)" no elemento "(?P<element>[^"]*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-element">
             <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>

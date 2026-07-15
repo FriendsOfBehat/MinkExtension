@@ -23,92 +23,92 @@
             <target><![CDATA[/^(?:|pře)jdu o jednu stránku vpřed$/]]></target>
         </trans-unit>
         <trans-unit id="i-press-button">
-            <source><![CDATA[/^(?:|I )press "(?P<button>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^stisknu(?:| tlačítko) "(?P<button>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )press "(?P<button>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^stisknu(?:| tlačítko) "(?P<button>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-follow-link">
-            <source><![CDATA[/^(?:|I )follow "(?P<link>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^kliknu na(?:| odkaz) "(?P<link>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )follow "(?P<link>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^kliknu na(?:| odkaz) "(?P<link>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-field-with-value">
-            <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^zadám do "(?P<field>(?:[^"]|\\")*)" hodnotu "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\")*)" with "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^zadám do "(?P<field>(?:[^"]|\")*)" hodnotu "(?P<value>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-value-for-field">
-            <source><![CDATA[/^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^zadám "(?P<value>(?:[^"]|\\")*)" do "(?P<field>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )fill in "(?P<value>(?:[^"]|\")*)" for "(?P<field>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^zadám "(?P<value>(?:[^"]|\")*)" do "(?P<field>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-the-following">
             <source><![CDATA[/^(?:|I )fill in the following:$/]]></source>
             <target><![CDATA[/^vyplním formulář:$/]]></target>
         </trans-unit>
         <trans-unit id="i-select-option-from-select">
-            <source><![CDATA[/^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^vyberu "(?P<option>(?:[^"]|\\")*)" z "(?P<select>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )select "(?P<option>(?:[^"]|\")*)" from "(?P<select>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^vyberu "(?P<option>(?:[^"]|\")*)" z "(?P<select>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-additionally-select-option-from-select">
-            <source><![CDATA[/^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^ještě vyberu "(?P<option>(?:[^"]|\\")*)" z "(?P<select>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )additionally select "(?P<option>(?:[^"]|\")*)" from "(?P<select>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^ještě vyberu "(?P<option>(?:[^"]|\")*)" z "(?P<select>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-check-option">
-            <source><![CDATA[/^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:zaškrtnu|označím) "(?P<option>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )check "(?P<option>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:zaškrtnu|označím) "(?P<option>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-uncheck-option">
-            <source><![CDATA[/^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^odznačím "(?P<option>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )uncheck "(?P<option>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^odznačím "(?P<option>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-attach-the-file-to-field">
-            <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^nahraji soubor "(?P<path>[^"]*)" do "(?P<field>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^nahraji soubor "(?P<path>[^"]*)" do "(?P<field>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text">
-            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^musím vidět(?:| text) "(?P<text>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^musím vidět(?:| text) "(?P<text>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-should-contain">
-            <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^stránka musí obsahovat "(?P<text>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^stránka musí obsahovat "(?P<text>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text">
-            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^nesmím vidět(?:| text) "(?P<text>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^nesmím vidět(?:| text) "(?P<text>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-should-not-contain">
-            <source><![CDATA[/^the response should not contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^stránka nesmí obsahovat "(?P<text>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the response should not contain "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^stránka nesmí obsahovat "(?P<text>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-field-should-contain-value">
-            <source><![CDATA[/^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^pole "(?P<field>(?:[^"]|\\")*)" musí obsahovat "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the "(?P<field>(?:[^"]|\")*)" field should contain "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^pole "(?P<field>(?:[^"]|\")*)" musí obsahovat "(?P<value>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-field-should-not-contain-value">
-            <source><![CDATA[/^the "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^pole "(?P<field>(?:[^"]|\\")*)" nesmí obsahovat "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the "(?P<field>(?:[^"]|\")*)" field should not contain "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^pole "(?P<field>(?:[^"]|\")*)" nesmí obsahovat "(?P<value>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-checkbox-should-be-checked">
-            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/]]></source>
-            <target><![CDATA[/^pole "(?P<checkbox>(?:[^"]|\\")*)" musí být (?:zaškrtnuto|vybráno|označeno)$/]]></target>
+            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\")*)" checkbox should be checked$/]]></source>
+            <target><![CDATA[/^pole "(?P<checkbox>(?:[^"]|\")*)" musí být (?:zaškrtnuto|vybráno|označeno)$/]]></target>
         </trans-unit>
         <trans-unit id="the-checkbox-should-not-be-checked">
-            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/]]></source>
-            <target><![CDATA[/^pole "(?P<checkbox>(?:[^"]|\\")*)" nesmí být (?:zaškrtnuto|vybráno|označeno)$/]]></target>
+            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\")*)" checkbox should not be checked$/]]></source>
+            <target><![CDATA[/^pole "(?P<checkbox>(?:[^"]|\")*)" nesmí být (?:zaškrtnuto|vybráno|označeno)$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-be-on-page">
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
             <target><![CDATA[/^musím být na stránce "(?P<page>[^"]+)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^(?:url|adresa|url adresa) musí mít tvar (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\")*")$/]]></source>
+            <target><![CDATA[/^(?:url|adresa|url adresa) musí mít tvar (?P<pattern>"(?:[^"]|\")*")$/]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-contain">
-            <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^element "(?P<element>[^"]*)" musí obsahovat "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^element "(?P<element>[^"]*)" musí obsahovat "(?P<value>(?:[^"]|\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text-in-element">
-            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^musím vidět(?:| text) "(?P<text>(?:[^"]|\\")*)" uvnitř elementu "(?P<element>[^"]*)"$/]]></target>
+            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^musím vidět(?:| text) "(?P<text>(?:[^"]|\")*)" uvnitř elementu "(?P<element>[^"]*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-element">
             <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>
