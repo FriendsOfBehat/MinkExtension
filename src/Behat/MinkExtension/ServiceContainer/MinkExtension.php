@@ -34,10 +34,8 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  * @author Christophe Coevoet <stof@notk.org>
- *
- * @final since 2.8.0
  */
-class MinkExtension implements ExtensionInterface
+final class MinkExtension implements ExtensionInterface
 {
     public const MINK_ID = 'mink';
     public const SELECTORS_HANDLER_ID = 'mink.selectors_handler';

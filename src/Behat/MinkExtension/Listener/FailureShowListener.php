@@ -23,11 +23,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  *
- * @final since 2.8.0
- *
- * @internal since 2.8.0
+ * @internal
  */
-class FailureShowListener implements EventSubscriberInterface
+final class FailureShowListener implements EventSubscriberInterface
 {
     private Mink $mink;
 
