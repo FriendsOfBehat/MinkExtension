@@ -55,6 +55,5 @@
             "vendor/bin/phpspec run -f pretty",
             "vendor/bin/behat --config behat.dist.php -fprogress --strict"
         ]
-    },
-    "minimum-stability": "stable"
+    }
 }
