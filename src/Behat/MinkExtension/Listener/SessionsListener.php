@@ -26,7 +26,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  *
- * @internal since 2.8.0
+ * @internal
  */
 final class SessionsListener implements EventSubscriberInterface
 {
