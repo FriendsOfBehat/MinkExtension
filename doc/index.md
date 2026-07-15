@@ -8,7 +8,7 @@ and languages provide functional testing tools. Today we'll talk about how to
 use Behat for functional testing of web applications. [Mink](http://mink.behat.org)
 is a tool exactly for that and this extension provides integration for it.
 
-Basically, MinkExtension is an integration layer between Behat 3.32+ and Mink 1.4+
+Basically, MinkExtension is an integration layer between Behat 3.32+ and Mink 1.11+
 and it provides:
 
 * Additional services for Behat (`Mink`, `Sessions`, `Drivers`).
@@ -23,7 +23,7 @@ and it provides:
 This extension requires:
 
 * Behat 3.32+ or 4.0+
-* Mink 1.4+
+* Mink 1.11+
 
 ### Through Composer
 
