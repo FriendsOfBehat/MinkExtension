@@ -24,9 +24,7 @@ class SessionsListenerSpec extends ObjectBehavior
         $suite->hasSetting('mink_session')->willReturn(false);
         $suite->getName()->willReturn('default');
 
-        $feature->hasTag('insulated')->willReturn(false);
         $feature->getTags()->willReturn([]);
-        $scenario->hasTag('insulated')->willReturn(false);
         $scenario->getTags()->willReturn([]);
     }
 
@@ -149,7 +147,7 @@ class SessionsListenerSpec extends ObjectBehavior
 
     public function it_stops_the_sessions_for_insulated_scenarios($event, $mink, $scenario)
     {
-        $scenario->hasTag('insulated')->willReturn(true);
+        $scenario->getTags()->willReturn(['insulated']);
         $mink->stopSessions()->shouldBeCalled();
         $mink->setDefaultSessionName('browserkit_http')->shouldBeCalled();
 
@@ -158,7 +156,7 @@ class SessionsListenerSpec extends ObjectBehavior
 
     public function it_stops_the_sessions_for_insulated_features($event, $mink, $feature)
     {
-        $feature->hasTag('insulated')->willReturn(true);
+        $feature->getTags()->willReturn(['insulated']);
         $mink->stopSessions()->shouldBeCalled();
         $mink->setDefaultSessionName('browserkit_http')->shouldBeCalled();
 

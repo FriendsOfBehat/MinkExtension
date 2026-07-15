@@ -83,7 +83,9 @@ class SessionsListener implements EventSubscriberInterface
         $session = null;
 
         $scenarioTags = $scenario instanceof TaggedNodeInterface ? $scenario->getTags() : [];
-        foreach (array_merge($feature->getTags(), $scenarioTags) as $tag) {
+        // Behat 4 returns tags prefixed with "@"; normalize so comparisons work across versions.
+        $tags = array_map(fn ($tag) => ltrim($tag, '@'), array_merge($feature->getTags(), $scenarioTags));
+        foreach ($tags as $tag) {
             if ('javascript' === $tag) {
                 $session = $this->getJavascriptSession($event->getSuite());
             } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
@@ -95,8 +97,7 @@ class SessionsListener implements EventSubscriberInterface
             $session = $this->getDefaultSession($event->getSuite());
         }
 
-        $isInsulated = ($scenario instanceof TaggedNodeInterface && $scenario->hasTag('insulated'))
-            || $feature->hasTag('insulated');
+        $isInsulated = in_array('insulated', $tags, true);
         if ($isInsulated) {
             $this->mink->stopSessions();
         } else {
