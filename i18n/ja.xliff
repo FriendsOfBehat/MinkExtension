@@ -31,80 +31,80 @@
             <target><![CDATA[/^(?:|ユーザーが )履歴の次のページヘ進む$/u]]></target>
         </trans-unit>
         <trans-unit id="i-press-button">
-            <source><![CDATA[/^(?:|I )press "(?P<button>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|ユーザーが )"(?P<button>(?:[^"]|\\")*)" ボタンをクリックする$/u]]></target>
+            <source><![CDATA[/^(?:|I )press "(?P<button>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|ユーザーが )"(?P<button>(?:[^"]|\")*)" ボタンをクリックする$/u]]></target>
         </trans-unit>
         <trans-unit id="i-follow-link">
-            <source><![CDATA[/^(?:|I )follow "(?P<link>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|ユーザーが )"(?P<link>(?:[^"]|\\")*)" のリンク先へ移動する$/u]]></target>
+            <source><![CDATA[/^(?:|I )follow "(?P<link>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|ユーザーが )"(?P<link>(?:[^"]|\")*)" のリンク先へ移動する$/u]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-field-with-value">
-            <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|ユーザーが )"(?P<field>(?:[^"]|\\")*)" フィールドに "(?P<value>(?:[^"]|\\")*)" と入力する$/u]]></target>
+            <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\")*)" with "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|ユーザーが )"(?P<field>(?:[^"]|\")*)" フィールドに "(?P<value>(?:[^"]|\")*)" と入力する$/u]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-field-with">
-            <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/]]></source>
-            <target><![CDATA[/^(?:|ユーザーが )"(?P<field>(?:[^"]|\\")*)" フィールドに以下の値を入力する:$/u]]></target>
+            <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\")*)" with:$/]]></source>
+            <target><![CDATA[/^(?:|ユーザーが )"(?P<field>(?:[^"]|\")*)" フィールドに以下の値を入力する:$/u]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-value-for-field">
-            <source><![CDATA[/^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|ユーザーが )"(?P<value>(?:[^"]|\\")*)" という値を "(?P<field>(?:[^"]|\\")*)" に入力する$/u]]></target>
+            <source><![CDATA[/^(?:|I )fill in "(?P<value>(?:[^"]|\")*)" for "(?P<field>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|ユーザーが )"(?P<value>(?:[^"]|\")*)" という値を "(?P<field>(?:[^"]|\")*)" に入力する$/u]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-the-following">
             <source><![CDATA[/^(?:|I )fill in the following:$/]]></source>
             <target><![CDATA[/^(?:|ユーザーが)次のように入力する:$/u]]></target>
         </trans-unit>
         <trans-unit id="i-select-option-from-select">
-            <source><![CDATA[/^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|ユーザーが )"(?P<option>(?:[^"]|\\")*)" という値を "(?P<select>(?:[^"]|\\")*)" から選択する$/u]]></target>
+            <source><![CDATA[/^(?:|I )select "(?P<option>(?:[^"]|\")*)" from "(?P<select>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|ユーザーが )"(?P<option>(?:[^"]|\")*)" という値を "(?P<select>(?:[^"]|\")*)" から選択する$/u]]></target>
         </trans-unit>
         <trans-unit id="i-additionally-select-option-from-select">
-            <source><![CDATA[/^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|ユーザーが )"(?P<option>(?:[^"]|\\")*)" という値を "(?P<select>(?:[^"]|\\")*)" から追加で選択する$/u]]></target>
+            <source><![CDATA[/^(?:|I )additionally select "(?P<option>(?:[^"]|\")*)" from "(?P<select>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|ユーザーが )"(?P<option>(?:[^"]|\")*)" という値を "(?P<select>(?:[^"]|\")*)" から追加で選択する$/u]]></target>
         </trans-unit>
         <trans-unit id="i-check-option">
-            <source><![CDATA[/^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|ユーザーが )"(?P<option>(?:[^"]|\\")*)" にチェックをつける$/u]]></target>
+            <source><![CDATA[/^(?:|I )check "(?P<option>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|ユーザーが )"(?P<option>(?:[^"]|\")*)" にチェックをつける$/u]]></target>
         </trans-unit>
         <trans-unit id="i-uncheck-option">
-            <source><![CDATA[/^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|ユーザーが )"(?P<option>(?:[^"]|\\")*)" のチェックをはずす$/u]]></target>
+            <source><![CDATA[/^(?:|I )uncheck "(?P<option>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|ユーザーが )"(?P<option>(?:[^"]|\")*)" のチェックをはずす$/u]]></target>
         </trans-unit>
         <trans-unit id="i-attach-the-file-to-field">
-            <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|ユーザーが)パス "(?P<path>[^"]*)" にあるファイルを "(?P<field>(?:[^"]|\\")*)" に添付する$/u]]></target>
+            <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|ユーザーが)パス "(?P<path>[^"]*)" にあるファイルを "(?P<field>(?:[^"]|\")*)" に添付する$/u]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text">
-            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|画面に )"(?P<text>(?:[^"]|\\")*)" と表示されていること$/u]]></target>
+            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|画面に )"(?P<text>(?:[^"]|\")*)" と表示されていること$/u]]></target>
         </trans-unit>
         <trans-unit id="the-response-should-contain">
-            <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^レスポンスに "(?P<text>(?:[^"]|\\")*)" が含まれていること$/u]]></target>
+            <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^レスポンスに "(?P<text>(?:[^"]|\")*)" が含まれていること$/u]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text">
-            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|画面に )"(?P<text>(?:[^"]|\\")*)" と表示されていないこと$/u]]></target>
+            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^(?:|画面に )"(?P<text>(?:[^"]|\")*)" と表示されていないこと$/u]]></target>
         </trans-unit>
         <trans-unit id="the-response-should-not-contain">
-            <source><![CDATA[/^the response should not contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^レスポンスに "(?P<text>(?:[^"]|\\")*)" が含まれていないこと$/u]]></target>
+            <source><![CDATA[/^the response should not contain "(?P<text>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^レスポンスに "(?P<text>(?:[^"]|\")*)" が含まれていないこと$/u]]></target>
         </trans-unit>
         <trans-unit id="the-field-should-contain-value">
-            <source><![CDATA[/^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^"(?P<field>(?:[^"]|\\")*)" フィールドに "(?P<value>(?:[^"]|\\")*)" が含まれていること$/u]]></target>
+            <source><![CDATA[/^the "(?P<field>(?:[^"]|\")*)" field should contain "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^"(?P<field>(?:[^"]|\")*)" フィールドに "(?P<value>(?:[^"]|\")*)" が含まれていること$/u]]></target>
         </trans-unit>
         <trans-unit id="the-field-should-not-contain-value">
-            <source><![CDATA[/^the "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^"(?P<field>(?:[^"]|\\")*)" フィールドに "(?P<value>(?:[^"]|\\")*)" が含まれていないこと$/u]]></target>
+            <source><![CDATA[/^the "(?P<field>(?:[^"]|\")*)" field should not contain "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^"(?P<field>(?:[^"]|\")*)" フィールドに "(?P<value>(?:[^"]|\")*)" が含まれていないこと$/u]]></target>
         </trans-unit>
         <trans-unit id="the-checkbox-should-be-checked">
-            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/]]></source>
-            <target><![CDATA[/^チェックボックス "(?P<checkbox>(?:[^"]|\\")*)" のチェックがついていること$/u]]></target>
+            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\")*)" checkbox should be checked$/]]></source>
+            <target><![CDATA[/^チェックボックス "(?P<checkbox>(?:[^"]|\")*)" のチェックがついていること$/u]]></target>
         </trans-unit>
         <trans-unit id="the-checkbox-should-not-be-checked">
-            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/]]></source>
-            <target><![CDATA[/^チェックボックス "(?P<checkbox>(?:[^"]|\\")*)" のチェックがはずれていること$/u]]></target>
+            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\")*)" checkbox should not be checked$/]]></source>
+            <target><![CDATA[/^チェックボックス "(?P<checkbox>(?:[^"]|\")*)" のチェックがはずれていること$/u]]></target>
         </trans-unit>
         <trans-unit id="i-should-be-on-page">
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
@@ -115,24 +115,24 @@
             <target><![CDATA[/^(?:|ユーザーが )ホームページを表示していること$/u]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^(?i)url(?-i)が (?P<pattern>"(?:[^"]|\\")*") にマッチすること$/u]]></target>
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\")*")$/]]></source>
+            <target><![CDATA[/^(?i)url(?-i)が (?P<pattern>"(?:[^"]|\")*") にマッチすること$/u]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-contain">
-            <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^"(?P<element>[^"]*)" エレメントに "(?P<value>(?:[^"]|\\")*)" という値が含まれていること$/u]]></target>
+            <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^"(?P<element>[^"]*)" エレメントに "(?P<value>(?:[^"]|\")*)" という値が含まれていること$/u]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-not-contain">
-            <source><![CDATA[/^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^"(?P<element>[^"]*)" エレメントに "(?P<value>(?:[^"]|\\")*)" という値が含まれていないこと$/u]]></target>
+            <source><![CDATA[/^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\")*)"$/]]></source>
+            <target><![CDATA[/^"(?P<element>[^"]*)" エレメントに "(?P<value>(?:[^"]|\")*)" という値が含まれていないこと$/u]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text-in-element">
-            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^"(?P<element>[^"]*)" エレメントに "(?P<text>(?:[^"]|\\")*)" と表示されていること$/u]]></target>
+            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^"(?P<element>[^"]*)" エレメントに "(?P<text>(?:[^"]|\")*)" と表示されていること$/u]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text-in-element">
-            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^"(?P<element>[^"]*)" エレメントに "(?P<text>(?:[^"]|\\")*)" と表示されていないこと$/u]]></target>
+            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^"(?P<element>[^"]*)" エレメントに "(?P<text>(?:[^"]|\")*)" と表示されていないこと$/u]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-element">
             <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>
@@ -167,12 +167,12 @@
             <target><![CDATA[/^現在のURLを表示$/]]></target>
         </trans-unit>
         <trans-unit id="-should-see-text-matching">
-            <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^(?:|画面に )"(?P<pattern>"(?:[^"]|\\")*")" にマッチするテキストが表示されていること$/u]]></target>
+            <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\")*")$/]]></source>
+            <target><![CDATA[/^(?:|画面に )"(?P<pattern>"(?:[^"]|\")*")" にマッチするテキストが表示されていること$/u]]></target>
         </trans-unit>
         <trans-unit id="-should-not-see-text-matching">
-            <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^(?:|画面に )"(?P<pattern>"(?:[^"]|\\")*")" にマッチするテキストが表示されていないこと$/u]]></target>
+            <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\")*")$/]]></source>
+            <target><![CDATA[/^(?:|画面に )"(?P<pattern>"(?:[^"]|\")*")" にマッチするテキストが表示されていないこと$/u]]></target>
         </trans-unit>
     </body>
   </file>
