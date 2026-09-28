@@ -83,7 +83,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: When I press "Log In"
      * Example: And I press "Log In".
      */
-    #[\Behat\Step\When('/^(?:|I )press "(?P<button>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\When('/^(?:|I )press "(?P<button>(?:[^"]|\\\\")*)"$/')]
     public function pressButton(string $button): void
     {
         $button = $this->fixStepArgument($button);
@@ -95,7 +95,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: When I follow "Log In"
      * Example: And I follow "Log In".
      */
-    #[\Behat\Step\When('/^(?:|I )follow "(?P<link>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\When('/^(?:|I )follow "(?P<link>(?:[^"]|\\\\")*)"$/')]
     public function clickLink(string $link): void
     {
         $link = $this->fixStepArgument($link);
@@ -107,9 +107,9 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: When I fill in "username" with: "bwayne"
      * Example: And I fill in "bwayne" for "username".
      */
-    #[\Behat\Step\When('/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/')]
-    #[\Behat\Step\When('/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/')]
-    #[\Behat\Step\When('/^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\When('/^(?:|I )fill in "(?P<field>(?:[^"]|\\\\")*)" with "(?P<value>(?:[^"]|\\\\")*)"$/')]
+    #[\Behat\Step\When('/^(?:|I )fill in "(?P<field>(?:[^"]|\\\\")*)" with:$/')]
+    #[\Behat\Step\When('/^(?:|I )fill in "(?P<value>(?:[^"]|\\\\")*)" for "(?P<field>(?:[^"]|\\\\")*)"$/')]
     public function fillField(string $field, string $value): void
     {
         $field = $this->fixStepArgument($field);
@@ -136,7 +136,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: When I select "Bats" from "user_fears"
      * Example: And I select "Bats" from "user_fears".
      */
-    #[\Behat\Step\When('/^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\When('/^(?:|I )select "(?P<option>(?:[^"]|\\\\")*)" from "(?P<select>(?:[^"]|\\\\")*)"$/')]
     public function selectOption(string $select, string $option): void
     {
         $select = $this->fixStepArgument($select);
@@ -149,7 +149,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: When I additionally select "Deceased" from "parents_alive_status"
      * Example: And I additionally select "Deceased" from "parents_alive_status".
      */
-    #[\Behat\Step\When('/^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\When('/^(?:|I )additionally select "(?P<option>(?:[^"]|\\\\")*)" from "(?P<select>(?:[^"]|\\\\")*)"$/')]
     public function additionallySelectOption(string $select, string $option): void
     {
         $select = $this->fixStepArgument($select);
@@ -162,7 +162,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: When I check "Pearl Necklace"
      * Example: And I check "Pearl Necklace".
      */
-    #[\Behat\Step\When('/^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\When('/^(?:|I )check "(?P<option>(?:[^"]|\\\\")*)"$/')]
     public function checkOption(string $option): void
     {
         $option = $this->fixStepArgument($option);
@@ -174,7 +174,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: When I uncheck "Broadway Plays"
      * Example: And I uncheck "Broadway Plays".
      */
-    #[\Behat\Step\When('/^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\When('/^(?:|I )uncheck "(?P<option>(?:[^"]|\\\\")*)"$/')]
     public function uncheckOption(string $option): void
     {
         $option = $this->fixStepArgument($option);
@@ -186,7 +186,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: When I attach the file "bwayne_profile.png" to "profileImageUpload"
      * Example: And I attach the file "bwayne_profile.png" to "profileImageUpload".
      */
-    #[\Behat\Step\When('/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\When('/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\\\")*)"$/')]
     public function attachFileToField(string $field, string $path): void
     {
         $field = $this->fixStepArgument($field);
@@ -233,7 +233,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the url should match "superman is dead"
      * Example: And the url should match "log in".
      */
-    #[\Behat\Step\Then('/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/')]
+    #[\Behat\Step\Then('/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\\\")*")$/')]
     public function assertUrlRegExp(string $pattern): void
     {
         $this->assertSession()->addressMatches($this->fixStepArgument($pattern));
@@ -266,7 +266,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then I should see "Who is the Batman?"
      * Example: And I should see "Who is the Batman?".
      */
-    #[\Behat\Step\Then('/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\Then('/^(?:|I )should see "(?P<text>(?:[^"]|\\\\")*)"$/')]
     public function assertPageContainsText(string $text): void
     {
         $this->assertSession()->pageTextContains($this->fixStepArgument($text));
@@ -277,7 +277,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then I should not see "Batman is Bruce Wayne"
      * Example: And I should not see "Batman is Bruce Wayne".
      */
-    #[\Behat\Step\Then('/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\Then('/^(?:|I )should not see "(?P<text>(?:[^"]|\\\\")*)"$/')]
     public function assertPageNotContainsText(string $text): void
     {
         $this->assertSession()->pageTextNotContains($this->fixStepArgument($text));
@@ -288,7 +288,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then I should see text matching "Batman, the vigilante"
      * Example: And I should not see "Batman, the vigilante".
      */
-    #[\Behat\Step\Then('/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/')]
+    #[\Behat\Step\Then('/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\\\")*")$/')]
     public function assertPageMatchesText(string $pattern): void
     {
         $this->assertSession()->pageTextMatches($this->fixStepArgument($pattern));
@@ -299,7 +299,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then I should not see text matching "Bruce Wayne, the vigilante"
      * Example: And I should not see "Bruce Wayne, the vigilante".
      */
-    #[\Behat\Step\Then('/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/')]
+    #[\Behat\Step\Then('/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\\\")*")$/')]
     public function assertPageNotMatchesText(string $pattern): void
     {
         $this->assertSession()->pageTextNotMatches($this->fixStepArgument($pattern));
@@ -310,7 +310,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the response should contain "Batman is the hero Gotham deserves."
      * Example: And the response should contain "Batman is the hero Gotham deserves.".
      */
-    #[\Behat\Step\Then('/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\Then('/^the response should contain "(?P<text>(?:[^"]|\\\\")*)"$/')]
     public function assertResponseContains(string $text): void
     {
         $this->assertSession()->responseContains($this->fixStepArgument($text));
@@ -321,7 +321,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the response should not contain "Bruce Wayne is a billionaire, play-boy, vigilante."
      * Example: And the response should not contain "Bruce Wayne is a billionaire, play-boy, vigilante.".
      */
-    #[\Behat\Step\Then('/^the response should not contain "(?P<text>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\Then('/^the response should not contain "(?P<text>(?:[^"]|\\\\")*)"$/')]
     public function assertResponseNotContains(string $text): void
     {
         $this->assertSession()->responseNotContains($this->fixStepArgument($text));
@@ -332,7 +332,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then I should see "Batman" in the "heroes_list" element
      * Example: And I should see "Batman" in the "heroes_list" element.
      */
-    #[\Behat\Step\Then('/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/')]
+    #[\Behat\Step\Then('/^(?:|I )should see "(?P<text>(?:[^"]|\\\\")*)" in the "(?P<element>[^"]*)" element$/')]
     public function assertElementContainsText(string $element, string $text): void
     {
         $this->assertSession()->elementTextContains('css', $element, $this->fixStepArgument($text));
@@ -343,7 +343,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then I should not see "Bruce Wayne" in the "heroes_alter_egos" element
      * Example: And I should not see "Bruce Wayne" in the "heroes_alter_egos" element.
      */
-    #[\Behat\Step\Then('/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/')]
+    #[\Behat\Step\Then('/^(?:|I )should not see "(?P<text>(?:[^"]|\\\\")*)" in the "(?P<element>[^"]*)" element$/')]
     public function assertElementNotContainsText(string $element, string $text): void
     {
         $this->assertSession()->elementTextNotContains('css', $element, $this->fixStepArgument($text));
@@ -354,7 +354,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the "body" element should contain "style=\"color:black;\""
      * Example: And the "body" element should contain "style=\"color:black;\"".
      */
-    #[\Behat\Step\Then('/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\Then('/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\\\")*)"$/')]
     public function assertElementContains(string $element, string $value): void
     {
         $this->assertSession()->elementContains('css', $element, $this->fixStepArgument($value));
@@ -365,7 +365,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the "body" element should not contain "style=\"color:black;\""
      * Example: And the "body" element should not contain "style=\"color:black;\"".
      */
-    #[\Behat\Step\Then('/^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\Then('/^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\\\")*)"$/')]
     public function assertElementNotContains(string $element, string $value): void
     {
         $this->assertSession()->elementNotContains('css', $element, $this->fixStepArgument($value));
@@ -398,7 +398,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the "username" field should contain "bwayne"
      * Example: And the "username" field should contain "bwayne".
      */
-    #[\Behat\Step\Then('/^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\Then('/^the "(?P<field>(?:[^"]|\\\\")*)" field should contain "(?P<value>(?:[^"]|\\\\")*)"$/')]
     public function assertFieldContains(string $field, string $value): void
     {
         $field = $this->fixStepArgument($field);
@@ -411,7 +411,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the "username" field should not contain "batman"
      * Example: And the "username" field should not contain "batman".
      */
-    #[\Behat\Step\Then('/^the "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/')]
+    #[\Behat\Step\Then('/^the "(?P<field>(?:[^"]|\\\\")*)" field should not contain "(?P<value>(?:[^"]|\\\\")*)"$/')]
     public function assertFieldNotContains(string $field, string $value): void
     {
         $field = $this->fixStepArgument($field);
@@ -435,9 +435,9 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the "remember_me" checkbox should be checked
      * Example: And the "remember_me" checkbox is checked.
      */
-    #[\Behat\Step\Then('/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/')]
-    #[\Behat\Step\Then('/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox is checked$/')]
-    #[\Behat\Step\Then('/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" (?:is|should be) checked$/')]
+    #[\Behat\Step\Then('/^the "(?P<checkbox>(?:[^"]|\\\\")*)" checkbox should be checked$/')]
+    #[\Behat\Step\Then('/^the "(?P<checkbox>(?:[^"]|\\\\")*)" checkbox is checked$/')]
+    #[\Behat\Step\Then('/^the checkbox "(?P<checkbox>(?:[^"]|\\\\")*)" (?:is|should be) checked$/')]
     public function assertCheckboxChecked(string $checkbox): void
     {
         $this->assertSession()->checkboxChecked($this->fixStepArgument($checkbox));
@@ -449,10 +449,10 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the "newsletter" checkbox should not be checked
      * Example: And the "newsletter" checkbox is unchecked.
      */
-    #[\Behat\Step\Then('/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should (?:be unchecked|not be checked)$/')]
-    #[\Behat\Step\Then('/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox is (?:unchecked|not checked)$/')]
-    #[\Behat\Step\Then('/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" should (?:be unchecked|not be checked)$/')]
-    #[\Behat\Step\Then('/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/')]
+    #[\Behat\Step\Then('/^the "(?P<checkbox>(?:[^"]|\\\\")*)" checkbox should (?:be unchecked|not be checked)$/')]
+    #[\Behat\Step\Then('/^the "(?P<checkbox>(?:[^"]|\\\\")*)" checkbox is (?:unchecked|not checked)$/')]
+    #[\Behat\Step\Then('/^the checkbox "(?P<checkbox>(?:[^"]|\\\\")*)" should (?:be unchecked|not be checked)$/')]
+    #[\Behat\Step\Then('/^the checkbox "(?P<checkbox>(?:[^"]|\\\\")*)" is (?:unchecked|not checked)$/')]
     public function assertCheckboxNotChecked(string $checkbox): void
     {
         $this->assertSession()->checkboxNotChecked($this->fixStepArgument($checkbox));
