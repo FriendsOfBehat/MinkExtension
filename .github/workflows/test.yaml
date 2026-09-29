@@ -59,9 +59,8 @@ jobs:
 
             - name: Drop the abandoned Goutte driver
               # Its dependency chain (behat/mink-goutte-driver -> fabpot/goutte -> symfony/browser-kit)
-              # is capped well below the newer Symfony versions pinned via SYMFONY_REQUIRE, and
-              # it won't be updated since the underlying client library has been abandoned. It's still
-              # exercised by the jobs that install the unmodified `composer.json` dependencies.
+              # does not allow it to be installed with newer Symfony versions.
+              # It's still exercised by the jobs that install the unmodified `composer.json` dependencies.
               run: composer remove --dev --no-update behat/mink-goutte-driver
               if: matrix.symfony-version
 

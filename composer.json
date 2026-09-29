@@ -24,15 +24,17 @@
         "php": "^8.1",
         "behat/behat": "^3.0.5",
         "behat/mink": "^1.5",
-        "symfony/config": "^5.4 || ^6.4 || ^7.3",
-        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.3",
+        "symfony/config": "^5.4 || ^6.4 || ^7.4",
+        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.4",
         "symfony/deprecation-contracts": "^1.0 || ^2.0 || ^3.0",
-        "symfony/event-dispatcher": "^5.4 || ^6.4 || ^7.3"
+        "symfony/event-dispatcher": "^5.4 || ^6.4 || ^7.4"
     },
     "require-dev": {
+        "behat/mink-browserkit-driver": "^2.0",
         "behat/mink-goutte-driver": "^1.1 || ^2.0",
+        "mink/webdriver-classic-driver": "^1.0",
         "phpspec/phpspec": "^7.0 || ^8.0",
-        "mink/webdriver-classic-driver": "^1.0"
+        "symfony/http-client": "^5.4 || ^6.4 || ^7.4"
     },
     "replace": {
         "behat/mink-extension": "self.version"
