@@ -30,6 +30,10 @@ jobs:
                       symfony-version: '6.4.*'
                       composer-tools: 'composer:v2, flex'
                       composer-command: 'update'
+                    - php-version: '8.2'
+                      symfony-version: '7.4.*'
+                      composer-tools: 'composer:v2, flex'
+                      composer-command: 'update'
                     - php-version: '8.5'
                       symfony-version: 'dev'
                       minimum-stability: 'dev'
@@ -59,15 +63,16 @@ jobs:
             - name: Install dependencies
               run: composer ${{ matrix.composer-command || 'install' }} --prefer-dist --no-progress ${{ matrix.composer-install-flags }}
               env:
-                  SYMFONY_REQUIRE: ${{ (matrix.symfony-version == '5.4.*' || matrix.symfony-version == '6.4.*') && matrix.symfony-version || '' }}
+                  SYMFONY_REQUIRE: ${{ (matrix.symfony-version == '5.4.*' || matrix.symfony-version == '6.4.*' || matrix.symfony-version == '7.4.*') && matrix.symfony-version || '' }}
 
             - name: Verify the Symfony LTS version was actually applied
-              if: matrix.symfony-version == '5.4.*' || matrix.symfony-version == '6.4.*'
+              if: matrix.symfony-version == '5.4.*' || matrix.symfony-version == '6.4.*' || matrix.symfony-version == '7.4.*'
               run: |
                   INSTALLED=$(jq -r '.packages[] | select(.name == "symfony/config") | .version' composer.lock)
                   case "${{ matrix.symfony-version }}" in
                       5.4.*) EXPECTED='v5.4' ;;
                       6.4.*) EXPECTED='v6.4' ;;
+                      7.4.*) EXPECTED='v7.4' ;;
                   esac
                   if [[ "$INSTALLED" != "$EXPECTED"* ]]; then
                       echo "::error::Expected symfony/config $EXPECTED.*, but Flex resolved $INSTALLED. SYMFONY_REQUIRE may have been silently ignored, see https://github.com/symfony/flex/issues/946"
