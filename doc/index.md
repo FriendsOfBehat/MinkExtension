@@ -209,6 +209,23 @@ Configuration settings depend on the Mink driver being used. Out of the box, Min
                                   ssl.certificate_authority: false
       ```
 
+* **WebdriverClassicDriver** - javascript driver speaking the W3C WebDriver (Classic) protocol, the direct successor of Selenium2Driver (which speaks the legacy, non-standard JSON Wire Protocol). In order to use it, install [`mink/webdriver-classic-driver`](https://packagist.org/packages/mink/webdriver-classic-driver) through Composer. Then, modify your `behat.yml` profile:
+
+    ```yaml
+    default:
+        extensions:
+            Behat\MinkExtension:
+                sessions:
+                    my_session:
+                        webdriver_classic:
+                            browser: chrome
+                            wd_host: 'http://localhost:4444/wd/hub'
+                            capabilities:
+                                browserName: chrome
+    ```
+
+  `browser` and `wd_host` default to `%mink.browser_name%` and `http://localhost:4444/wd/hub` respectively. `capabilities` is merged with capabilities Mink guesses automatically from the environment (e.g. build and tag information when running on Travis CI or Jenkins).
+
 * **Selenium2Driver** - javascript driver. In order to use it, install [`behat/mink-selenium2-driver`](https://packagist.org/packages/behat/mink-selenium2-driver) through Composer. Then, modify your `behat.yml` profile:
 
     ```yaml
