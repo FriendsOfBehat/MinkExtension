@@ -14,9 +14,11 @@ jobs:
             fail-fast: false
             matrix:
                 php-version:
+                    - '8.1'
                     - '8.2'
                     - '8.3'
                     - '8.4'
+                    - '8.5'
                 symfony-version:
                     - 'none'
                 include:
@@ -24,6 +26,12 @@ jobs:
                       symfony-version: '5.4.*'
                     - php-version: '8.1'
                       symfony-version: '6.4.*'
+                    - php-version: '8.5'
+                      symfony-version: 'dev'
+                      minimum-stability: 'dev'
+                    - php-version: '8.1'
+                      symfony-version: 'lowest'
+                      composer-install-flags: '--prefer-lowest --prefer-stable'
         steps:
             - name: Checkout
               uses: actions/checkout@v6
@@ -39,12 +47,16 @@ jobs:
             - name: Validate composer.json
               run: composer validate --no-check-lock
 
-            - name: Configure Symfony version
+            - name: Force Symfony LTS version
               run: composer require --no-update "symfony/config:${{ matrix.symfony-version }}" "symfony/dependency-injection:${{ matrix.symfony-version }}" "symfony/event-dispatcher:${{ matrix.symfony-version }}"
-              if: matrix.symfony-version != 'none'
+              if: matrix.symfony-version == '5.4.*' || matrix.symfony-version == '6.4.*'
+
+            - name: Allow dev dependencies
+              run: composer config minimum-stability dev
+              if: matrix.minimum-stability == 'dev'
 
             - name: Install dependencies
-              run: composer install --prefer-dist --no-progress
+              run: composer install --prefer-dist --no-progress ${{ matrix.composer-install-flags }}
 
             - name: PHPSpec
               run: vendor/bin/phpspec run -f pretty
