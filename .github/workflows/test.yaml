@@ -7,7 +7,7 @@ on:
 
 jobs:
     test:
-        name: PHP ${{ matrix.php-version }} + Symfony ${{ matrix.symfony-version }}
+        name: PHP ${{ matrix.php-version }} ${{ matrix.description }}
         runs-on: ubuntu-latest
         continue-on-error: false
         strategy:
@@ -19,21 +19,25 @@ jobs:
                     - '8.3'
                     - '8.4'
                     - '8.5'
-                symfony-version:
-                    - 'none'
+                symfony-version: [false]
+                description:
+                    - '(unmodified composer.json dependencies)'
                 include:
                     - php-version: '8.1'
                       symfony-version: '5.4.*'
+                      description: 'Symfony 5.4 LTS'
                     - php-version: '8.1'
                       symfony-version: '6.4.*'
+                      description: 'Symfony 6.4 LTS'
                     - php-version: '8.2'
                       symfony-version: '7.4.*'
+                      description: 'Symfony 7.4 LTS'
                     - php-version: '8.5'
-                      symfony-version: 'dev'
                       minimum-stability: 'dev'
+                      description: 'with dev dependencies'
                     - php-version: '8.1'
-                      symfony-version: 'lowest'
                       composer-install-flags: '--prefer-lowest --prefer-stable'
+                      description: 'with the lowest dependencies'
         steps:
             - name: Checkout
               uses: actions/checkout@v6
@@ -53,10 +57,18 @@ jobs:
               run: composer config minimum-stability dev
               if: matrix.minimum-stability == 'dev'
 
+            - name: Drop the abandoned Goutte driver
+              # Its dependency chain (behat/mink-goutte-driver -> fabpot/goutte -> symfony/browser-kit)
+              # is capped well below the newer Symfony versions pinned via SYMFONY_REQUIRE, and
+              # it won't be updated since the underlying client library has been abandoned. It's still
+              # exercised by the jobs that install the unmodified `composer.json` dependencies.
+              run: composer remove --dev --no-update behat/mink-goutte-driver
+              if: matrix.symfony-version
+
             - name: Install dependencies
               run: composer update --prefer-dist --no-progress ${{ matrix.composer-install-flags }}
               env:
-                  SYMFONY_REQUIRE: ${{ (matrix.symfony-version != 'none' && matrix.symfony-version != 'dev' && matrix.symfony-version != 'lowest') && matrix.symfony-version || '' }}
+                  SYMFONY_REQUIRE: ${{ matrix.symfony-version || '' }}
 
             - name: PHPSpec
               run: vendor/bin/phpspec run -f pretty
