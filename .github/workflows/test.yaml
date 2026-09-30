@@ -7,7 +7,7 @@ on:
 
 jobs:
     test:
-        name: PHP ${{ matrix.php-version }} ${{ matrix.description }}
+        name: PHP ${{ matrix.php-version }} ${{ matrix.description || '' }}
         runs-on: ubuntu-latest
         continue-on-error: false
         strategy:
@@ -20,8 +20,6 @@ jobs:
                     - '8.4'
                     - '8.5'
                 symfony-version: [false]
-                description:
-                    - '(unmodified composer.json dependencies)'
                 include:
                     - php-version: '8.1'
                       symfony-version: '5.4.*'
@@ -34,10 +32,10 @@ jobs:
                       description: 'Symfony 7.4 LTS'
                     - php-version: '8.5'
                       minimum-stability: 'dev'
-                      description: 'with dev dependencies'
+                      description: 'dev'
                     - php-version: '8.1'
                       composer-install-flags: '--prefer-lowest --prefer-stable'
-                      description: 'with the lowest dependencies'
+                      description: 'lowest'
         steps:
             - name: Checkout
               uses: actions/checkout@v6
@@ -57,12 +55,12 @@ jobs:
               run: composer config minimum-stability dev
               if: matrix.minimum-stability == 'dev'
 
-            - name: Drop the abandoned Goutte driver
-              # Its dependency chain (behat/mink-goutte-driver -> fabpot/goutte -> symfony/browser-kit)
-              # does not allow it to be installed with newer Symfony versions.
-              # It's still exercised by the jobs that install the unmodified `composer.json` dependencies.
-              run: composer remove --dev --no-update behat/mink-goutte-driver
-              if: matrix.symfony-version
+#            - name: Drop the abandoned Goutte driver
+#              # Its dependency chain (behat/mink-goutte-driver -> fabpot/goutte -> symfony/browser-kit)
+#              # does not allow it to be installed with newer Symfony versions.
+#              # It's still exercised by the jobs that install the unmodified `composer.json` dependencies.
+#              run: composer remove --dev --no-update behat/mink-goutte-driver
+#              if: matrix.symfony-version || matrix.minimum-stability == 'dev'
 
             - name: Install dependencies
               run: composer update --prefer-dist --no-progress ${{ matrix.composer-install-flags }}

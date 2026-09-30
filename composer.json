@@ -31,7 +31,6 @@
     },
     "require-dev": {
         "behat/mink-browserkit-driver": "^2.0",
-        "behat/mink-goutte-driver": "^1.1 || ^2.0",
         "mink/webdriver-classic-driver": "^1.0",
         "phpspec/phpspec": "^7.0 || ^8.0",
         "symfony/http-client": "^5.4 || ^6.4 || ^7.4"
