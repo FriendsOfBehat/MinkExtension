@@ -93,6 +93,18 @@ class SessionsListenerSpec extends ObjectBehavior
         $this->prepareDefaultMinkSession($event);
     }
 
+    function it_supports_changing_the_default_javascript_session_per_suite_in_gherkin_32_mode($event, $mink, $scenario, $suite)
+    {
+        $suite->hasSetting('mink_javascript_session')->willReturn(true);
+        $suite->getSetting('mink_javascript_session')->willReturn('sahi');
+
+        $scenario->getTags()->willReturn(array('@javascript'));
+        $mink->resetSessions()->shouldBeCalled();
+        $mink->setDefaultSessionName('sahi')->shouldBeCalled();
+
+        $this->prepareDefaultMinkSession($event);
+    }
+
     function it_fails_for_non_string_javascript_suite_session($event, $scenario, $suite)
     {
         $suite->hasSetting('mink_javascript_session')->willReturn(true);
@@ -134,11 +146,31 @@ class SessionsListenerSpec extends ObjectBehavior
         $this->prepareDefaultMinkSession($event);
     }
 
+    function it_switches_to_a_named_session_in_gherkin_32_mode($event, $mink, $scenario)
+    {
+        $scenario->getTags()->willReturn(array('@mink:test'));
+        $mink->resetSessions()->shouldBeCalled();
+        $mink->setDefaultSessionName('test')->shouldBeCalled();
+
+        $this->prepareDefaultMinkSession($event);
+    }
+
     function it_prefers_the_scenario_over_the_feature($event, $mink, $scenario, $feature, $suite)
     {
         $suite->hasSetting('mink_javascript_session')->willReturn(false);
         $scenario->getTags()->willReturn(array('mink:test'));
         $feature->getTags()->willReturn(array('javascript'));
+        $mink->resetSessions()->shouldBeCalled();
+        $mink->setDefaultSessionName('test')->shouldBeCalled();
+
+        $this->prepareDefaultMinkSession($event);
+    }
+
+    function it_prefers_the_scenario_over_the_feature_in_gherkin32_mode($event, $mink, $scenario, $feature, $suite)
+    {
+        $suite->hasSetting('mink_javascript_session')->willReturn(false);
+        $scenario->getTags()->willReturn(array('@mink:test'));
+        $feature->getTags()->willReturn(array('@javascript'));
         $mink->resetSessions()->shouldBeCalled();
         $mink->setDefaultSessionName('test')->shouldBeCalled();
 
@@ -154,9 +186,27 @@ class SessionsListenerSpec extends ObjectBehavior
         $this->prepareDefaultMinkSession($event);
     }
 
+    function it_stops_the_sessions_for_insulated_scenarios_in_gherkin32_mode($event, $mink, $scenario)
+    {
+        $scenario->getTags()->willReturn(['@insulated']);
+        $mink->stopSessions()->shouldBeCalled();
+        $mink->setDefaultSessionName('goutte')->shouldBeCalled();
+
+        $this->prepareDefaultMinkSession($event);
+    }
+
     function it_stops_the_sessions_for_insulated_features($event, $mink, $feature)
     {
         $feature->getTags()->willReturn(['insulated']);
+        $mink->stopSessions()->shouldBeCalled();
+        $mink->setDefaultSessionName('goutte')->shouldBeCalled();
+
+        $this->prepareDefaultMinkSession($event);
+    }
+
+    function it_stops_the_sessions_for_insulated_features_in_gherkin32_mode($event, $mink, $feature)
+    {
+        $feature->getTags()->willReturn(['@insulated']);
         $mink->stopSessions()->shouldBeCalled();
         $mink->setDefaultSessionName('goutte')->shouldBeCalled();
 
