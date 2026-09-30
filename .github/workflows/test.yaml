@@ -20,6 +20,8 @@ jobs:
                     - '8.4'
                     - '8.5'
                 symfony-version: [false]
+                composer-install-flags: [false]
+                minimum-stability: ['stable']
                 include:
                     - php-version: '8.1'
                       symfony-version: '5.4.*'
@@ -51,19 +53,11 @@ jobs:
             - name: Validate composer.json
               run: composer validate --no-check-lock
 
-            - name: Allow dev dependencies
-              run: composer config minimum-stability dev
-              if: matrix.minimum-stability == 'dev'
-
-#            - name: Drop the abandoned Goutte driver
-#              # Its dependency chain (behat/mink-goutte-driver -> fabpot/goutte -> symfony/browser-kit)
-#              # does not allow it to be installed with newer Symfony versions.
-#              # It's still exercised by the jobs that install the unmodified `composer.json` dependencies.
-#              run: composer remove --dev --no-update behat/mink-goutte-driver
-#              if: matrix.symfony-version || matrix.minimum-stability == 'dev'
+            - name: Configure minimum-stability
+              run: composer config minimum-stability ${{ matrix.minimum-stability }}
 
             - name: Install dependencies
-              run: composer update --prefer-dist --no-progress ${{ matrix.composer-install-flags }}
+              run: composer update --prefer-dist --no-progress ${{ matrix.composer-install-flags || '' }}
               env:
                   SYMFONY_REQUIRE: ${{ matrix.symfony-version || '' }}
 
