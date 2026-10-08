@@ -13,6 +13,7 @@ namespace Behat\MinkExtension\Listener;
 use Behat\Behat\EventDispatcher\Event\ExampleTested;
 use Behat\Behat\EventDispatcher\Event\ScenarioLikeTested;
 use Behat\Behat\EventDispatcher\Event\ScenarioTested;
+use Behat\Gherkin\Node\TaggedNodeInterface;
 use Behat\Mink\Mink;
 use Behat\Testwork\EventDispatcher\Event\ExerciseCompleted;
 use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
@@ -91,7 +92,10 @@ class SessionsListener implements EventSubscriberInterface
         $feature  = $event->getFeature();
         $session  = null;
 
-        foreach (array_merge($feature->getTags(), $scenario->getTags()) as $tag) {
+        $scenarioTags = $scenario instanceof TaggedNodeInterface ? $scenario->getTags() : [];
+        // Features parsed in GHERKIN_32 mode returns tags prefixed with "@"; normalize so comparisons work across versions.
+        $tags = array_map(fn ($tag) => ltrim($tag, '@'), array_merge($feature->getTags(), $scenarioTags));
+        foreach ($tags as $tag) {
             if ('javascript' === $tag) {
                 $session = $this->getJavascriptSession($event->getSuite());
             } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
@@ -103,7 +107,8 @@ class SessionsListener implements EventSubscriberInterface
             $session = $this->getDefaultSession($event->getSuite());
         }
 
-        if ($scenario->hasTag('insulated') || $feature->hasTag('insulated')) {
+        $isInsulated = in_array('insulated', $tags, true);
+        if ($isInsulated) {
             $this->mink->stopSessions();
         } else {
             $this->mink->resetSessions();
