@@ -7,27 +7,37 @@ on:
 
 jobs:
     test:
-        name: PHP ${{ matrix.php-version }} + Symfony ${{ matrix.symfony-version }}
+        name: PHP ${{ matrix.php-version }} ${{ matrix.description || '' }}
         runs-on: ubuntu-latest
         continue-on-error: false
         strategy:
             fail-fast: false
             matrix:
                 php-version:
-                    - '7.4'
-                    - '8.0'
                     - '8.1'
-                symfony-version:
-                    - '5.4.*'
-                    - '6.4.*'
-                exclude:
-                    - php-version: '7.4'
-                      symfony-version: '6.4.*'
-                    - php-version: '8.0'
-                      symfony-version: '6.4.*'
+                    - '8.2'
+                    - '8.3'
+                    - '8.4'
+                    - '8.5'
+                symfony-version: [false]
+                composer-install-flags: [false]
+                minimum-stability: ['stable']
                 include:
+                    - php-version: '8.1'
+                      symfony-version: '5.4.*'
+                      description: 'Symfony 5.4 LTS'
+                    - php-version: '8.1'
+                      symfony-version: '6.4.*'
+                      description: 'Symfony 6.4 LTS'
                     - php-version: '8.2'
-                      symfony-version: '7.0.*'
+                      symfony-version: '7.4.*'
+                      description: 'Symfony 7.4 LTS'
+                    - php-version: '8.5'
+                      minimum-stability: 'dev'
+                      description: 'dev'
+                    - php-version: '8.1'
+                      composer-install-flags: '--prefer-lowest --prefer-stable'
+                      description: 'lowest'
         steps:
             - name: Checkout
               uses: actions/checkout@v6
@@ -38,16 +48,18 @@ jobs:
                   coverage: none
                   ini-values: "memory_limit=-1"
                   php-version: ${{ matrix.php-version }}
-                  tools: composer:v2
+                  tools: composer:v2, flex
 
             - name: Validate composer.json
               run: composer validate --no-check-lock
 
-            - name: Configure Symfony version
-              run: composer require --no-update "symfony/config:${{ matrix.symfony-version }}" "symfony/dependency-injection:${{ matrix.symfony-version }}"
+            - name: Configure minimum-stability
+              run: composer config minimum-stability ${{ matrix.minimum-stability }}
 
             - name: Install dependencies
-              run: composer install --prefer-dist --no-progress
+              run: composer update --prefer-dist --no-progress ${{ matrix.composer-install-flags || '' }}
+              env:
+                  SYMFONY_REQUIRE: ${{ matrix.symfony-version || '' }}
 
             - name: PHPSpec
               run: vendor/bin/phpspec run -f pretty
