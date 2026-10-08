@@ -11,7 +11,7 @@ on:
 
 jobs:
     test:
-        name: PHP ${{ matrix.php-version }} + Symfony ${{ matrix.symfony-version }} + Behat ${{ matrix.behat-version }}
+        name: PHP ${{ matrix.php-version }} ${{ matrix.description || '' }} + Behat ${{ matrix.behat-version }}
         runs-on: ubuntu-latest
         continue-on-error: false
         strategy:
@@ -21,24 +21,19 @@ jobs:
                     - '8.3'
                     - '8.4'
                     - '8.5'
-                symfony-version:
-                    - '7.4.*'
-                    - '8.0.*'
-                    - '8.1.*'
-                behat-version:
-                    - '3.*'
-                    - '4.*@alpha'
-                exclude:
-                    # Symfony 8.x requires PHP >= 8.4
+                symfony-version: [false]
+                composer-install-flags: [false]
+                minimum-stability: ['stable']
+                include:
                     - php-version: '8.3'
-                      symfony-version: '8.0.*'
+                      symfony-version: '7.4.*'
+                      description: 'Symfony 7.4 LTS'
+                    - php-version: '8.5'
+                      minimum-stability: 'dev'
+                      description: 'dev'
                     - php-version: '8.3'
-                      symfony-version: '8.1.*'
-                    # Behat 3.x cannot install with Symfony 8.x
-                    - behat-version: '3.*'
-                      symfony-version: '8.0.*'
-                    - behat-version: '3.*'
-                      symfony-version: '8.1.*'
+                      composer-install-flags: '--prefer-lowest --prefer-stable'
+                      description: 'lowest'
         steps:
             - name: Checkout
               uses: actions/checkout@v5
@@ -49,16 +44,18 @@ jobs:
                   coverage: none
                   ini-values: "memory_limit=-1"
                   php-version: ${{ matrix.php-version }}
-                  tools: composer:v2
+                  tools: composer:v2, flex
 
             - name: Validate composer.json
               run: composer validate --strict
 
-            - name: Lock Symfony version
-              run: VERSION=${{ matrix.symfony-version }} .github/workflows/lock-symfony-version.sh
+            - name: Configure minimum-stability
+              run: composer config minimum-stability ${{ matrix.minimum-stability }}
 
             - name: Install dependencies
-              run: composer update --prefer-dist --prefer-stable --no-progress --with behat/behat:"${{ matrix.behat-version }}"
+              run: composer update --prefer-dist --no-progress ${{ matrix.composer-install-flags || '' }}
+              env:
+                  SYMFONY_REQUIRE: ${{ matrix.symfony-version || '' }}
 
             - name: CS Fixer
               run: vendor/bin/php-cs-fixer fix --dry-run

@@ -46,3 +46,8 @@ instead (wrap or decorate them, or register your own service).
 
 Additionally, `FailureShowListener` and `SessionsListener` are now marked as `@internal`. Their API may
 change at any time without further notice.
+
+## Return types added
+
+`@return` type hints have been turned into actual return types in the `MinkAwareContext` and `DriverFactory` interfaces
+and in all methods in `MinkContext` and `RawMinkContext`.

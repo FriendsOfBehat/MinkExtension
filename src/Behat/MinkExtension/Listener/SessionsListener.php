@@ -73,6 +73,8 @@ final class SessionsListener implements EventSubscriberInterface
      * instead of just soft-resetting them
      *
      * @throws ProcessingException when the @javascript tag is used without a javascript session
+     *
+     * @return void
      */
     public function prepareDefaultMinkSession(ScenarioTested $event): void
     {
@@ -107,6 +109,8 @@ final class SessionsListener implements EventSubscriberInterface
 
     /**
      * Stops all started Mink sessions.
+     *
+     * @return void
      */
     public function tearDownMinkSessions(): void
     {

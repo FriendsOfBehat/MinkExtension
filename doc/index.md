@@ -1,45 +1,26 @@
 # Mink Extension
 
-You can use Behat to describe anything, that you can describe in business
-logic. It's tools, gui applications, web applications. The most interesting part
-is web applications. First, behavioral testing already exists in the web world -
-it's called functional or acceptance testing. Almost all popular frameworks
-and languages provide functional testing tools. Today we'll talk about how to
-use Behat for functional testing of web applications. [Mink](http://mink.behat.org)
-is a tool exactly for that and this extension provides integration for it.
+This extension allows you to use the [Mink](https://mink.behat.org) browser emulator
+abstraction with [Behat](https://github.com/Behat/Behat), a BDD tool for PHP.
 
-Basically, MinkExtension is an integration layer between Behat 3.32+ and Mink 1.11+
-and it provides:
-
-* Additional services for Behat (`Mink`, `Sessions`, `Drivers`).
-* `Behat\MinkExtension\Context\MinkAwareContext` which provides a `Mink`
-  instance for your contexts.
-* Base `Behat\MinkExtension\Context\MinkContext` context which provides base
-  step definitions and hooks for your contexts or subcontexts. Or it could be
-  even used as context on its own.
+Together, this allows you to do functional and acceptance testing of web applications.
+You can write behavior-driven tests for web applications using natural language
+descriptions and run them against different browsers and drivers without changing
+your test code.
 
 ## Installation
 
-This extension requires:
-
-* Behat 3.32+ or 4.0+
-* Mink 1.11+
-
-### Through Composer
-
-The easiest way to keep your suite updated is to use [Composer](http://getcomposer.org):
-
-1. Install with composer:
+1. Installation with Composer:
 
     ```bash
-    $ composer require --dev behat/mink-extension
+    $ composer require --dev friends-of-behat/mink-extension
     ```
 
 2. Activate the extension by specifying its class in your `behat.php`:
 
     ```php
     # behat.php
-    
+
     use Behat\Config\Config;
     use Behat\Config\Extension;
     use Behat\Config\Profile;
@@ -65,7 +46,7 @@ The easiest way to keep your suite updated is to use [Composer](http://getcompos
 
 ## Usage
 
-After installing the extension, there are 4 usage options available:
+After installing the extension, there are four usage options available:
 
 1. Extending `Behat\MinkExtension\Context\RawMinkContext` in your feature suite.
    This will give you the ability to use a preconfigured `Mink` instance with some
@@ -109,7 +90,7 @@ After installing the extension, there are 4 usage options available:
    class clean.
 
     ```php
-    
+
     use Behat\Config\Config;
     use Behat\Config\Extension;
     use Behat\Config\Profile;
@@ -145,8 +126,8 @@ this `$mink` instance will be preconfigured based on the settings you've provide
 
 ## Configuration
 
-MinkExtension comes with a flexible configuration system, that gives you
-the ability to configure Mink inside Behat to fulfil all your needs.
+MinkExtension comes with a flexible configuration system that gives you
+the ability to configure Mink inside Behat from your `behat.yml` file.
 
 ### Sessions
 
@@ -196,7 +177,7 @@ The default session and the default `javascript` session can also be configured 
 each suite:
 
  ```php
-    
+
 use Behat\Config\Config;
 use Behat\Config\Profile;
 use Behat\Config\Suite;
@@ -227,13 +208,9 @@ support javascript).
 
 ### Drivers
 
-First of all, there are drivers enabling configuration. MinkExtension comes
-with support for the following drivers out of the box:
+Configuration settings depend on the Mink driver being used. Out of the box, MinkExtension can configure the following Mink drivers:
 
-* `browserkit_http` - headless driver without JavaScript support, based on
-  Symfony's BrowserKit and HttpClient components. It is the recommended
-  replacement for the removed Goutte driver. In order to use it, install
-  `behat/mink-browserkit-driver` and modify your `behat.php` profile:
+* **Symfony `BrowserKit` with Symfony `HttpClient`** - headless driver without JavaScript support. In order to use it, install [`behat/mink-browserkit-driver`](https://packagist.org/packages/behat/mink-browserkit-driver) and [`symfony/http-client`](https://packagist.org/packages/symfony/http-client) through Composer. Then, modify your `behat.php` profile:
 
     ```php
     # behat.php
@@ -296,8 +273,42 @@ with support for the following drivers out of the box:
         );
     ```
 
-* `Selenium2Driver` - javascript driver. In order to use it, modify your
-  `behat.php` profile:
+* **WebdriverClassicDriver** - javascript driver speaking the W3C WebDriver (Classic) protocol, the direct successor of Selenium2Driver (which speaks the legacy, non-standard JSON Wire Protocol). In order to use it, install [`mink/webdriver-classic-driver`](https://packagist.org/packages/mink/webdriver-classic-driver) through Composer. Then, modify your `behat.php` profile:
+
+    ```php
+    # behat.php
+
+    use Behat\Config\Config;
+    use Behat\Config\Extension;
+    use Behat\Config\Profile;
+    use Behat\MinkExtension\ServiceContainer\MinkExtension;
+
+    return (new Config())
+        ->withProfile(
+            (new Profile('default'))
+                //... suite configuration
+                ->withExtension(
+                    new Extension(MinkExtension::class, [
+                        'base_url' => 'http://example.com/',
+                        'sessions' => [
+                            'my_session' => [
+                                'webdriver_classic' => [
+                                    'browser' => 'chrome',
+                                    'wd_host' => 'http://localhost:4444/wd/hub',
+                                    'capabilities' => [
+                                        'browserName' => 'chrome',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ])
+                )
+        );
+    ```
+
+  `browser` and `wd_host` default to `%mink.browser_name%` and `http://localhost:4444/wd/hub` respectively. `capabilities` is merged with capabilities Mink guesses automatically from the environment (e.g. build and tag information when running on Travis CI or Jenkins).
+
+* **Selenium2Driver** - javascript driver. In order to use it, install [`behat/mink-selenium2-driver`](https://packagist.org/packages/behat/mink-selenium2-driver) through Composer. Then, modify your `behat.php` profile:
 
     ```php
     # behat.php
@@ -324,11 +335,7 @@ with support for the following drivers out of the box:
         );
     ```
 
-* `Selenium4Driver` - javascript driver for Selenium 4 / W3C WebDriver. Its basic
-  usage is analogous to `selenium2` (it also accepts `browser` and `wd_host`), but
-  it exposes an extra `name` option and expects W3C-style `capabilities` structured
-  under `alwaysMatch` / `firstMatch` (e.g. `goog:chromeOptions`). In order to use it,
-  modify your `behat.php` profile:
+* **Selenium4Driver** - javascript driver. In order to use it, install [`ediasoft/mink-selenium4-driver`](https://packagist.org/packages/ediasoft/mink-selenium4-driver) through Composer. for Selenium 4 / W3C WebDriver. Then modify your `behat.php` profile:
 
     ```php
     # behat.php
@@ -355,11 +362,10 @@ with support for the following drivers out of the box:
         );
     ```
 
-* `SauceLabsDriver` - special flavor of the Selenium2Driver configured to use the
-  selenium2 hosted installation of saucelabs.com. In order to use it, modify your
-  `behat.php` profile:
+* **SauceLabsDriver** - special flavor of the Selenium2Driver configured to use the
+  selenium2 hosted installation of saucelabs.com. This uses Selenium2Driver, so make sure you have [`behat/mink-selenium2-driver`](https://packagist.org/packages/behat/mink-selenium2-driver) installed. Then, modify your `behat.php` profile:
 
-    
+
     ```php
     # behat.php
 
@@ -384,12 +390,11 @@ with support for the following drivers out of the box:
                 )
         );
     ```
-    
-* `BrowserStackDriver` - special flavor of the Selenium2Driver configured to use the
-  selenium2 hosted installation of browserstack.com. In order to use it, modify your
-  `behat.php` profile:
 
-    
+* **BrowserStackDriver** - special flavor of the Selenium2Driver configured to use the
+  selenium2 hosted installation of browserstack.com. This uses Selenium2Driver, so make sure you have [`behat/mink-selenium2-driver`](https://packagist.org/packages/behat/mink-selenium2-driver) installed. Then, modify your `behat.php` profile:
+
+
     ```php
     # behat.php
 
@@ -414,13 +419,6 @@ with support for the following drivers out of the box:
                 )
         );
     ```
-
-If you're using Composer, you need to install the drivers that you need first:
-
-- `browserkit_http` - `behat/mink-browserkit-driver` (also requires `symfony/browser-kit` and `symfony/http-client`)
-- `selenium2` (also used for SauceLabs, BrowserStack and Appium) - `behat/mink-selenium2-driver`
-- `selenium4` - `ediasoft/mink-selenium4-driver`
-- `webdriver_classic` - `mink/webdriver-classic-driver`
 
 > [!NOTE]
 > All drivers share the same API, which means that you could use multiple drivers
@@ -455,3 +453,43 @@ There's other useful parameters, that you can use to configure your suite:
   name.
 * `mink_loader` - path to a file loaded to make Mink available (useful when
   using the PHAR archive for Mink, useless when using Composer)
+
+## Adding your own or other drivers
+
+If you have another Mink driver implementation that you would like to use,
+you can create your own `DriverFactory` implementation. Then, create a Behat
+extension class and use it to register your driver factory with this extension
+here along the lines of:
+
+```php
+<?php
+
+namespace My\Mink\DriverPackage;
+
+use Behat\MinkExtension\ServiceContainer\MinkExtension;
+use Behat\Testwork\ServiceContainer\Extension as ExtensionInterface;
+use Behat\Testwork\ServiceContainer\ExtensionManager;
+
+class MyMinkDriverExtension implements ExtensionInterface
+{
+    // ... other ExtensionInterface methods omitted for brevity
+
+    public function initialize(ExtensionManager $extensionManager): void
+    {
+        if (null !== $minkExtension = $extensionManager->getExtension('mink')) {
+            /* @var $minkExtension MinkExtension */
+            $minkExtension->registerDriverFactory(new MyDriverFactory());
+        }
+    }
+}
+```
+
+Your driver factory defines the driver name, which can be used to configure
+_your_ driver in the `behat.yml` file just like the other drivers shown above.
+
+> [!TIP]
+> If you would like to see a real-world example, have a look at the [SymfonyExtension](https://github.com/FriendsOfBehat/SymfonyExtension).
+> In its [extension class](https://github.com/FriendsOfBehat/SymfonyExtension/blob/3ed86d77923be089d67d952e7b75af48fec42e22/src/ServiceContainer/SymfonyExtension.php#L102),
+> it registers a `SymfonyDriver` under the driver name `symfony`. That driver can be used
+> to make requests directly against a Symfony Kernel, without the overhead of HTTP network
+> requests and within the same PHP process that is running Behat.
