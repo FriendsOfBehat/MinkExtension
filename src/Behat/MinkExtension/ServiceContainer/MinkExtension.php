@@ -118,7 +118,7 @@ class MinkExtension implements ExtensionInterface
 
         $builder
             ->beforeNormalization()
-                ->always()
+                ->ifArray()
                 ->then(function ($v) use ($renamedKeys) {
                     foreach ($renamedKeys as $driverType) {
                         if (!array_key_exists($driverType, $v) || isset($v['sessions'][$driverType])) {
