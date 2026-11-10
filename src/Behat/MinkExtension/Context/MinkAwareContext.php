@@ -32,8 +32,6 @@ interface MinkAwareContext extends Context
     /**
      * Sets parameters provided for Mink.
      *
-     * @param array $parameters
-     *
      * @return void
      */
     public function setMinkParameters(array $parameters);

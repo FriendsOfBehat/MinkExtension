@@ -11,8 +11,8 @@
 namespace Behat\MinkExtension\Context;
 
 use Behat\Mink\Mink;
-use Behat\Mink\WebAssert;
 use Behat\Mink\Session;
+use Behat\Mink\WebAssert;
 
 /**
  * Raw Mink context for Behat BDD tool.
@@ -45,10 +45,7 @@ class RawMinkContext implements MinkAwareContext
     public function getMink()
     {
         if (null === $this->mink) {
-            throw new \RuntimeException(
-                'Mink instance has not been set on Mink context class. ' . 
-                'Have you enabled the Mink Extension?'
-            );
+            throw new \RuntimeException('Mink instance has not been set on Mink context class. Have you enabled the Mink Extension?');
         }
 
         return $this->mink;
@@ -67,8 +64,6 @@ class RawMinkContext implements MinkAwareContext
     /**
      * Sets parameters provided for Mink.
      *
-     * @param array $parameters
-     *
      * @return void
      */
     public function setMinkParameters(array $parameters)
@@ -80,8 +75,6 @@ class RawMinkContext implements MinkAwareContext
      * Returns specific mink parameter.
      *
      * @param string $name
-     *
-     * @return mixed
      */
     public function getMinkParameter($name)
     {
@@ -149,9 +142,9 @@ class RawMinkContext implements MinkAwareContext
      */
     public function locatePath($path)
     {
-        $startUrl = rtrim($this->getMinkParameter('base_url') ?? '', '/') . '/';
+        $startUrl = rtrim($this->getMinkParameter('base_url') ?? '', '/').'/';
 
-        return 0 !== strpos($path, 'http') ? $startUrl . ltrim($path, '/') : $path;
+        return 0 !== strpos($path, 'http') ? $startUrl.ltrim($path, '/') : $path;
     }
 
     /**
@@ -170,6 +163,6 @@ class RawMinkContext implements MinkAwareContext
         // No effect in other environments.
         $filename = $filename ?: sprintf('%s_%s_%s.%s', $this->getMinkParameter('browser_name'), date('c'), uniqid('', true), 'png');
         $filepath = $filepath ?: (ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir());
-        file_put_contents($filepath . '/' . $filename, $this->getSession()->getScreenshot());
+        file_put_contents($filepath.'/'.$filename, $this->getSession()->getScreenshot());
     }
 }

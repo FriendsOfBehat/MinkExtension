@@ -31,6 +31,7 @@
     },
     "require-dev": {
         "behat/mink-browserkit-driver": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.75",
         "mink/webdriver-classic-driver": "^1.0",
         "phpspec/phpspec": "^7.0 || ^8.0",
         "symfony/http-client": "^5.4 || ^6.4 || ^7.4"
@@ -42,6 +43,10 @@
         "psr-0": {
             "Behat\\MinkExtension": "src/"
         }
+    },
+    "scripts": {
+        "cs": "vendor/bin/php-cs-fixer fix",
+        "cs-check": "vendor/bin/php-cs-fixer fix --dry-run"
     },
     "extra": {
         "branch-alias": {

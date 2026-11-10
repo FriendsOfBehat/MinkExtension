@@ -28,6 +28,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * @final since 2.8.0
+ *
  * @internal since 2.8.0
  */
 class SessionsListener implements EventSubscriberInterface
@@ -44,29 +45,25 @@ class SessionsListener implements EventSubscriberInterface
     /**
      * Initializes initializer.
      *
-     * @param Mink        $mink
      * @param string      $defaultSession
      * @param string|null $javascriptSession
      * @param string[]    $availableJavascriptSessions
      */
-    public function __construct(Mink $mink, $defaultSession, $javascriptSession, array $availableJavascriptSessions = array())
+    public function __construct(Mink $mink, $defaultSession, $javascriptSession, array $availableJavascriptSessions = [])
     {
-        $this->mink              = $mink;
-        $this->defaultSession    = $defaultSession;
+        $this->mink = $mink;
+        $this->defaultSession = $defaultSession;
         $this->javascriptSession = $javascriptSession;
         $this->availableJavascriptSessions = $availableJavascriptSessions;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
-        return array(
-            ScenarioTested::BEFORE   => array('prepareDefaultMinkSession', 10),
-            ExampleTested::BEFORE    => array('prepareDefaultMinkSession', 10),
-            ExerciseCompleted::AFTER => array('tearDownMinkSessions', -10)
-        );
+        return [
+            ScenarioTested::BEFORE => ['prepareDefaultMinkSession', 10],
+            ExampleTested::BEFORE => ['prepareDefaultMinkSession', 10],
+            ExerciseCompleted::AFTER => ['tearDownMinkSessions', -10],
+        ];
     }
 
     /**
@@ -80,17 +77,15 @@ class SessionsListener implements EventSubscriberInterface
      * `@insulated` tag will cause Mink to stop current sessions before scenario
      * instead of just soft-resetting them
      *
-     * @param ScenarioLikeTested $event
+     * @return void
      *
      * @throws ProcessingException when the @javascript tag is used without a javascript session
-     *
-     * @return void
      */
     public function prepareDefaultMinkSession(ScenarioLikeTested $event)
     {
         $scenario = $event->getScenario();
-        $feature  = $event->getFeature();
-        $session  = null;
+        $feature = $event->getFeature();
+        $session = null;
 
         $scenarioTags = $scenario instanceof TaggedNodeInterface ? $scenario->getTags() : [];
         // Features parsed in GHERKIN_32 mode returns tags prefixed with "@"; normalize so comparisons work across versions.
@@ -136,14 +131,7 @@ class SessionsListener implements EventSubscriberInterface
         $session = $suite->getSetting('mink_session');
 
         if (!is_string($session)) {
-            throw new SuiteConfigurationException(
-                sprintf(
-                    '`mink_session` setting of the "%s" suite is expected to be a string, %s given.',
-                    $suite->getName(),
-                    gettype($session)
-                ),
-                $suite->getName()
-            );
+            throw new SuiteConfigurationException(sprintf('`mink_session` setting of the "%s" suite is expected to be a string, %s given.', $suite->getName(), gettype($session)), $suite->getName());
         }
 
         return $session;
@@ -162,26 +150,11 @@ class SessionsListener implements EventSubscriberInterface
         $session = $suite->getSetting('mink_javascript_session');
 
         if (!is_string($session)) {
-            throw new SuiteConfigurationException(
-                sprintf(
-                    '`mink_javascript_session` setting of the "%s" suite is expected to be a string, %s given.',
-                    $suite->getName(),
-                    gettype($session)
-                ),
-                $suite->getName()
-            );
+            throw new SuiteConfigurationException(sprintf('`mink_javascript_session` setting of the "%s" suite is expected to be a string, %s given.', $suite->getName(), gettype($session)), $suite->getName());
         }
 
         if (!in_array($session, $this->availableJavascriptSessions)) {
-            throw new SuiteConfigurationException(
-                sprintf(
-                    '`mink_javascript_session` setting of the "%s" suite is not a javascript session. %s given but expected one of %s.',
-                    $suite->getName(),
-                    $session,
-                    implode(', ', $this->availableJavascriptSessions)
-                ),
-                $suite->getName()
-            );
+            throw new SuiteConfigurationException(sprintf('`mink_javascript_session` setting of the "%s" suite is not a javascript session. %s given but expected one of %s.', $suite->getName(), $session, implode(', ', $this->availableJavascriptSessions)), $suite->getName());
         }
 
         return $session;

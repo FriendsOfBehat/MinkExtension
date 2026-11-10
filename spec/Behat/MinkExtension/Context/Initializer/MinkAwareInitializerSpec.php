@@ -9,25 +9,25 @@ use PhpSpec\ObjectBehavior;
 
 class MinkAwareInitializerSpec extends ObjectBehavior
 {
-    function let(Mink $mink)
+    public function let(Mink $mink)
     {
-        $this->beConstructedWith($mink, array('base_url' => 'foo'));
+        $this->beConstructedWith($mink, ['base_url' => 'foo']);
     }
 
-    function it_is_a_context_initializer()
+    public function it_is_a_context_initializer()
     {
         $this->shouldHaveType('Behat\Behat\Context\Initializer\ContextInitializer');
     }
 
-    function it_does_nothing_for_basic_contexts(Context $context)
+    public function it_does_nothing_for_basic_contexts(Context $context)
     {
         $this->initializeContext($context);
     }
 
-    function it_injects_mink_and_parameters_in_mink_aware_contexts(MinkAwareContext $context, $mink)
+    public function it_injects_mink_and_parameters_in_mink_aware_contexts(MinkAwareContext $context, $mink)
     {
         $context->setMink($mink)->shouldBeCalled();
-        $context->setMinkParameters(array('base_url' => 'foo'))->shouldBeCalled();
+        $context->setMinkParameters(['base_url' => 'foo'])->shouldBeCalled();
         $this->initializeContext($context);
     }
 }

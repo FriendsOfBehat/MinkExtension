@@ -14,17 +14,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class SauceLabsFactory extends Selenium2Factory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getDriverName()
     {
         return 'sauce_labs';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(ArrayNodeDefinition $builder)
     {
         $builder
@@ -38,9 +32,6 @@ class SauceLabsFactory extends Selenium2Factory
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildDriver(array $config)
     {
         $host = 'ondemand.saucelabs.com';
@@ -84,9 +75,9 @@ class SauceLabsFactory extends Selenium2Factory
                 ->booleanNode('disable-popup-handler')->end()
             ->end()
             ->validate()
-                ->ifTrue(function ($v) {return empty($v['custom-data']);})
+                ->ifTrue(function ($v) {return empty($v['custom-data']); })
                 ->then(function ($v) {
-                    unset ($v['custom-data']);
+                    unset($v['custom-data']);
 
                     return $v;
                 })

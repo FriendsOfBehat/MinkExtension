@@ -61,6 +61,9 @@ jobs:
               env:
                   SYMFONY_REQUIRE: ${{ matrix.symfony-version || '' }}
 
+            - name: CS Fixer
+              run: vendor/bin/php-cs-fixer fix --dry-run
+
             - name: PHPSpec
               run: vendor/bin/phpspec run -f pretty
 

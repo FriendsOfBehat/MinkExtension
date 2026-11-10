@@ -18,25 +18,16 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 class GoutteFactory implements DriverFactory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getDriverName()
     {
         return 'goutte';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supportsJavascript()
     {
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(ArrayNodeDefinition $builder)
     {
         $builder
@@ -57,32 +48,27 @@ class GoutteFactory implements DriverFactory
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildDriver(array $config)
     {
         trigger_deprecation('friends-of-behat/mink-extension', '2.8.0', 'Configuration for the "goutte" driver is deprecated, since the client implementation has been abandoned. Support for it will be removed in the next major version of this extension.');
 
         if (!class_exists('Behat\Mink\Driver\GoutteDriver')) {
-            throw new \RuntimeException(
-                'Install MinkGoutteDriver in order to use goutte driver.'
-            );
+            throw new \RuntimeException('Install MinkGoutteDriver in order to use goutte driver.');
         }
 
-        $clientArguments = array(
+        $clientArguments = [
             $config['server_parameters'],
-        );
+        ];
         $guzzleClient = null;
 
         if ($this->isGoutte4()) {
-            $clientArguments = array();
+            $clientArguments = [];
 
             if (class_exists('Symfony\Component\HttpClient\HttpClient')) {
                 $httpClient = new Definition('Symfony\Component\HttpClient\HttpClient');
                 $httpClient->setFactory('Symfony\Component\HttpClient\HttpClient::create');
                 $httpClient->setArgument(0, $config['server_parameters']);
-                $clientArguments = array($httpClient);
+                $clientArguments = [$httpClient];
             }
         } elseif ($this->isGoutte1()) {
             $guzzleClient = $this->buildGuzzle3Client($config['guzzle_parameters']);
@@ -95,12 +81,12 @@ class GoutteFactory implements DriverFactory
         $clientDefinition = new Definition('Behat\Mink\Driver\Goutte\Client', $clientArguments);
 
         if (null !== $guzzleClient) {
-            $clientDefinition->addMethodCall('setClient', array($guzzleClient));
+            $clientDefinition->addMethodCall('setClient', [$guzzleClient]);
         }
 
-        return new Definition('Behat\Mink\Driver\GoutteDriver', array(
+        return new Definition('Behat\Mink\Driver\GoutteDriver', [
             $clientDefinition,
-        ));
+        ]);
     }
 
     private function buildGuzzle6Client(array $parameters)
@@ -109,7 +95,7 @@ class GoutteFactory implements DriverFactory
         $parameters['allow_redirects'] = false;
         $parameters['cookies'] = true;
 
-        return new Definition('GuzzleHttp\Client', array($parameters));
+        return new Definition('GuzzleHttp\Client', [$parameters]);
     }
 
     private function buildGuzzle4Client(array $parameters)
@@ -118,7 +104,7 @@ class GoutteFactory implements DriverFactory
         $parameters['allow_redirects'] = false;
         $parameters['cookies'] = true;
 
-        return new Definition('GuzzleHttp\Client', array(array('defaults' => $parameters)));
+        return new Definition('GuzzleHttp\Client', [['defaults' => $parameters]]);
     }
 
     private function buildGuzzle3Client(array $parameters)
@@ -126,7 +112,7 @@ class GoutteFactory implements DriverFactory
         // Force the parameters set by default in Goutte to reproduce its behavior
         $parameters['redirect.disable'] = true;
 
-        return new Definition('Guzzle\Http\Client', array(null, $parameters));
+        return new Definition('Guzzle\Http\Client', [null, $parameters]);
     }
 
     private function isGoutte4()
@@ -138,7 +124,7 @@ class GoutteFactory implements DriverFactory
 
     private function isGoutte1()
     {
-        $refl = new \ReflectionParameter(array('Goutte\Client', 'setClient'), 0);
+        $refl = new \ReflectionParameter(['Goutte\Client', 'setClient'], 0);
 
         $type = $refl->getType();
         if ($type instanceof \ReflectionNamedType && 'Guzzle\Http\ClientInterface' === $type->getName()) {
@@ -150,7 +136,7 @@ class GoutteFactory implements DriverFactory
 
     private function isGuzzle6()
     {
-        return interface_exists('GuzzleHttp\ClientInterface') &&
-            version_compare(\GuzzleHttp\ClientInterface::VERSION, '6.0.0', '>=');
+        return interface_exists('GuzzleHttp\ClientInterface')
+            && version_compare(\GuzzleHttp\ClientInterface::VERSION, '6.0.0', '>=');
     }
 }

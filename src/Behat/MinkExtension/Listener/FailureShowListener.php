@@ -12,10 +12,10 @@ namespace Behat\MinkExtension\Listener;
 
 use Behat\Behat\EventDispatcher\Event\AfterStepTested;
 use Behat\Behat\EventDispatcher\Event\StepTested;
+use Behat\Mink\Exception\Exception as MinkException;
+use Behat\Mink\Mink;
 use Behat\Testwork\Tester\Result\ExceptionResult;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Behat\Mink\Mink;
-use Behat\Mink\Exception\Exception as MinkException;
 
 /**
  * Failed step response show listener.
@@ -24,6 +24,7 @@ use Behat\Mink\Exception\Exception as MinkException;
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * @final since 2.8.0
+ *
  * @internal since 2.8.0
  */
 class FailureShowListener implements EventSubscriberInterface
@@ -33,24 +34,18 @@ class FailureShowListener implements EventSubscriberInterface
 
     /**
      * Initializes initializer.
-     *
-     * @param Mink  $mink
-     * @param array $parameters
      */
     public function __construct(Mink $mink, array $parameters)
     {
-        $this->mink       = $mink;
+        $this->mink = $mink;
         $this->parameters = $parameters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
-        return array(
-            StepTested::AFTER => array('showFailedStepResponse', -10)
-        );
+        return [
+            StepTested::AFTER => ['showFailedStepResponse', -10],
+        ];
     }
 
     /**
@@ -62,11 +57,9 @@ class FailureShowListener implements EventSubscriberInterface
      * `show_cmd` command to run (`open %s` to open default browser on Mac)
      * `show_tmp_dir` folder where to store temp files (default is system temp)
      *
-     * @param AfterStepTested $event
+     * @return void
      *
      * @throws \RuntimeException if show_cmd is not configured
-     *
-     * @return void
      */
     public function showFailedStepResponse(AfterStepTested $event)
     {

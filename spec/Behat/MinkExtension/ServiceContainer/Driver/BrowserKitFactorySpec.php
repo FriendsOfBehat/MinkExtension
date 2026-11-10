@@ -2,22 +2,22 @@
 
 namespace spec\Behat\MinkExtension\ServiceContainer\Driver;
 
-use PhpSpec\ObjectBehavior;
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
+use PhpSpec\ObjectBehavior;
 
 class BrowserKitFactorySpec extends ObjectBehavior
 {
-    function it_is_a_driver_factory()
+    public function it_is_a_driver_factory()
     {
         $this->shouldHaveType(DriverFactory::class);
     }
 
-    function it_is_named_browserkit()
+    public function it_is_named_browserkit()
     {
         $this->getDriverName()->shouldReturn('browserkit_http');
     }
 
-    function it_does_not_support_javascript()
+    public function it_does_not_support_javascript()
     {
         $this->supportsJavascript()->shouldBe(false);
     }

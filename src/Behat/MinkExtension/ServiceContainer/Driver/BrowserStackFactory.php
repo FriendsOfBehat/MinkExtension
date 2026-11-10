@@ -14,17 +14,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class BrowserStackFactory extends Selenium2Factory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getDriverName()
     {
         return 'browser_stack';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(ArrayNodeDefinition $builder)
     {
         $builder
@@ -37,9 +31,6 @@ class BrowserStackFactory extends Selenium2Factory
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildDriver(array $config)
     {
         $config['wd_host'] = sprintf('%s:%s@hub.browserstack.com/wd/hub', $config['username'], $config['access_key']);

@@ -28,16 +28,14 @@ interface DriverFactory
     public function getDriverName();
 
     /**
-     * Defines whether a session using this driver is eligible as default javascript session
+     * Defines whether a session using this driver is eligible as default javascript session.
      *
-     * @return boolean
+     * @return bool
      */
     public function supportsJavascript();
 
     /**
      * Setups configuration for the driver factory.
-     *
-     * @param ArrayNodeDefinition $builder
      *
      * @return void
      */
@@ -45,8 +43,6 @@ interface DriverFactory
 
     /**
      * Builds the service definition for the driver.
-     *
-     * @param array $config
      *
      * @return Definition
      */

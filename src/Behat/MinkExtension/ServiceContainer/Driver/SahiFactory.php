@@ -15,25 +15,16 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class SahiFactory implements DriverFactory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getDriverName()
     {
         return 'sahi';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supportsJavascript()
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(ArrayNodeDefinition $builder)
     {
         $builder
@@ -47,30 +38,25 @@ class SahiFactory implements DriverFactory
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildDriver(array $config)
     {
         trigger_deprecation('friends-of-behat/mink-extension', '2.8.0', 'Configuration for the "sahi" driver is deprecated, since the client implementation has been abandoned. Support for it will be removed in the next major version of this extension.');
 
         if (!class_exists('Behat\Mink\Driver\SahiDriver')) {
-            throw new \RuntimeException(
-                'Install MinkSahiDriver in order to use sahi driver.'
-            );
+            throw new \RuntimeException('Install MinkSahiDriver in order to use sahi driver.');
         }
 
-        return new Definition('Behat\Mink\Driver\SahiDriver', array(
+        return new Definition('Behat\Mink\Driver\SahiDriver', [
             '%mink.browser_name%',
-            new Definition('Behat\SahiClient\Client', array(
-                new Definition('Behat\SahiClient\Connection', array(
+            new Definition('Behat\SahiClient\Client', [
+                new Definition('Behat\SahiClient\Connection', [
                     $config['sid'],
                     $config['host'],
                     $config['port'],
                     $config['browser'],
                     $config['limit'],
-                )),
-            )),
-        ));
+                ]),
+            ]),
+        ]);
     }
 }

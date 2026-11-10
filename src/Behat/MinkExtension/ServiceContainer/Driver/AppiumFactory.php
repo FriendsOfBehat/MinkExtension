@@ -1,23 +1,16 @@
 <?php
 
-
 namespace Behat\MinkExtension\ServiceContainer\Driver;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class AppiumFactory extends Selenium2Factory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getDriverName()
     {
         return 'appium';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(ArrayNodeDefinition $builder)
     {
         $builder
@@ -30,12 +23,9 @@ class AppiumFactory extends Selenium2Factory
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildDriver(array $config)
     {
-        $host = $config['appium_host'].":".$config['appium_port'];
+        $host = $config['appium_host'].':'.$config['appium_port'];
 
         $config['wd_host'] = sprintf('%s/wd/hub', $host);
 
@@ -63,7 +53,7 @@ class AppiumFactory extends Selenium2Factory
                 ->booleanNode('autoWebview')->end()
                 ->booleanNode('noReset')->end()
                 ->booleanNode('fullReset')->end()
-            //ANDROID ONLY
+            // ANDROID ONLY
                 ->scalarNode('appActivity')->end()
                 ->scalarNode('appPackage')->end()
                 ->scalarNode('appWaitActivity')->end()
@@ -116,7 +106,7 @@ class AppiumFactory extends Selenium2Factory
                 ->booleanNode('keepKeyChains')->end()
                 ->booleanNode('showIOSLog')->end()
             ->end()
-         ;
+        ;
 
         return $node;
     }

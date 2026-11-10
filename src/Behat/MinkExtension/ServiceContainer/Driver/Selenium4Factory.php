@@ -17,25 +17,16 @@ class Selenium4Factory implements DriverFactory
 {
     use EnvironmentCapabilities;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDriverName()
     {
         return 'selenium4';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supportsJavascript()
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(ArrayNodeDefinition $builder)
     {
         $builder
@@ -48,26 +39,20 @@ class Selenium4Factory implements DriverFactory
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildDriver(array $config)
     {
         if (!class_exists('Behat\Mink\Driver\Selenium4Driver')) {
-            throw new \RuntimeException(sprintf(
-                'Install MinkSelenium4Driver in order to use %s driver.',
-                $this->getDriverName()
-            ));
+            throw new \RuntimeException(sprintf('Install MinkSelenium4Driver in order to use %s driver.', $this->getDriverName()));
         }
 
-        return new Definition('Behat\Mink\Driver\Selenium4Driver', array(
+        return new Definition('Behat\Mink\Driver\Selenium4Driver', [
             $config['browser'],
             array_merge(
                 $this->guessEnvironmentCapabilities(),
                 $config['capabilities']
             ),
             $config['wd_host'],
-        ));
+        ]);
     }
 
     protected function getCapabilitiesNode()

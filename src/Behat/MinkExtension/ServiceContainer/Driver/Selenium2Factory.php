@@ -17,25 +17,16 @@ class Selenium2Factory implements DriverFactory
 {
     use EnvironmentCapabilities;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDriverName()
     {
         return 'selenium2';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supportsJavascript()
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(ArrayNodeDefinition $builder)
     {
         $builder
@@ -47,26 +38,20 @@ class Selenium2Factory implements DriverFactory
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildDriver(array $config)
     {
         if (!class_exists('Behat\Mink\Driver\Selenium2Driver')) {
-            throw new \RuntimeException(sprintf(
-                'Install MinkSelenium2Driver in order to use %s driver.',
-                $this->getDriverName()
-            ));
+            throw new \RuntimeException(sprintf('Install MinkSelenium2Driver in order to use %s driver.', $this->getDriverName()));
         }
 
         $extraCapabilities = $config['capabilities']['extra_capabilities'];
         unset($config['capabilities']['extra_capabilities']);
 
-        return new Definition('Behat\Mink\Driver\Selenium2Driver', array(
+        return new Definition('Behat\Mink\Driver\Selenium2Driver', [
             $config['browser'],
             array_replace($this->guessEnvironmentCapabilities(), $extraCapabilities, $config['capabilities']),
             $config['wd_host'],
-        ));
+        ]);
     }
 
     protected function getCapabilitiesNode()
@@ -142,6 +127,7 @@ class Selenium2Factory implements DriverFactory
                         })
                         ->then(function ($v) {
                             unset($v['prefs']);
+
                             return $v;
                         })
                     ->end()

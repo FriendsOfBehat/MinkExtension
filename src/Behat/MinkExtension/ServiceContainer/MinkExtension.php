@@ -43,15 +43,15 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class MinkExtension implements ExtensionInterface
 {
-    const MINK_ID = 'mink';
-    const SELECTORS_HANDLER_ID = 'mink.selectors_handler';
+    public const MINK_ID = 'mink';
+    public const SELECTORS_HANDLER_ID = 'mink.selectors_handler';
 
-    const SELECTOR_TAG = 'mink.selector';
+    public const SELECTOR_TAG = 'mink.selector';
 
     /**
      * @var DriverFactory[]
      */
-    private $driverFactories = array();
+    private $driverFactories = [];
 
     public function __construct()
     {
@@ -73,18 +73,15 @@ class MinkExtension implements ExtensionInterface
         $this->driverFactories[$driverFactory->getDriverName()] = $driverFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function load(ContainerBuilder $container, array $config)
     {
         if (isset($config['mink_loader'])) {
             $basePath = $container->getParameter('paths.base');
 
             if (file_exists($basePath.DIRECTORY_SEPARATOR.$config['mink_loader'])) {
-                require($basePath.DIRECTORY_SEPARATOR.$config['mink_loader']);
+                require $basePath.DIRECTORY_SEPARATOR.$config['mink_loader'];
             } else {
-                require($config['mink_loader']);
+                require $config['mink_loader'];
             }
         }
 
@@ -105,15 +102,12 @@ class MinkExtension implements ExtensionInterface
         $container->setParameter('mink.browser_name', $config['browser_name']);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function configure(ArrayNodeDefinition $builder)
     {
         // Rewrite keys to define a shortcut way without allowing conflicts with real keys
         $renamedKeys = array_diff(
             array_keys($this->driverFactories),
-            array('mink_loader', 'base_url', 'files_path', 'show_auto', 'show_cmd', 'show_tmp_dir', 'default_session', 'javascript_session', 'browser_name', 'sessions')
+            ['mink_loader', 'base_url', 'files_path', 'show_auto', 'show_cmd', 'show_tmp_dir', 'default_session', 'javascript_session', 'browser_name', 'sessions']
         );
 
         $builder
@@ -164,34 +158,25 @@ class MinkExtension implements ExtensionInterface
 
         $sessionsBuilder
             ->validate()
-                ->ifTrue(function ($v) {return count($v) > 1;})
+                ->ifTrue(function ($v) {return count($v) > 1; })
                 ->thenInvalid('You cannot set multiple driver types for the same session')
             ->end()
             ->validate()
-                ->ifTrue(function ($v) {return count($v) === 0;})
+                ->ifTrue(function ($v) {return 0 === count($v); })
                 ->thenInvalid('You must set a driver definition for the session.')
             ->end()
         ;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getConfigKey()
     {
         return 'mink';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function initialize(ExtensionManager $extensionManager)
     {
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function process(ContainerBuilder $container)
     {
         $this->processSelectors($container);
@@ -204,11 +189,11 @@ class MinkExtension implements ExtensionInterface
 
     private function loadContextInitializer(ContainerBuilder $container)
     {
-        $definition = new Definition('Behat\MinkExtension\Context\Initializer\MinkAwareInitializer', array(
+        $definition = new Definition('Behat\MinkExtension\Context\Initializer\MinkAwareInitializer', [
             new Reference(self::MINK_ID),
             '%mink.parameters%',
-        ));
-        $definition->addTag(ContextExtension::INITIALIZER_TAG, array('priority' => 0));
+        ]);
+        $definition->addTag(ContextExtension::INITIALIZER_TAG, ['priority' => 0]);
         $container->setDefinition('mink.context_initializer', $definition);
     }
 
@@ -217,19 +202,19 @@ class MinkExtension implements ExtensionInterface
         $container->setDefinition(self::SELECTORS_HANDLER_ID, new Definition('Behat\Mink\Selector\SelectorsHandler'));
 
         $cssSelectorDefinition = new Definition('Behat\Mink\Selector\CssSelector');
-        $cssSelectorDefinition->addTag(self::SELECTOR_TAG, array('alias' => 'css'));
-        $container->setDefinition(self::SELECTOR_TAG . '.css', $cssSelectorDefinition);
+        $cssSelectorDefinition->addTag(self::SELECTOR_TAG, ['alias' => 'css']);
+        $container->setDefinition(self::SELECTOR_TAG.'.css', $cssSelectorDefinition);
 
         $namedSelectorDefinition = new Definition('Behat\Mink\Selector\NamedSelector');
-        $namedSelectorDefinition->addTag(self::SELECTOR_TAG, array('alias' => 'named'));
-        $container->setDefinition(self::SELECTOR_TAG . '.named', $namedSelectorDefinition);
+        $namedSelectorDefinition->addTag(self::SELECTOR_TAG, ['alias' => 'named']);
+        $container->setDefinition(self::SELECTOR_TAG.'.named', $namedSelectorDefinition);
     }
 
     private function loadSessions(ContainerBuilder $container, array $config)
     {
         $defaultSession = $config['default_session'];
         $javascriptSession = $config['javascript_session'];
-        $javascriptSessions = $nonJavascriptSessions = array();
+        $javascriptSessions = $nonJavascriptSessions = [];
 
         $minkDefinition = $container->getDefinition(self::MINK_ID);
 
@@ -237,11 +222,11 @@ class MinkExtension implements ExtensionInterface
             $driver = key($session);
             $factory = $this->driverFactories[$driver];
 
-            $definition = new Definition('Behat\Mink\Session', array(
+            $definition = new Definition('Behat\Mink\Session', [
                 $factory->buildDriver($session[$driver]),
                 new Reference(self::SELECTORS_HANDLER_ID),
-            ));
-            $minkDefinition->addMethodCall('registerSession', array($name, $definition));
+            ]);
+            $minkDefinition->addMethodCall('registerSession', [$name, $definition]);
 
             if ($factory->supportsJavascript()) {
                 $javascriptSessions[] = $name;
@@ -253,11 +238,7 @@ class MinkExtension implements ExtensionInterface
         if (null === $javascriptSession && !empty($javascriptSessions)) {
             $javascriptSession = $javascriptSessions[0];
         } elseif (null !== $javascriptSession && !in_array($javascriptSession, $javascriptSessions)) {
-            throw new InvalidConfigurationException(sprintf(
-                'The javascript session must be one of the enabled javascript sessions (%s), but got %s',
-                json_encode($javascriptSessions),
-                $javascriptSession
-            ));
+            throw new InvalidConfigurationException(sprintf('The javascript session must be one of the enabled javascript sessions (%s), but got %s', json_encode($javascriptSessions), $javascriptSession));
         }
 
         if (null === $defaultSession) {
@@ -273,23 +254,23 @@ class MinkExtension implements ExtensionInterface
 
     private function loadSessionsListener(ContainerBuilder $container)
     {
-        $definition = new Definition('Behat\MinkExtension\Listener\SessionsListener', array(
+        $definition = new Definition('Behat\MinkExtension\Listener\SessionsListener', [
             new Reference(self::MINK_ID),
             '%mink.default_session%',
             '%mink.javascript_session%',
             '%mink.available_javascript_sessions%',
-        ));
-        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, array('priority' => 0));
+        ]);
+        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, ['priority' => 0]);
         $container->setDefinition('mink.listener.sessions', $definition);
     }
 
     private function loadFailureShowListener(ContainerBuilder $container)
     {
-        $definition = new Definition('Behat\MinkExtension\Listener\FailureShowListener', array(
+        $definition = new Definition('Behat\MinkExtension\Listener\FailureShowListener', [
             new Reference(self::MINK_ID),
             '%mink.parameters%',
-        ));
-        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, array('priority' => 0));
+        ]);
+        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, ['priority' => 0]);
         $container->setDefinition('mink.listener.failure_show', $definition);
     }
 
@@ -300,14 +281,10 @@ class MinkExtension implements ExtensionInterface
         foreach ($container->findTaggedServiceIds(self::SELECTOR_TAG) as $id => $tags) {
             foreach ($tags as $tag) {
                 if (!isset($tag['alias'])) {
-                    throw new ProcessingException(sprintf(
-                        'All `%s` tags should have an `alias` attribute, but `%s` service has none.',
-                        $tag,
-                        $id
-                    ));
+                    throw new ProcessingException(sprintf('All `%s` tags should have an `alias` attribute, but `%s` service has none.', $tag, $id));
                 }
                 $handlerDefinition->addMethodCall(
-                    'registerSelector', array($tag['alias'], new Reference($id))
+                    'registerSelector', [$tag['alias'], new Reference($id)]
                 );
             }
         }
