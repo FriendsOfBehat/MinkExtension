@@ -36,10 +36,10 @@ class MinkExtensionSpec extends ObjectBehavior
     {
         $tree = $this->buildConfigTree();
 
-        $config = (new Processor())->process($tree, array(array('goutte' => array())));
+        $config = (new Processor())->process($tree, array(array('browserkit_http' => array())));
 
-        if (!array_key_exists('goutte', $config['sessions']['goutte'])) {
-            throw new \Exception('Expected the "goutte" shortcut key to be moved under sessions.goutte.goutte.');
+        if (!array_key_exists('browserkit_http', $config['sessions']['browserkit_http'])) {
+            throw new \Exception('Expected the "browserkit_http" shortcut key to be moved under sessions.browserkit_http.browserkit_http.');
         }
     }
 
