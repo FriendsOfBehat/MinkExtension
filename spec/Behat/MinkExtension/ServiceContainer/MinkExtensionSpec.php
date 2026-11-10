@@ -2,6 +2,7 @@
 
 namespace spec\Behat\MinkExtension\ServiceContainer;
 
+use Behat\MinkExtension\ServiceContainer\MinkExtension;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -23,30 +24,25 @@ class MinkExtensionSpec extends ObjectBehavior
     {
         $tree = $this->buildConfigTree();
 
-        try {
-            (new Processor())->process($tree, array(null));
-            throw new \Exception('Expected an InvalidConfigurationException to be thrown.');
-        } catch (InvalidConfigurationException $e) {
-            // expected: a misconfigured extension (e.g. "MinkExtension: ~") must not
-            // trigger a fatal TypeError during normalization
-        }
+        $this->beAnInstanceOf(Processor::class);
+        $this->shouldThrow(InvalidConfigurationException::class)
+            ->duringProcess($tree, array(null));
     }
 
     function it_still_moves_shortcut_driver_keys_into_sessions_for_array_configs()
     {
         $tree = $this->buildConfigTree();
 
-        $config = (new Processor())->process($tree, array(array('browserkit_http' => array())));
+        $this->beAnInstanceOf(Processor::class);
+        $config = $this->process($tree, array(array('browserkit_http' => array())));
 
-        if (!array_key_exists('browserkit_http', $config['sessions']['browserkit_http'])) {
-            throw new \Exception('Expected the "browserkit_http" shortcut key to be moved under sessions.browserkit_http.browserkit_http.');
-        }
+        $config['sessions']['browserkit_http']->shouldHaveKey('browserkit_http');
     }
 
     private function buildConfigTree()
     {
         $treeBuilder = new TreeBuilder('mink', 'array');
-        $this->configure($treeBuilder->getRootNode());
+        (new MinkExtension())->configure($treeBuilder->getRootNode());
 
         return $treeBuilder->buildTree();
     }
