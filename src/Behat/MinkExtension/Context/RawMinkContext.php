@@ -31,8 +31,6 @@ class RawMinkContext implements MinkAwareContext
      * Sets Mink instance.
      *
      * @param Mink $mink Mink session manager
-     *
-     * @return void
      */
     public function setMink(Mink $mink): void
     {
@@ -65,8 +63,6 @@ class RawMinkContext implements MinkAwareContext
      * Sets parameters provided for Mink.
      *
      * @param array<string, mixed> $parameters
-     *
-     * @return void
      */
     public function setMinkParameters(array $parameters): void
     {
@@ -87,8 +83,6 @@ class RawMinkContext implements MinkAwareContext
      *
      * @param string $name  The key of the parameter
      * @param mixed  $value The value of the parameter
-     *
-     * @return void
      */
     public function setMinkParameter(string $name, mixed $value): void
     {
@@ -142,8 +136,6 @@ class RawMinkContext implements MinkAwareContext
      *                         <browser_name>_<ISO 8601 date>_<randomId>.png
      * @param string $filepath Desired filepath, defaults to
      *                         upload_tmp_dir, falls back to sys_get_temp_dir()
-     *
-     * @return void
      */
     public function saveScreenshot(?string $filename = null, ?string $filepath = null): void
     {

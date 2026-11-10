@@ -41,7 +41,7 @@ class BrowserKitFactory implements DriverFactory
     }
 
     /**
-     * @param array<mixed> $config
+     * @param array<string, mixed> $config
      */
     public function buildDriver(array $config): Definition
     {
@@ -55,7 +55,7 @@ class BrowserKitFactory implements DriverFactory
             throw new \RuntimeException(sprintf('Class %s not found, did you install symfony/browser-kit 4.4+?', HttpBrowser::class));
         }
 
-        $parameters[] = $config['http_client_parameters'] ?? [];
+        $parameters = [$config['http_client_parameters'] ?? []];
 
         $httpClientDefinition = new Definition(null, $parameters);
         $httpClientDefinition->setFactory(HttpClient::class.'::create');
