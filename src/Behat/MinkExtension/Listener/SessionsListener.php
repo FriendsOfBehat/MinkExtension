@@ -81,7 +81,7 @@ final class SessionsListener implements EventSubscriberInterface
         $session = null;
 
         $scenarioTags = $scenario instanceof TaggedNodeInterface ? $scenario->getTags() : [];
-        // Behat 4 returns tags prefixed with "@"; normalize so comparisons work across versions.
+        // Features parsed in GHERKIN_32 mode return tags prefixed with "@"; normalize so comparisons work across versions.
         $tags = array_map(fn ($tag) => ltrim($tag, '@'), array_merge($feature->getTags(), $scenarioTags));
         foreach ($tags as $tag) {
             if ('javascript' === $tag) {

@@ -2,7 +2,11 @@
 
 namespace spec\Behat\MinkExtension\ServiceContainer;
 
+use Behat\MinkExtension\ServiceContainer\MinkExtension;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Symfony\Component\Config\Definition\Processor;
 
 class MinkExtensionSpec extends ObjectBehavior
 {
@@ -14,5 +18,32 @@ class MinkExtensionSpec extends ObjectBehavior
     public function it_is_named_mink()
     {
         $this->getConfigKey()->shouldReturn('mink');
+    }
+
+    public function it_rejects_a_non_array_config_with_a_meaningful_exception()
+    {
+        $tree = $this->buildConfigTree();
+
+        $this->beAnInstanceOf(Processor::class);
+        $this->shouldThrow(InvalidConfigurationException::class)
+            ->duringProcess($tree, [null]);
+    }
+
+    public function it_still_moves_shortcut_driver_keys_into_sessions_for_array_configs()
+    {
+        $tree = $this->buildConfigTree();
+
+        $this->beAnInstanceOf(Processor::class);
+        $config = $this->process($tree, [['browserkit_http' => []]]);
+
+        $config['sessions']['browserkit_http']->shouldHaveKey('browserkit_http');
+    }
+
+    private function buildConfigTree()
+    {
+        $treeBuilder = new TreeBuilder('mink', 'array');
+        (new MinkExtension())->configure($treeBuilder->getRootNode());
+
+        return $treeBuilder->buildTree();
     }
 }
