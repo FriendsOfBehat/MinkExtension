@@ -106,17 +106,13 @@ final class MinkExtension implements ExtensionInterface
 
         $builder
             ->beforeNormalization()
-                ->always()
-                ->then(function (mixed $v) use ($renamedKeys): mixed {
-                    if (!is_array($v)) {
-                        return $v;
-                    }
-
+                ->ifArray()
+                ->then(function (array $v) use ($renamedKeys): array {
                     foreach ($renamedKeys as $driverType) {
                         if (!array_key_exists($driverType, $v)) {
                             continue;
                         }
-                        $sessions = is_array($v['sessions']) ? $v['sessions'] : [];
+                        $sessions = is_array($v['sessions'] ?? null) ? $v['sessions'] : [];
                         if (isset($sessions[$driverType])) {
                             continue;
                         }
